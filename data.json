@@ -1,61 +1,78 @@
 {
-  "status": "Online",
-  "updated": "2026-04-03T14:57:00Z",
+  "updated": "2026-04-03T15:35:00Z",
+  "currentActivity": {
+    "icon": "⌨️",
+    "title": "Trabajando en el Dashboard",
+    "description": "Creando interfaz estilo The Sims/Pokémon",
+    "screen": "dashboard.js",
+    "message": "¡Me encanta como queda!"
+  },
   "agents": [
     {
       "name": "Max",
-      "type": "max",
-      "role": "Asistente Personal Digital",
-      "badge": "Principal",
-      "status": "active",
-      "activity": "Coordinando proyectos"
+      "type": "main",
+      "sprite": "girl-purple",
+      "status": "working",
+      "location": "desk",
+      "activity": "Escribiendo código HTML"
     }
   ],
   "projects": [
     {
       "name": "Psicofrecuencia.com",
-      "description": "Sitio web para vender libros digitales de psicología",
+      "description": "Sitio web para vender libros digitales",
       "status": "in-progress",
-      "progress": 20
+      "progress": 25,
+      "tasks": ["Diseño del sitio", "Contenido", "SEO", "Tienda"]
     },
     {
       "name": "Dashboard Max",
-      "description": "Panel de control estilo Pokémon para ver avances",
-      "status": "completed",
-      "progress": 100
+      "description": "Panel visual estilo Sims/Pokémon",
+      "status": "in-progress",
+      "progress": 85,
+      "tasks": ["Diseño", "Animaciones", "Datos dinámicos", "PWA"]
     }
   ],
   "stats": {
-    "tasks": 8,
+    "tasks": 12,
     "projects": 2,
-    "hours": 12,
-    "ideas": 23
+    "hours": 8,
+    "ideas": 34,
+    "commits": 5,
+    "files": 8
   },
   "activities": [
     {
-      "icon": "🎉",
-      "text": "Dashboard estilo Pokémon creado",
+      "icon": "🎨",
+      "text": "Diseñando personaje estilo pixel art",
       "time": "Ahora"
     },
     {
+      "icon": "⌨️",
+      "text": "Creando animaciones del personaje",
+      "time": "Hace 2 min"
+    },
+    {
       "icon": "📱",
-      "text": "PWA instalable configurada",
+      "text": "Configurando PWA instalable",
       "time": "Hace 5 min"
     },
     {
-      "icon": "🎨",
-      "text": "Sprites de agentes diseñados",
+      "icon": "🔄",
+      "text": "Subiendo cambios a GitHub",
+      "time": "Hace 10 min"
+    },
+    {
+      "icon": "💭",
+      "text": "Analizando requisitos del dashboard",
       "time": "Hace 15 min"
-    },
-    {
-      "icon": "🔍",
-      "text": "Analizando psicofrecuencia.com",
-      "time": "Hace 30 min"
-    },
-    {
-      "icon": "📚",
-      "text": "Revisando estrategia de marketing",
-      "time": "Hace 1 hora"
     }
-  ]
+  ],
+  "world": {
+    "location": "office",
+    "timeOfDay": "afternoon",
+    "mood": "focused",
+    "coffeeLevel": 75,
+    "energyLevel": 85
+  }
 }

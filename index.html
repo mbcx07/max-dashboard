@@ -3,362 +3,430 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#6366f1">
+<meta name="theme-color" content="#1a1a2e">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Max Dash">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
-<title>Dashboard de Max</title>
+<title>El Mundo de Max</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--p:#6366f1;--pd:#4f46e5;--s:#f472b6;--a:#22d3ee;--bg:#0f172a;--c:#1e293b;--t:#f1f5f9;--ts:#94a3b8;--g:#22c55e;--w:#f59e0b;--r:#ef4444}
-
-/* Pokemon-style font */
+:root{--bg-dark:#1a1a2e;--bg-floor:#2d3a4f;--bg-wall:#3d4a5f;--desk:#5c4033;--desk-light:#8b6914;--screen:#0a0a15;--text:#f1f5f9;--text-dim:#94a3b8;--accent:#6366f1;--accent-glow:#818cf8;--success:#22c55e;--warning:#f59e0b}
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-.font-pixel{font-family:'Press Start 2P',cursive}
+.font-pixel{font-family:'Press Start 2P',monospace}
 
-body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--t);min-height:100vh;overflow-x:hidden}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg-dark);color:var(--text);min-height:100vh;overflow-x:hidden}
 
-/* Install prompt */
-.install-prompt{position:fixed;top:0;left:0;right:0;background:linear-gradient(135deg,var(--p),var(--s));padding:1rem;text-align:center;z-index:1000;display:none;animation:slideDown .5s}
-.install-prompt.show{display:block}
-.install-btn{background:#fff;color:var(--p);border:none;padding:.5rem 1.5rem;border-radius:8px;font-weight:bold;margin-left:1rem;cursor:pointer}
-.install-close{background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;margin-left:1rem}
+/* Game World Container */
+.game-world{position:relative;width:100%;max-width:500px;margin:0 auto;background:var(--bg-wall);border-radius:0 0 20px 20px;box-shadow:0 10px 40px rgba(0,0,0,.5)}
 
-@keyframes slideDown{from{transform:translateY(-100%)}to{transform:translateY(0)}}
+/* Room/Office Scene */
+.room{position:relative;width:100%;height:280px;background:linear-gradient(180deg,var(--bg-wall) 0%,var(--bg-wall) 60%,var(--bg-floor) 60%,var(--bg-floor) 100%);overflow:hidden}
 
-.container{max-width:800px;margin:0 auto;padding:1rem}
+/* Window with stars */
+.window{position:absolute;top:20px;left:50%;transform:translateX(-50%);width:100px;height:60px;background:linear-gradient(180deg,#1a1a3e 0%,#2a2a4e 100%);border:4px solid #4a4a6a;border-radius:8px}
+.window::before{content:'';position:absolute;top:50%;left:0;right:0;height:4px;background:#4a4a6a}
+.window::after{content:'';position:absolute;top:0;bottom:0;left:50%;width:4px;background:#4a4a6a}
+.stars{position:absolute;width:100%;height:100%}
+.star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;animation:twinkle 2s infinite}
+@keyframes twinkle{0%,100%{opacity:.3}50%{opacity:1}}
 
-/* Header - Pokemon style */
-.header{display:flex;justify-content:space-between;align-items:center;padding:1rem;background:var(--c);border-radius:16px;margin-bottom:1rem;border:3px solid var(--p);box-shadow:0 4px 0 var(--pd);position:relative;overflow:hidden}
-.header::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:linear-gradient(45deg,transparent,rgba(255,255,255,.1),transparent);animation:shine 3s infinite}
-@keyframes shine{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
-.logo{display:flex;align-items:center;gap:.75rem;position:relative;z-index:1}
-.logo h1{font-size:.9rem;background:linear-gradient(135deg,var(--p),var(--a));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.status{display:flex;align-items:center;gap:.5rem;padding:.5rem 1rem;background:rgba(34,197,94,.2);border-radius:20px;font-size:.75rem;border:2px solid var(--g)}
-.pulse{width:8px;height:8px;background:var(--g);border-radius:50%;animation:pulse 1s infinite}
-@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.3);opacity:.5}}
+/* Desk */
+.desk{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);width:280px;height:80px}
+.desk-top{position:absolute;top:0;left:0;right:0;height:15px;background:linear-gradient(180deg,var(--desk-light),var(--desk));border-radius:4px 4px 0 0}
+.desk-front{position:absolute;top:15px;left:10px;right:10px;bottom:0;background:var(--desk);border-radius:0 0 4px 4px}
+.drawer{position:absolute;top:20px;left:20px;width:40px;height:30px;background:var(--desk-light);border-radius:2px;border:2px solid #3d2817}
+.drawer:nth-child(2){left:70px}
 
-/* Agent cards - Pokemon trainer style */
-.agents-section{margin-bottom:1.5rem}
-.section-title{font-size:.65rem;color:var(--ts);margin-bottom:.75rem;text-transform:uppercase;letter-spacing:1px;display:flex;align-items:center;gap:.5rem}
-.section-title::before{content:'';width:20px;height:3px;background:linear-gradient(90deg,var(--p),var(--a));border-radius:2px}
+/* Computer Monitor */
+.monitor{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:140px;height:90px;background:var(--screen);border:4px solid #333;border-radius:8px;box-shadow:0 0 20px var(--accent-glow)}
+.monitor-stand{position:absolute;bottom:-15px;left:50%;transform:translateX(-50%);width:20px;height:15px;background:#333}
+.screen-content{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.screen-text{font-size:6px;color:#22c55e;font-family:monospace;white-space:nowrap;animation:typing 3s infinite}
+@keyframes typing{0%,100%{opacity:1}50%{opacity:.5}}
 
-.agents-grid{display:grid;gap:.75rem}
+/* Max Character */
+.character{position:absolute;bottom:100px;left:50%;transform:translateX(-50%);animation:characterBounce 1s infinite}
+@keyframes characterBounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-3px)}}
 
-.agent-card{background:var(--c);border-radius:16px;padding:1rem;border:3px solid var(--ts);position:relative;overflow:hidden;cursor:pointer;transition:all .3s}
-.agent-card:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.3)}
-.agent-card.active{border-color:var(--g);box-shadow:0 0 20px rgba(34,197,94,.3)}
-.agent-card.working{border-color:var(--a);box-shadow:0 0 20px rgba(34,211,238,.3)}
+.character-body{position:relative;width:40px;height:50px}
+/* Head */
+.head{position:absolute;top:0;left:50%;transform:translateX(-50%);width:28px;height:28px;background:#fcd5ce;border-radius:8px;border:2px solid #e8b4a8}
+.hair{position:absolute;top:-4px;left:50%;transform:translateX(-50%);width:30px;height:12px;background:#8b5cf6;border-radius:8px 8px 0 0}
+.bangs{position:absolute;top:2px;left:50%;transform:translateX(-50%);width:24px;height:6px;background:#8b5cf6;border-radius:0 0 4px 4px}
+.eyes{position:absolute;top:10px;left:50%;transform:translateX(-50%);display:flex;gap:6px}
+.eye{width:5px;height:5px;background:#1a1a2e;border-radius:50%;animation:blink 4s infinite}
+@keyframes blink{0%,95%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
+.mouth{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);width:8px;height:4px;background:#e8a4a4;border-radius:0 0 4px 4px}
+/* Body */
+.body{position:absolute;top:26px;left:50%;transform:translateX(-50%);width:26px;height:24px;background:linear-gradient(180deg,#6366f1,var(--accent));border-radius:6px}
+.arm{position:absolute;top:28px;width:8px;height:18px;background:#6366f1;border-radius:4px}
+.arm.left{left:2px;transform:rotate(20deg)}
+.arm.right{right:2px;transform:rotate(-20deg);animation:typingArm .5s infinite}
+@keyframes typingArm{0%,100%{transform:rotate(-20deg)}50%{transform:rotate(-15deg)}}
+/* Chair */
+.chair{position:absolute;bottom:-25px;left:50%;transform:translateX(-50%);width:50px;height:30px;background:#333;border-radius:4px}
+.chair-back{position:absolute;top:-35px;left:50%;transform:translateX(-50%);width:45px;height:35px;background:#2d2d2d;border-radius:4px}
 
-.agent-card::after{content:'';position:absolute;bottom:0;right:0;width:60px;height:60px;background:linear-gradient(135deg,transparent,rgba(255,255,255,.05));border-radius:16px 0 16px 0}
+/* Speech Bubble */
+.speech-bubble{position:absolute;top:-70px;left:50%;transform:translateX(-50%);background:#fff;color:#1a1a2e;padding:8px 12px;border-radius:12px;font-size:11px;white-space:nowrap;box-shadow:0 2px 10px rgba(0,0,0,.2);animation:showBubble 5s infinite}
+.speech-bubble::after{content:'';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);border-left:8px solid transparent;border-right:8px solid transparent;border-top:8px solid #fff}
+@keyframes showBubble{0%,10%,100%{opacity:0;transform:translateX(-50%) translateY(5px)}15%,85%{opacity:1;transform:translateX(-50%) translateY(0)}}
 
-.agent-header{display:flex;align-items:center;gap:.75rem;margin-bottom:.5rem}
-.agent-sprite{width:48px;height:48px;image-rendering:pixelated;image-rendering:crisp-edges}
-.agent-info{flex:1}
-.agent-name{font-weight:bold;font-size:1rem;display:flex;align-items:center;gap:.5rem}
-.agent-name .badge{font-size:.6rem;padding:2px 6px;border-radius:4px;background:var(--p)}
-.agent-role{font-size:.75rem;color:var(--ts)}
+/* Items on desk */
+.desk-items{position:absolute;top:5px;left:10px;right:10px;display:flex;justify-content:space-between;align-items:flex-end}
+.coffee{width:16px;height:20px;background:#8b4513;border-radius:0 0 4px 4px;position:relative}
+.coffee::before{content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%);width:14px;height:6px;background:#d2691e;border-radius:4px}
+.steam{position:absolute;top:-12px;left:50%;transform:translateX(-50%);font-size:10px;animation:steamFloat 1s infinite}
+@keyframes steamFloat{0%,100%{opacity:.5;transform:translateX(-50%) translateY(0)}50%{opacity:0;transform:translateX(-50%) translateY(-5px)}}
+.book-stack{display:flex;flex-direction:column;gap:2px}
+.book{width:20px;height:4px;border-radius:1px}
+.book:nth-child(1){background:#ef4444;width:22px}
+.book:nth-child(2){background:#22c55e;width:18px}
+.book:nth-child(3){background:#f59e0b;width:20px}
+.plant{width:20px;height:25px;position:relative}
+.pot{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:16px;height:10px;background:#d2691e;border-radius:0 0 4px 4px}
+.leaves{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);font-size:16px}
 
-.agent-status{display:flex;align-items:center;gap:.5rem;font-size:.7rem;margin-top:.5rem;padding:.5rem;background:rgba(255,255,255,.05);border-radius:8px}
-.agent-status .dot{width:6px;height:6px;border-radius:50%;animation:blink 1s infinite}
-.agent-status .dot.active{background:var(--g)}
-.agent-status .dot.working{background:var(--a)}
-.agent-status .dot.idle{background:var(--ts)}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+/* Activity Display */
+.activity-panel{background:var(--bg-dark);padding:12px;border-top:3px solid var(--accent)}
+.activity-header{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.activity-icon{font-size:20px;animation:working 1s infinite}
+@keyframes working{0%,100%{transform:rotate(0deg)}25%{transform:rotate(10deg)}75%{transform:rotate(-10deg)}}
+.activity-title{font-size:12px;font-weight:bold;color:var(--text)}
+.activity-desc{font-size:11px;color:var(--text-dim);margin-top:4px}
 
-/* Projects - Pokemon PC boxes style */
-.projects-section{margin-bottom:1.5rem}
-.project-card{background:var(--c);border-radius:16px;padding:1rem;margin-bottom:.75rem;border-left:4px solid var(--p);position:relative;overflow:hidden}
-.project-card.active{border-left-color:var(--g)}
-.project-card.active::before{content:'';position:absolute;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 30px 30px 0;border-color:transparent var(--g) transparent transparent}
-.project-header{display:flex;justify-content:space-between;align-items:start;margin-bottom:.5rem}
-.project-name{font-weight:bold;font-size:1rem}
-.project-desc{font-size:.8rem;color:var(--ts);margin-bottom:.5rem}
-.progress-container{background:rgba(255,255,255,.1);border-radius:8px;height:8px;overflow:hidden;border:1px solid rgba(255,255,255,.1)}
-.progress-bar{height:100%;background:linear-gradient(90deg,var(--g),var(--a));border-radius:8px;transition:width .5s ease}
-.progress-text{font-size:.65rem;color:var(--ts);margin-top:.25rem;text-align:right}
+/* Projects Bar */
+.projects-bar{background:var(--bg-floor);padding:12px;border-top:1px solid rgba(255,255,255,.1)}
+.projects-title{font-size:10px;color:var(--text-dim);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
+.project-item{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.project-dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.project-dot.active{background:var(--success);box-shadow:0 0 8px var(--success)}
+.project-name{font-size:12px;flex:1}
+.project-progress{font-size:10px;color:var(--text-dim)}
 
-/* Stats - Pokemon status style */
-.stats-section{margin-bottom:1.5rem}
-.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem}
-.stat-card{background:var(--c);border-radius:16px;padding:1rem;text-align:center;border:2px solid rgba(255,255,255,.1)}
-.stat-icon{font-size:1.5rem;margin-bottom:.25rem}
-.stat-value{font-size:1.5rem;font-weight:bold;background:linear-gradient(135deg,var(--p),var(--a));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.stat-label{font-size:.7rem;color:var(--ts)}
+/* Stats Grid */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:12px;background:var(--bg-dark)}
+.stat-item{text-align:center}
+.stat-value{font-size:18px;font-weight:bold;background:linear-gradient(135deg,var(--accent),#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stat-label{font-size:9px;color:var(--text-dim)}
 
-/* Activity - Pokemon battle log style */
-.activity-section{margin-bottom:1.5rem}
-.activity-log{background:var(--c);border-radius:16px;padding:.75rem;max-height:200px;overflow-y:auto;border:2px solid rgba(255,255,255,.1)}
-.activity-item{display:flex;gap:.75rem;padding:.5rem;border-radius:8px;transition:background .2s}
-.activity-item:hover{background:rgba(255,255,255,.05)}
-.activity-icon{font-size:1.25rem;width:28px;text-align:center}
-.activity-content{flex:1}
-.activity-text{font-size:.85rem}
-.activity-time{font-size:.65rem;color:var(--ts);margin-top:.15rem}
+/* Action Log */
+.action-log{background:var(--bg-floor);padding:12px;max-height:120px;overflow-y:auto}
+.log-item{display:flex;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.log-time{font-size:9px;color:var(--text-dim);min-width:40px}
+.log-text{font-size:11px;color:var(--text)}
+.log-icon{font-size:12px}
 
 /* Footer */
-.footer{text-align:center;padding:1rem;color:var(--ts);font-size:.7rem;border-top:1px solid rgba(255,255,255,.1);margin-top:1rem}
-.footer p{margin-bottom:.25rem}
-
-/* Pokemon-style animations */
-@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-2px)}75%{transform:translateX(2px)}}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
-
-/* Sprite animation */
-.sprite-animate{animation:bounce 1s infinite}
-.sprite-working{animation:shake .3s infinite}
+.footer{background:var(--accent);padding:8px;text-align:center}
+.footer-text{font-size:9px;color:#fff;opacity:.8}
+.install-hint{font-size:10px;color:#fff;margin-top:4px;cursor:pointer}
 
 /* Scrollbar */
-::-webkit-scrollbar{width:6px}
-::-webkit-scrollbar-track{background:rgba(255,255,255,.05);border-radius:3px}
-::-webkit-scrollbar-thumb{background:var(--p);border-radius:3px}
-::-webkit-scrollbar-thumb:hover{background:var(--pd)}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg-dark)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px}
 
-/* Loading screen */
-.loading-screen{position:fixed;top:0;left:0;right:0;bottom:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999}
-.loading-screen.hidden{display:none}
-.loading-pokeball{width:60px;height:60px;animation:spin 1s linear infinite}
-@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-.loading-text{margin-top:1rem;font-size:.8rem;color:var(--ts)}
+/* Responsive */
+@media(max-width:400px){.room{height:240px}.desk{width:240px}.monitor{width:120px;height:75px}.speech-bubble{font-size:9px}}
+
+/* Loading */
+.loading{position:fixed;top:0;left:0;right:0;bottom:0;background:var(--bg-dark);display:flex;align-items:center;justify-content:center;z-index:9999}
+.loading.hidden{display:none}
+.loading-text{font-size:14px;color:var(--accent);animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
 </style>
 </head>
 <body>
 
-<!-- Loading Screen -->
-<div class="loading-screen" id="loading">
-  <svg class="loading-pokeball" viewBox="0 0 100 100">
-    <circle cx="50" cy="50" r="45" fill="#fff" stroke="#333" stroke-width="5"/>
-    <path d="M5 50 H95" stroke="#333" stroke-width="5"/>
-    <circle cx="50" cy="50" r="12" fill="#fff" stroke="#333" stroke-width="5"/>
-    <path d="M5 50 A45 45 0 0 0 95 50" fill="#ef4444"/>
-  </svg>
-  <p class="loading-text">Cargando...</p>
+<div class="loading" id="loading">
+  <p class="loading-text">📚 Cargando el mundo de Max...</p>
 </div>
 
-<!-- Install Prompt -->
-<div class="install-prompt" id="installPrompt">
-  <span>📱 ¡Instala la app en tu celular!</span>
-  <button class="install-btn" id="installBtn">Instalar</button>
-  <button class="install-close" id="installClose">&times;</button>
-</div>
-
-<div class="container">
-
-<!-- Header -->
-<div class="header">
-  <div class="logo">
-    <span style="font-size:2rem">📚</span>
-    <div>
-      <h1>Dashboard de Max</h1>
-      <p style="font-size:.65rem;color:var(--ts);opacity:.8">Centro de Comando</p>
+<div class="game-world">
+  <!-- Room Scene -->
+  <div class="room">
+    <!-- Window with stars -->
+    <div class="window">
+      <div class="stars">
+        <div class="star" style="top:20%;left:20%"></div>
+        <div class="star" style="top:40%;left:60%"></div>
+        <div class="star" style="top:70%;left:30%"></div>
+        <div class="star" style="top:30%;left:80%"></div>
+      </div>
+    </div>
+    
+    <!-- Desk -->
+    <div class="desk">
+      <div class="desk-top"></div>
+      <div class="desk-front">
+        <div class="drawer"></div>
+        <div class="drawer"></div>
+      </div>
+      <!-- Items on desk -->
+      <div class="desk-items">
+        <div>
+          <div class="coffee">
+            <div class="steam">~</div>
+          </div>
+        </div>
+        <div class="book-stack">
+          <div class="book"></div>
+          <div class="book"></div>
+          <div class="book"></div>
+        </div>
+        <div class="plant">
+          <div class="pot"></div>
+          <div class="leaves">🌿</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Computer Monitor -->
+    <div class="monitor">
+      <div class="screen-content">
+        <div class="screen-text" id="screenText">Trabajando...</div>
+      </div>
+      <div class="monitor-stand"></div>
+    </div>
+    
+    <!-- Max Character -->
+    <div class="character" id="character">
+      <div class="speech-bubble" id="speechBubble">¡Hola! Soy Max 📚</div>
+      <div class="character-body">
+        <div class="chair">
+          <div class="chair-back"></div>
+        </div>
+        <div class="head">
+          <div class="hair"></div>
+          <div class="bangs"></div>
+          <div class="eyes">
+            <div class="eye"></div>
+            <div class="eye"></div>
+          </div>
+          <div class="mouth"></div>
+        </div>
+        <div class="body"></div>
+        <div class="arm left"></div>
+        <div class="arm right"></div>
+      </div>
     </div>
   </div>
-  <div class="status">
-    <span class="pulse"></span>
-    <span id="statusText">Online</span>
+  
+  <!-- Activity Panel -->
+  <div class="activity-panel">
+    <div class="activity-header">
+      <span class="activity-icon" id="activityIcon">⌨️</span>
+      <div>
+        <div class="activity-title" id="activityTitle">Cargando...</div>
+        <div class="activity-desc" id="activityDesc">Espere un momento</div>
+      </div>
+    </div>
   </div>
-</div>
-
-<!-- Agents Section -->
-<div class="agents-section">
-  <h2 class="section-title">🤖 Agentes Activos</h2>
-  <div class="agents-grid" id="agentsList">
-    <!-- Populated by JS -->
+  
+  <!-- Projects Bar -->
+  <div class="projects-bar">
+    <div class="projects-title">📁 Proyectos Activos</div>
+    <div id="projectsList">
+      <div class="project-item">
+        <div class="project-dot active"></div>
+        <span class="project-name">Cargando proyectos...</span>
+        <span class="project-progress">--</span>
+      </div>
+    </div>
   </div>
-</div>
-
-<!-- Projects Section -->
-<div class="projects-section">
-  <h2 class="section-title">📁 Proyectos</h2>
-  <div id="projectsList">
-    <!-- Populated by JS -->
+  
+  <!-- Stats Grid -->
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-value" id="statTasks">0</div>
+      <div class="stat-label">Tareas</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value" id="statProjects">0</div>
+      <div class="stat-label">Proyectos</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value" id="statHours">0</div>
+      <div class="stat-label">Horas</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value" id="statIdeas">0</div>
+      <div class="stat-label">Ideas</div>
+    </div>
   </div>
-</div>
-
-<!-- Stats Section -->
-<div class="stats-section">
-  <h2 class="section-title">📊 Estadísticas</h2>
-  <div class="stats-grid" id="statsGrid">
-    <!-- Populated by JS -->
+  
+  <!-- Action Log -->
+  <div class="action-log">
+    <div id="logList">
+      <div class="log-item">
+        <span class="log-icon">⚡</span>
+        <span class="log-time">--:--</span>
+        <span class="log-text">Iniciando sistema...</span>
+      </div>
+    </div>
   </div>
-</div>
-
-<!-- Activity Section -->
-<div class="activity-section">
-  <h2 class="section-title">📋 Actividad Reciente</h2>
-  <div class="activity-log" id="activityLog">
-    <!-- Populated by JS -->
+  
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-text">📚 Max — Asistente Personal Digital</div>
+    <div class="footer-text" style="opacity:.6">Última actualización: <span id="lastUpdate">--</span></div>
   </div>
-</div>
-
-<!-- Footer -->
-<div class="footer">
-  <p>📚 Max — Asistente Personal Digital</p>
-  <p>Última actualización: <span id="lastUpdate">--</span></p>
-</div>
-
 </div>
 
 <script>
-// Pokemon-style pixel art sprites (base64 encoded small images)
-const SPRITES = {
-  max: 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><rect fill="#6366f1" width="16" height="16" rx="2"/><rect fill="#4f46e5" x="2" y="2" width="12" height="6" rx="1"/><circle fill="#fcd5ce" cx="8" cy="6" r="3"/><circle fill="#1a1a2e" cx="6.5" cy="5.5" r="1"/><circle fill="#1a1a2e" cx="9.5" cy="5.5" r="1"/><rect fill="#f472b6" x="4" y="10" width="8" height="4" rx="1"/></svg>`),
-  researcher: 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><rect fill="#22c55e" width="16" height="16" rx="2"/><circle fill="#fcd5ce" cx="8" cy="5" r="4"/><circle fill="#1a1a2e" cx="6" cy="4" r="1"/><circle fill="#1a1a2e" cx="10" cy="4" r="1"/><rect fill="#fff" x="3" y="1" width="10" height="2" rx="1"/><rect fill="#1a1a2e" x="6" y="10" width="4" height="4" rx="1"/></svg>`),
-  writer: 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><rect fill="#f59e0b" width="16" height="16" rx="2"/><circle fill="#fcd5ce" cx="8" cy="5" r="4"/><circle fill="#1a1a2e" cx="6" cy="4" r="1"/><circle fill="#1a1a2e" cx="10" cy="4" r="1"/><rect fill="#1a1a2e" x="3" y="10" width="10" height="2" rx="1"/><rect fill="#fff" x="3" y="13" width="6" height="2" rx="1"/></svg>`),
-  developer: 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><rect fill="#22d3ee" width="16" height="16" rx="2"/><circle fill="#fcd5ce" cx="8" cy="5" r="4"/><circle fill="#1a1a2e" cx="6" cy="4" r="1"/><circle fill="#1a1a2e" cx="10" cy="4" r="1"/><rect fill="#1a1a2e" x="4" y="10" width="8" height="5" rx="1"/><rect fill="#22d3ee" x="6" y="12" width="4" height="2" rx="1"/></svg>`),
-  default: 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><rect fill="#94a3b8" width="16" height="16" rx="2"/><circle fill="#fcd5ce" cx="8" cy="5" r="4"/><circle fill="#1a1a2e" cx="6" cy="4" r="1"/><circle fill="#1a1a2e" cx="10" cy="4" r="1"/><rect fill="#1a1a2e" x="5" y="10" width="6" height="5" rx="1"/></svg>`)
+// Messages for speech bubble
+const MESSAGES = [
+  "¡Trabajando en tus proyectos!",
+  "Analizando datos...",
+  "¡Nueva idea detectada!",
+  "Revisando el progreso...",
+  "Optimizando todo...",
+  "¡Casi termino esto!",
+  "Pensando en marketing...",
+  "Organizando tareas..."
+];
+
+// Icons for activities
+const ACTIVITY_ICONS = {
+  coding: "⌨️",
+  writing: "✍️",
+  thinking: "💭",
+  analyzing: "🔍",
+  creating: "🎨",
+  organizing: "📁",
+  communicating: "💬",
+  default: "⚡"
 };
 
-// Fetch and render data
-async function loadData() {
-  try {
-    const res = await fetch('data.json?t=' + Date.now());
-    const data = await res.json();
-    renderAgents(data.agents || []);
-    renderProjects(data.projects || []);
-    renderStats(data.stats || {});
-    renderActivity(data.activities || []);
-    document.getElementById('statusText').textContent = data.status || 'Online';
-    document.getElementById('lastUpdate').textContent = new Date(data.updated).toLocaleString('es-MX');
-    setTimeout(() => document.getElementById('loading').classList.add('hidden'), 500);
-  } catch (e) {
-    console.error('Error loading data:', e);
-    document.getElementById('statusText').textContent = 'Offline';
-    setTimeout(() => document.getElementById('loading').classList.add('hidden'), 500);
-  }
+let currentMessage = 0;
+let data = null;
+
+// Animate speech bubble
+function nextMessage() {
+  const bubble = document.getElementById('speechBubble');
+  currentMessage = (currentMessage + 1) % MESSAGES.length;
+  bubble.textContent = MESSAGES[currentMessage];
 }
 
-function renderAgents(agents) {
-  const container = document.getElementById('agentsList');
-  if (agents.length === 0) {
-    // Default: show Max as main agent
+// Update screen text based on current activity
+function updateScreen(activity) {
+  const screen = document.getElementById('screenText');
+  screen.textContent = activity || 'Procesando...';
+}
+
+// Render projects
+function renderProjects(projects) {
+  const container = document.getElementById('projectsList');
+  if (!projects || projects.length === 0) {
     container.innerHTML = `
-      <div class="agent-card active">
-        <div class="agent-header">
-          <img src="${SPRITES.max}" class="agent-sprite sprite-animate" alt="Max">
-          <div class="agent-info">
-            <div class="agent-name">Max <span class="badge">Principal</span></div>
-            <div class="agent-role">Asistente Personal Digital</div>
-          </div>
-        </div>
-        <div class="agent-status">
-          <span class="dot active"></span>
-          <span>Trabajando en proyectos</span>
-        </div>
+      <div class="project-item">
+        <div class="project-dot"></div>
+        <span class="project-name">Sin proyectos activos</span>
+        <span class="project-progress">--</span>
       </div>
     `;
     return;
   }
   
-  container.innerHTML = agents.map(agent => {
-    const sprite = SPRITES[agent.type] || SPRITES.default;
-    const statusClass = agent.status === 'active' ? 'active' : agent.status === 'working' ? 'working' : '';
-    const dotClass = agent.status === 'active' ? 'active' : agent.status === 'working' ? 'working' : 'idle';
-    const spriteClass = agent.status === 'working' ? 'sprite-working' : 'sprite-animate';
+  container.innerHTML = projects.map(p => `
+    <div class="project-item">
+      <div class="project-dot ${p.status === 'in-progress' ? 'active' : ''}"></div>
+      <span class="project-name">${p.name}</span>
+      <span class="project-progress">${p.progress}%</span>
+    </div>
+  `).join('');
+}
+
+// Render action log
+function renderLog(activities) {
+  const container = document.getElementById('logList');
+  if (!activities || activities.length === 0) {
+    container.innerHTML = `
+      <div class="log-item">
+        <span class="log-icon">⚡</span>
+        <span class="log-time">--:--</span>
+        <span class="log-text">Sin actividad reciente</span>
+      </div>
+    `;
+    return;
+  }
+  
+  container.innerHTML = activities.slice(0, 5).map(a => `
+    <div class="log-item">
+      <span class="log-icon">${a.icon}</span>
+      <span class="log-time">${a.time}</span>
+      <span class="log-text">${a.text}</span>
+    </div>
+  `).join('');
+}
+
+// Update stats
+function updateStats(stats) {
+  document.getElementById('statTasks').textContent = stats?.tasks || 0;
+  document.getElementById('statProjects').textContent = stats?.projects || 0;
+  document.getElementById('statHours').textContent = stats?.hours || 0;
+  document.getElementById('statIdeas').textContent = stats?.ideas || 0;
+}
+
+// Update activity panel
+function updateActivity(currentActivity) {
+  document.getElementById('activityIcon').textContent = 
+    currentActivity?.icon || ACTIVITY_ICONS.default;
+  document.getElementById('activityTitle').textContent = 
+    currentActivity?.title || 'En espera';
+  document.getElementById('activityDesc').textContent = 
+    currentActivity?.description || 'Esperando nuevas tareas';
+  updateScreen(currentActivity?.screen || 'En espera');
+}
+
+// Fetch data from JSON
+async function loadData() {
+  try {
+    const res = await fetch('data.json?t=' + Date.now());
+    data = await res.json();
     
-    return `
-      <div class="agent-card ${statusClass}">
-        <div class="agent-header">
-          <img src="${sprite}" class="agent-sprite ${spriteClass}" alt="${agent.name}">
-          <div class="agent-info">
-            <div class="agent-name">${agent.name} ${agent.badge ? `<span class="badge">${agent.badge}</span>` : ''}</div>
-            <div class="agent-role">${agent.role}</div>
-          </div>
-        </div>
-        <div class="agent-status">
-          <span class="dot ${dotClass}"></span>
-          <span>${agent.activity || 'En espera'}</span>
-        </div>
-      </div>
-    `;
-  }).join('');
+    // Update all components
+    updateActivity(data.currentActivity);
+    renderProjects(data.projects);
+    updateStats(data.stats);
+    renderLog(data.activities);
+    
+    // Update timestamp
+    document.getElementById('lastUpdate').textContent = 
+      new Date(data.updated).toLocaleTimeString('es-MX', {hour:'2-digit',minute:'2-digit'});
+    
+    // Update speech bubble with current activity
+    if (data.currentActivity?.message) {
+      document.getElementById('speechBubble').textContent = data.currentActivity.message;
+    }
+    
+    // Hide loading
+    document.getElementById('loading').classList.add('hidden');
+  } catch (e) {
+    console.error('Error loading data:', e);
+    document.getElementById('loading').classList.add('hidden');
+  }
 }
 
-function renderProjects(projects) {
-  const container = document.getElementById('projectsList');
-  container.innerHTML = projects.map(project => {
-    const activeClass = project.status === 'in-progress' ? 'active' : '';
-    return `
-      <div class="project-card ${activeClass}">
-        <div class="project-header">
-          <span class="project-name">${project.name}</span>
-          <span style="font-size:.7rem;color:var(--${project.status === 'completed' ? 'g' : project.status === 'in-progress' ? 'a' : 'ts'})">${project.status === 'completed' ? '✅ Completado' : project.status === 'in-progress' ? '🔄 En progreso' : '⏳ Pendiente'}</span>
-        </div>
-        <p class="project-desc">${project.description}</p>
-        <div class="progress-container">
-          <div class="progress-bar" style="width:${project.progress}%"></div>
-        </div>
-        <p class="progress-text">${project.progress}% completado</p>
-      </div>
-    `;
-  }).join('');
+// Initialize
+setInterval(nextMessage, 5000);
+setInterval(loadData, 60000);
+loadData();
+
+// Service Worker for PWA
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(() => {});
 }
 
-function renderStats(stats) {
-  const container = document.getElementById('statsGrid');
-  const items = [
-    { icon: '📝', value: stats.tasks || 0, label: 'Tareas' },
-    { icon: '📁', value: stats.projects || 0, label: 'Proyectos' },
-    { icon: '⏱️', value: stats.hours || 0, label: 'Horas' },
-    { icon: '✨', value: stats.ideas || 0, label: 'Ideas' }
-  ];
-  container.innerHTML = items.map(item => `
-    <div class="stat-card">
-      <div class="stat-icon">${item.icon}</div>
-      <div class="stat-value">${item.value}</div>
-      <div class="stat-label">${item.label}</div>
-    </div>
-  `).join('');
-}
-
-function renderActivity(activities) {
-  const container = document.getElementById('activityLog');
-  container.innerHTML = activities.map(activity => `
-    <div class="activity-item">
-      <span class="activity-icon">${activity.icon}</span>
-      <div class="activity-content">
-        <p class="activity-text">${activity.text}</p>
-        <p class="activity-time">${activity.time}</p>
-      </div>
-    </div>
-  `).join('');
-}
-
-// PWA Install
+// Install prompt
 let deferredPrompt;
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredPrompt = e;
-  document.getElementById('installPrompt').classList.add('show');
 });
-
-document.getElementById('installBtn')?.addEventListener('click', async () => {
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    if (outcome === 'accepted') {
-      document.getElementById('installPrompt').classList.remove('show');
-    }
-    deferredPrompt = null;
-  }
-});
-
-document.getElementById('installClose')?.addEventListener('click', () => {
-  document.getElementById('installPrompt').classList.remove('show');
-});
-
-// Service Worker
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js').catch(console.error);
-}
-
-// Initial load
-loadData();
-setInterval(loadData, 60000);
 </script>
 </body>
 </html>
