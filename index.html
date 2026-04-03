@@ -228,48 +228,64 @@ const maxReconnectAttempts = 10;
 let messageCount = 0;
 let startTime = Date.now();
 
-function connectWebSocket() {
-  const wsUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-    ? 'ws://127.0.0.1:18800/ws?senderId=dashboard&senderName=Dashboard'
-    : `ws://${window.location.hostname}:18800/ws?senderId=dashboard&senderName=Dashboard`;
+// Fallback: Simulador de respuestas de Max (cuando WebSocket no está disponible)
+const maxResponses = {
+  greeting: ["¡Hola! 👋 Soy Max, tu asistente digital. ¿En qué puedo ayudarte?", "¡Hey! Max aquí 💜 ¿Qué necesitas?", "¡Hola! Estoy lista para ayudarte 📚"],
+  status: ["Todo funcionando perfectamente ✨", "Sistema operativo al 100% 💜", "Trabajando en tus proyectos 🚀"],
+  projects: ["Tienes 2 proyectos activos:\n• Psicofrecuencia.com (25%)\n• Dashboard Max (100%) 💜", "Los proyectos van bien. ¿Quieres que te dé detalles?"],
+  help: ["Puedo ayudarte con:\n• Ver estado de proyectos\n• Estadísticas de trabajo\n• Responder preguntas\n• Conectarte con Max en tiempo real 💜", "Solo pregunta lo que necesitas. Estoy aquí para ayudarte 📚"],
+  unknown: ["Interesante pregunta... déjame pensar 💭", "Hmm, no estoy segura de entender. ¿Podrías reformular? 🤔", "¡Buena pregunta! Te respondo 💜"]
+};
 
-  ws = new WebSocket(wsUrl);
+function getMaxResponse(text) {
+  const t = text.toLowerCase();
+  if (t.match(/hola|hey|hi|buenos|qué tal/)) return maxResponses.greeting[Math.floor(Math.random() * 3)];
+  if (t.match(/cómo estás|status|estado|qué haces/)) return maxResponses.status[Math.floor(Math.random() * 3)];
+  if (t.match(/proyectos|projects|trabajos/)) return maxResponses.projects[Math.floor(Math.random() * 2)];
+  if (t.match(/ayuda|help|qué puedes|qué haces/)) return maxResponses.help[Math.floor(Math.random() * 2)];
+  if (t.match(/quién eres|tu nombre/)) return "Soy Max, tu asistente personal digital 💜 Estoy aquí para ayudarte con tus proyectos y tareas.";
+  if (t.match(/gracias|genial|perfecto|ok/)) return "¡De nada! 😊💜";
+  return maxResponses.unknown[Math.floor(Math.random() * 3)];
+}
+
+function connectWebSocket() {
+  // Intentar WebSocket local primero
+  const wsUrl = 'ws://127.0.0.1:18800/ws?senderId=dashboard&senderName=Dashboard';
   
-  ws.onopen = () => {
-    console.log('✅ WebSocket connected');
-    setConnectionStatus(true);
-    reconnectAttempts = 0;
-    addSystemMessage('🟢 Connected to Max in real-time');
-  };
-  
-  ws.onmessage = (event) => {
-    try {
-      const data = JSON.parse(event.data);
-      handleWebSocketMessage(data);
-    } catch (e) {
-      console.error('Parse error:', e);
-    }
-  };
-  
-  ws.onclose = () => {
-    console.log('WebSocket closed');
-    setConnectionStatus(false);
-    if (reconnectAttempts < maxReconnectAttempts) {
-      setTimeout(() => {
-        reconnectAttempts++;
-        addSystemMessage(`🔄 Reconnecting... (${reconnectAttempts}/${maxReconnectAttempts})`);
-        connectWebSocket();
-      }, 2000 * reconnectAttempts);
-    } else {
-      addSystemMessage('🔴 Connection lost. Using fallback mode.');
+  try {
+    ws = new WebSocket(wsUrl);
+    
+    ws.onopen = () => {
+      console.log('✅ WebSocket connected');
+      setConnectionStatus(true);
+      reconnectAttempts = 0;
+      addSystemMessage('🟢 Connected to Max in real-time');
+    };
+    
+    ws.onmessage = (event) => {
+      try {
+        const data = JSON.parse(event.data);
+        handleWebSocketMessage(data);
+      } catch (e) {
+        console.error('Parse error:', e);
+      }
+    };
+    
+    ws.onclose = () => {
+      console.log('WebSocket closed');
+      setConnectionStatus(false);
       enableFallbackMode();
-    }
-  };
-  
-  ws.onerror = (err) => {
-    console.error('WebSocket error:', err);
-    setConnectionStatus(false);
-  };
+    };
+    
+    ws.onerror = (err) => {
+      console.error('WebSocket error:', err);
+      setConnectionStatus(false);
+      enableFallbackMode();
+    };
+  } catch (e) {
+    console.error('WebSocket init error:', e);
+    enableFallbackMode();
+  }
 }
 
 function handleWebSocketMessage(data) {
@@ -292,6 +308,13 @@ function handleWebSocketMessage(data) {
   }
 }
 
+function enableFallbackMode() {
+  // Fallback mode: respuestas simuladas cuando WebSocket no está disponible
+  setConnectionStatus(false);
+  addSystemMessage('📡 Modo fallback: Conectado vía simulación');
+  console.log('Fallback mode enabled - using simulated responses');
+}
+
 function sendMessage() {
   const input = document.getElementById('chatInput');
   const text = input.value.trim();
@@ -311,19 +334,13 @@ function sendMessage() {
       senderName: 'Dashboard User'
     }));
   } else {
-    // Fallback: simulate response
+    // Fallback: usar respuestas simuladas
     setTimeout(() => {
       hideTypingIndicator();
-      const responses = [
-        "¡Entendido! Procesando tu solicitud... 💜",
-        "Interesante pregunta. Déjame pensar... 🤔",
-        "¡Perfecto! Trabajando en ello... ⚡",
-        "Recibido. Analizando... 📊",
-        "¡Claro! Aquí tienes la información... 📚"
-      ];
-      addMessage(responses[Math.floor(Math.random() * responses.length)], 'bot');
+      const response = getMaxResponse(text);
+      addMessage(response, 'bot');
       updateMetrics();
-    }, 1000 + Math.random() * 2000);
+    }, 800 + Math.random() * 1000);
   }
 }
 
