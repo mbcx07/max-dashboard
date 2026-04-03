@@ -1,34 +1,31 @@
-/* ===== ANIME CHARACTER DASHBOARD - KAWAII STYLE ===== */
-/* Based on the reference image provided */
+/* ===== ANIME CHARACTER - EXACT REFERENCE ===== */
+/* Based on the kawaii anime girl image provided */
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --bg-dark: #0d0a1a;
-  --bg-room: #1a1428;
-  --bg-floor: #251e36;
-  --bg-wall: #2d2540;
-  --text: #f0e6ff;
-  --text-dim: #9d8fbf;
+  --bg-dark: #0a0a15;
+  --bg-room: #12101a;
+  --bg-floor: #1a1525;
+  --bg-wall: #252035;
+  --text: #f0e8ff;
+  --text-dim: #a090c0;
   --accent: #9b6dff;
   --accent-light: #c4a8ff;
   --accent-glow: #e0d0ff;
-  --success: #6dd58c;
-  --warning: #ffd166;
-  --danger: #ff6b9d;
   
-  /* Character colors from reference */
-  --hair-main: #4a3d6b;
-  --hair-highlight: #6b5a9e;
-  --hair-shadow: #2d2550;
-  --skin: #ffe4d4;
-  --skin-shadow: #f5c9b8;
-  --eye-outer: #6b4fd9;
-  --eye-inner: #9b6dff;
-  --eye-pupil: #1a0a30;
-  --blush: #ffb3c6;
-  --shirt-main: #7c5cbf;
-  --shirt-shadow: #5a4a9f;
+  /* Character colors from image */
+  --hair-color: #1a1a2e;
+  --hair-highlight: #2a2a4a;
+  --skin-color: #ffe8dc;
+  --skin-shadow: #f5d4c8;
+  --eye-iris: #8b5ccf;
+  --eye-iris-light: #b88dff;
+  --eye-pupil: #1a0a20;
+  --blush-color: #ffb5c5;
+  --mouth-color: #e8a0a8;
+  --shirt-color: #6b4fd9;
+  --shirt-shadow: #4a35a8;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
@@ -40,8 +37,8 @@ body { font-family: 'Nunito', system-ui, sans-serif; background: var(--bg-dark);
 .character-scene {
   position: relative;
   width: 100%;
-  height: 420px;
-  background: linear-gradient(180deg, #1a1535 0%, #2d2550 40%, #251e36 60%, #1a1428 100%);
+  height: 450px;
+  background: linear-gradient(180deg, #0d0a18 0%, #1a1528 50%, #12101a 100%);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -50,488 +47,488 @@ body { font-family: 'Nunito', system-ui, sans-serif; background: var(--bg-dark);
   padding: 20px;
 }
 
-/* Ambient particles */
-.particles {
+/* Stars */
+.stars {
   position: absolute;
   width: 100%;
-  height: 100%;
-  pointer-events: none;
+  height: 50%;
+  top: 0;
 }
 
-.particle {
+.star {
   position: absolute;
-  width: 4px;
-  height: 4px;
-  background: var(--accent-light);
+  width: 2px;
+  height: 2px;
+  background: #fff;
   border-radius: 50%;
-  animation: float-particle 8s infinite;
-  opacity: 0.6;
+  animation: twinkle 2s infinite;
 }
 
-@keyframes float-particle {
-  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.6; }
-  50% { transform: translateY(-20px) translateX(10px); opacity: 0.3; }
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
 }
 
 /* Moon */
 .moon {
   position: absolute;
-  top: 30px;
-  right: 40px;
-  width: 60px;
-  height: 60px;
-  background: radial-gradient(circle at 30% 30%, #fff9e6, #f5e0b8, #d4b896);
+  top: 20px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background: radial-gradient(circle at 35% 35%, #fffde8, #f5e8c8, #d8c8a8);
   border-radius: 50%;
-  box-shadow: 0 0 40px rgba(255,250,220,0.4), 0 0 80px rgba(255,250,220,0.2);
+  box-shadow: 0 0 30px rgba(255,250,200,0.4), 0 0 60px rgba(255,250,200,0.2);
 }
 
-/* ===== ANIME CHARACTER - KAWAII STYLE ===== */
-.anime-character {
+/* ===== CHARACTER CONTAINER ===== */
+.character-container {
   position: relative;
-  z-index: 10;
-  transform: scale(1.1);
+  width: 220px;
+  height: 320px;
+  animation: float 4s ease-in-out infinite;
 }
 
-.char-wrapper {
-  position: relative;
-  width: 200px;
-  height: 280px;
-  animation: gentle-float 3s ease-in-out infinite;
-}
-
-@keyframes gentle-float {
+@keyframes float {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+  50% { transform: translateY(-8px); }
 }
 
-/* Hair - Back layer */
+/* Hair - Long flowing hair */
 .hair-back {
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 180px;
-  height: 200px;
-  background: linear-gradient(180deg, var(--hair-main) 0%, var(--hair-shadow) 100%);
-  border-radius: 90px 90px 60px 60px;
+  width: 200px;
+  height: 280px;
+  background: linear-gradient(180deg, var(--hair-color) 0%, var(--hair-highlight) 50%, var(--hair-color) 100%);
+  border-radius: 100px 100px 80px 80px;
   z-index: 1;
 }
 
-/* Hair strands flowing down */
-.hair-strand {
+.hair-side-left, .hair-side-right {
   position: absolute;
-  background: linear-gradient(180deg, var(--hair-main), var(--hair-shadow));
-  border-radius: 0 0 20px 20px;
-  z-index: 1;
-  animation: hair-flow 4s ease-in-out infinite;
+  top: 80px;
+  width: 50px;
+  height: 180px;
+  background: linear-gradient(180deg, var(--hair-color), var(--hair-highlight));
+  z-index: 2;
+  animation: hair-sway 5s ease-in-out infinite;
 }
 
-.hair-strand.left { left: 10px; width: 25px; height: 120px; animation-delay: 0.1s; }
-.hair-strand.right { right: 10px; width: 25px; height: 115px; animation-delay: 0.2s; }
-.hair-strand.back-left { left: 30px; width: 20px; height: 100px; animation-delay: 0.3s; }
-.hair-strand.back-right { right: 30px; width: 20px; height: 105px; animation-delay: 0.4s; }
+.hair-side-left {
+  left: 5px;
+  border-radius: 0 0 25px 25px;
+  transform-origin: top;
+}
 
-@keyframes hair-flow {
-  0%, 100% { transform: skewX(0deg); }
-  25% { transform: skewX(2deg); }
-  75% { transform: skewX(-2deg); }
+.hair-side-right {
+  right: 5px;
+  border-radius: 0 0 25px 25px;
+  transform-origin: top;
+  animation-delay: 0.5s;
+}
+
+@keyframes hair-sway {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(3deg); }
+  75% { transform: rotate(-3deg); }
 }
 
 /* Head */
 .head {
   position: absolute;
-  top: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 160px;
-  height: 175px;
-  background: linear-gradient(180deg, var(--skin) 0%, var(--skin-shadow) 100%);
-  border-radius: 80px 80px 60px 60px;
-  z-index: 3;
-}
-
-/* Face features */
-.face {
-  position: absolute;
-  top: 60px;
+  top: 20px;
   left: 50%;
   transform: translateX(-50%);
   width: 140px;
-  height: 150px;
-  z-index: 4;
+  height: 160px;
+  background: linear-gradient(180deg, var(--skin-color) 0%, var(--skin-shadow) 100%);
+  border-radius: 70px 70px 55px 55px;
+  z-index: 10;
 }
 
 /* Hair front */
 .hair-front {
   position: absolute;
-  top: 35px;
+  top: 15px;
   left: 50%;
   transform: translateX(-50%);
-  width: 170px;
-  height: 70px;
-  background: linear-gradient(180deg, var(--hair-highlight) 0%, var(--hair-main) 100%);
-  border-radius: 85px 85px 0 0;
-  z-index: 5;
+  width: 155px;
+  height: 60px;
+  background: linear-gradient(180deg, var(--hair-highlight) 0%, var(--hair-color) 100%);
+  border-radius: 80px 80px 0 0;
+  z-index: 15;
 }
 
 /* Bangs */
 .bangs {
   position: absolute;
-  top: 85px;
+  top: 50px;
   left: 50%;
   transform: translateX(-50%);
-  width: 150px;
-  height: 45px;
-  z-index: 6;
+  width: 140px;
   display: flex;
   justify-content: center;
-  gap: 3px;
+  gap: 2px;
+  z-index: 16;
 }
 
 .bang {
-  background: linear-gradient(180deg, var(--hair-highlight), var(--hair-main));
-  border-radius: 0 0 50% 50%;
-  animation: bang-move 3s ease-in-out infinite;
+  background: linear-gradient(180deg, var(--hair-highlight), var(--hair-color));
+  border-radius: 0 0 10px 10px;
+  animation: bang-bounce 3s ease-in-out infinite;
 }
 
-.bang:nth-child(1) { width: 22px; height: 40px; animation-delay: 0s; }
-.bang:nth-child(2) { width: 18px; height: 45px; animation-delay: 0.1s; }
-.bang:nth-child(3) { width: 24px; height: 38px; animation-delay: 0.2s; }
-.bang:nth-child(4) { width: 20px; height: 42px; animation-delay: 0.15s; }
-.bang:nth-child(5) { width: 22px; height: 40px; animation-delay: 0.05s; }
+.bang:nth-child(1) { width: 20px; height: 45px; animation-delay: 0s; }
+.bang:nth-child(2) { width: 18px; height: 50px; animation-delay: 0.1s; }
+.bang:nth-child(3) { width: 22px; height: 42px; animation-delay: 0.2s; }
+.bang:nth-child(4) { width: 18px; height: 48px; animation-delay: 0.15s; }
+.bang:nth-child(5) { width: 20px; height: 44px; animation-delay: 0.05s; }
 
-@keyframes bang-move {
+@keyframes bang-bounce {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(2px); }
 }
 
-/* Anime Eyes - Large and Expressive */
+/* Face */
+.face {
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 80px;
+  z-index: 20;
+}
+
+/* Eyes - Large anime eyes */
 .eyes {
   position: absolute;
-  top: 55px;
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 12px;
-  z-index: 7;
+  gap: 15px;
 }
 
 .eye {
   position: relative;
-  width: 48px;
-  height: 50px;
-  background: linear-gradient(180deg, #fff 0%, #f8f4ff 100%);
+  width: 42px;
+  height: 48px;
+  background: linear-gradient(180deg, #fff 0%, #faf5ff 100%);
   border-radius: 50% 50% 45% 45%;
   overflow: hidden;
-  animation: eye-sparkle 2s infinite;
+  animation: blink 4s infinite;
 }
 
-@keyframes eye-sparkle {
-  0%, 100% { filter: brightness(1); }
-  50% { filter: brightness(1.1); }
+@keyframes blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.1); }
 }
 
-/* Iris */
-.eye::before {
-  content: '';
+.eye-iris {
   position: absolute;
   top: 8px;
   left: 50%;
   transform: translateX(-50%);
-  width: 38px;
-  height: 40px;
-  background: radial-gradient(circle at 50% 40%, var(--eye-inner) 0%, var(--eye-outer) 60%, var(--hair-shadow) 100%);
+  width: 32px;
+  height: 38px;
+  background: radial-gradient(circle at 50% 30%, var(--eye-iris-light) 0%, var(--eye-iris) 50%, #6b4fcf 100%);
   border-radius: 50%;
 }
 
-/* Pupil */
-.eye::after {
-  content: '';
+.eye-pupil {
   position: absolute;
-  top: 18px;
+  top: 15px;
   left: 50%;
   transform: translateX(-50%);
-  width: 18px;
-  height: 22px;
+  width: 14px;
+  height: 18px;
   background: var(--eye-pupil);
   border-radius: 50%;
 }
 
-/* Eye shine */
 .eye-shine {
   position: absolute;
-  top: 12px;
-  left: 10px;
-  width: 12px;
-  height: 12px;
   background: #fff;
   border-radius: 50%;
-  z-index: 8;
+}
+
+.eye-shine.big {
+  top: 10px;
+  left: 8px;
+  width: 10px;
+  height: 10px;
 }
 
 .eye-shine.small {
-  top: 22px;
-  left: 22px;
-  width: 6px;
-  height: 6px;
+  top: 20px;
+  left: 20px;
+  width: 5px;
+  height: 5px;
 }
 
 /* Eyebrows */
 .eyebrows {
   position: absolute;
-  top: 45px;
+  top: -8px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 40px;
-  z-index: 8;
+  gap: 35px;
+  z-index: 25;
 }
 
 .eyebrow {
-  width: 30px;
-  height: 5px;
-  background: var(--hair-shadow);
-  border-radius: 3px;
+  width: 28px;
+  height: 4px;
+  background: var(--hair-color);
+  border-radius: 2px;
 }
 
-.eyebrow.left { transform: rotate(-8deg); }
-.eyebrow.right { transform: rotate(8deg); }
+.eyebrow.left { transform: rotate(-5deg); }
+.eyebrow.right { transform: rotate(5deg); }
 
 /* Blush */
 .blush {
   position: absolute;
-  top: 95px;
-  width: 28px;
-  height: 12px;
-  background: var(--blush);
+  top: 35px;
+  width: 22px;
+  height: 10px;
+  background: var(--blush-color);
   border-radius: 50%;
-  opacity: 0.7;
-  z-index: 7;
+  opacity: 0.6;
+  z-index: 21;
 }
 
-.blush.left { left: 8px; }
-.blush.right { right: 8px; }
+.blush.left { left: 5px; }
+.blush.right { right: 5px; }
 
 /* Nose */
 .nose {
   position: absolute;
-  top: 88px;
+  top: 35px;
   left: 50%;
   transform: translateX(-50%);
-  width: 6px;
-  height: 8px;
+  width: 5px;
+  height: 6px;
   background: var(--skin-shadow);
   border-radius: 50%;
-  z-index: 7;
+  z-index: 21;
 }
 
 /* Mouth */
 .mouth {
   position: absolute;
-  top: 105px;
+  top: 48px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 7;
+  z-index: 21;
 }
 
 .mouth-shape {
-  width: 18px;
-  height: 10px;
-  background: #e8a4a4;
-  border-radius: 0 0 12px 12px;
-  animation: talk 0.4s infinite;
-}
-
-.mouth-shape.smile {
-  width: 24px;
-  height: 12px;
-  background: #ffb3c6;
-  border-radius: 0 0 15px 15px;
+  width: 16px;
+  height: 8px;
+  background: var(--mouth-color);
+  border-radius: 0 0 10px 10px;
+  animation: talk 0.5s infinite;
 }
 
 @keyframes talk {
-  0%, 100% { height: 10px; }
-  50% { height: 14px; }
+  0%, 100% { height: 8px; }
+  50% { height: 12px; }
 }
 
 /* Neck */
 .neck {
   position: absolute;
-  top: 145px;
+  top: 175px;
   left: 50%;
   transform: translateX(-50%);
-  width: 40px;
+  width: 35px;
   height: 25px;
-  background: linear-gradient(180deg, var(--skin-shadow), var(--skin));
-  border-radius: 0 0 10px 10px;
-  z-index: 2;
+  background: linear-gradient(180deg, var(--skin-shadow), var(--skin-color));
+  z-index: 5;
 }
 
 /* Body */
 .body {
   position: absolute;
-  top: 165px;
+  top: 195px;
   left: 50%;
   transform: translateX(-50%);
-  width: 110px;
-  height: 70px;
-  background: linear-gradient(180deg, var(--shirt-main) 0%, var(--shirt-shadow) 100%);
-  border-radius: 25px 25px 0 0;
-  z-index: 0;
+  width: 100px;
+  height: 80px;
+  background: linear-gradient(180deg, var(--shirt-color) 0%, var(--shirt-shadow) 100%);
+  border-radius: 20px 20px 0 0;
+  z-index: 3;
+}
+
+/* Arms */
+.arm {
+  position: absolute;
+  top: 210px;
+  width: 28px;
+  height: 50px;
+  background: linear-gradient(180deg, var(--shirt-color), var(--shirt-shadow));
+  border-radius: 14px;
+  z-index: 4;
+}
+
+.arm.left {
+  left: 15px;
+  transform: rotate(15deg);
+}
+
+.arm.right {
+  right: 15px;
+  transform: rotate(-15deg);
+}
+
+/* Hands */
+.hand {
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22px;
+  height: 22px;
+  background: var(--skin-color);
+  border-radius: 50%;
 }
 
 /* Speech bubble */
 .speech-bubble {
   position: absolute;
-  top: -20px;
+  top: -30px;
   left: 50%;
   transform: translateX(-50%);
-  background: linear-gradient(135deg, #fff 0%, #f5f0ff 100%);
+  background: linear-gradient(135deg, #fff 0%, #faf5ff 100%);
   color: #2d1f50;
   padding: 12px 20px;
   border-radius: 20px;
   font-size: 14px;
   font-weight: 600;
   white-space: nowrap;
-  max-width: 220px;
+  max-width: 200px;
   text-align: center;
-  box-shadow: 0 4px 25px rgba(155,109,255,0.3);
-  animation: bubble-appear 6s infinite;
+  box-shadow: 0 4px 20px rgba(139,92,255,0.3);
+  animation: bubble 6s infinite;
   z-index: 100;
 }
 
 .speech-bubble::after {
   content: '';
   position: absolute;
-  bottom: -14px;
+  bottom: -12px;
   left: 50%;
   transform: translateX(-50%);
-  border: 14px solid transparent;
+  border: 12px solid transparent;
   border-top-color: #fff;
 }
 
-@keyframes bubble-appear {
-  0%, 8%, 100% { opacity: 0; transform: translateX(-50%) translateY(10px) scale(0.9); }
-  12%, 88% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+@keyframes bubble {
+  0%, 10%, 100% { opacity: 0; transform: translateX(-50%) translateY(10px) scale(0.9); }
+  15%, 85% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
 }
 
-/* Activity indicator */
+/* Activity badge */
 .activity-badge {
   position: absolute;
-  bottom: -30px;
+  bottom: -20px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(45,37,80,0.9);
+  background: rgba(20,15,30,0.9);
   padding: 10px 20px;
   border-radius: 25px;
   border: 2px solid var(--accent);
-  box-shadow: 0 4px 20px rgba(155,109,255,0.3);
 }
 
-.activity-icon {
-  font-size: 20px;
-  animation: wiggle 1s ease-in-out infinite;
-}
+.activity-icon { font-size: 18px; animation: wiggle 1s infinite; }
+.activity-text { font-size: 12px; font-weight: 600; }
 
 @keyframes wiggle {
   0%, 100% { transform: rotate(-5deg); }
   50% { transform: rotate(5deg); }
 }
 
-.activity-text {
-  font-size: 13px;
-  font-weight: 600;
-}
-
-/* ===== CHAT PANEL ===== */
+/* ===== CHAT ===== */
 .chat-panel {
   background: var(--bg-room);
   border-top: 3px solid var(--accent);
   display: flex;
   flex-direction: column;
-  height: 260px;
+  height: 250px;
 }
 
 .chat-header {
-  background: linear-gradient(90deg, var(--accent), var(--hair-main));
-  padding: 12px 15px;
+  background: linear-gradient(90deg, var(--accent), var(--shirt-color));
+  padding: 10px 15px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .chat-avatar {
-  width: 45px;
-  height: 45px;
+  width: 40px;
+  height: 40px;
   background: linear-gradient(135deg, var(--accent-light), var(--accent));
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 22px;
-  border: 3px solid var(--accent-glow);
+  font-size: 20px;
 }
 
-.chat-title h3 { font-size: 15px; font-weight: 700; }
-.chat-status { font-size: 11px; opacity: 0.85; display: flex; align-items: center; gap: 6px; }
+.chat-title h3 { font-size: 14px; }
+.chat-status { font-size: 10px; opacity: 0.85; display: flex; align-items: center; gap: 5px; }
+.status-dot { width: 8px; height: 8px; background: #5fb85f; border-radius: 50%; animation: pulse 1.5s infinite; }
 
-.status-dot {
-  width: 8px;
-  height: 8px;
-  background: var(--success);
-  border-radius: 50%;
-  animation: pulse-glow 1.5s infinite;
-}
-
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 5px var(--success); }
-  50% { box-shadow: 0 0 15px var(--success); }
-}
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
 .chat-messages {
   flex: 1;
   overflow-y: auto;
-  padding: 12px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .message {
   max-width: 85%;
   padding: 10px 14px;
-  border-radius: 16px;
-  font-size: 13px;
+  border-radius: 14px;
+  font-size: 12px;
   line-height: 1.4;
-  animation: msg-slide 0.3s ease-out;
+  animation: msg 0.3s;
   white-space: pre-wrap;
 }
 
-@keyframes msg-slide {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+@keyframes msg { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
 .message.bot {
-  background: linear-gradient(135deg, var(--bg-floor), #2a2245);
+  background: linear-gradient(135deg, var(--bg-floor), #252040);
   border-bottom-left-radius: 4px;
   align-self: flex-start;
   border: 1px solid rgba(155,109,255,0.2);
 }
 
 .message.user {
-  background: linear-gradient(135deg, var(--accent), var(--hair-highlight));
+  background: linear-gradient(135deg, var(--accent), var(--shirt-color));
   border-bottom-right-radius: 4px;
   align-self: flex-end;
 }
 
 .chat-input-area {
   display: flex;
-  gap: 10px;
-  padding: 12px;
+  gap: 8px;
+  padding: 10px;
   background: var(--bg-floor);
   border-top: 1px solid rgba(155,109,255,0.2);
 }
@@ -540,52 +537,43 @@ body { font-family: 'Nunito', system-ui, sans-serif; background: var(--bg-dark);
   flex: 1;
   background: var(--bg-dark);
   border: 2px solid var(--accent);
-  border-radius: 25px;
-  padding: 12px 18px;
+  border-radius: 20px;
+  padding: 10px 15px;
   color: var(--text);
-  font-size: 14px;
+  font-size: 13px;
   outline: none;
-  transition: all 0.3s;
 }
 
-.chat-input::placeholder { color: var(--text-dim); }
-.chat-input:focus {
-  border-color: var(--accent-light);
-  box-shadow: 0 0 20px rgba(155,109,255,0.3);
-}
+.chat-input:focus { border-color: var(--accent-light); box-shadow: 0 0 15px rgba(155,109,255,0.2); }
 
 .chat-send {
-  background: linear-gradient(135deg, var(--accent), var(--hair-main));
+  background: linear-gradient(135deg, var(--accent), var(--shirt-color));
   border: none;
   border-radius: 50%;
-  width: 48px;
-  height: 48px;
+  width: 42px;
+  height: 42px;
   color: #fff;
-  font-size: 18px;
+  font-size: 16px;
   cursor: pointer;
-  transition: all 0.2s;
-  box-shadow: 0 4px 15px rgba(155,109,255,0.4);
+  transition: transform 0.2s;
 }
 
-.chat-send:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 25px rgba(155,109,255,0.6);
-}
+.chat-send:hover { transform: scale(1.1); }
 
-/* ===== PANELS ===== */
+/* ===== OTHER PANELS ===== */
 .projects-panel, .stats-panel, .log-panel {
   background: var(--bg-floor);
-  padding: 12px;
+  padding: 10px;
   border-top: 2px solid var(--bg-room);
 }
 
 .panel-title {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
   color: var(--accent-light);
   text-transform: uppercase;
   letter-spacing: 1px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .project-item {
@@ -595,88 +583,39 @@ body { font-family: 'Nunito', system-ui, sans-serif; background: var(--bg-dark);
   padding: 10px;
   background: var(--bg-room);
   border-radius: 10px;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   border-left: 3px solid var(--text-dim);
-  transition: all 0.2s;
 }
 
-.project-item.active {
-  border-left-color: var(--success);
-  box-shadow: 0 0 15px rgba(109,213,140,0.2);
-}
+.project-item.active { border-left-color: #5fb85f; }
 
-.project-icon { font-size: 18px; }
+.project-icon { font-size: 16px; }
 .project-info { flex: 1; }
-.project-name { font-size: 13px; font-weight: 600; }
-.project-desc { font-size: 10px; color: var(--text-dim); }
+.project-name { font-size: 12px; font-weight: 600; }
+.project-desc { font-size: 9px; color: var(--text-dim); }
+.progress-bar-container { width: 50px; height: 6px; background: var(--bg-dark); border-radius: 3px; overflow: hidden; }
+.progress-bar-fill { height: 100%; background: linear-gradient(90deg, #5fb85f, var(--accent)); border-radius: 3px; transition: width 0.5s; }
+.project-percent { font-size: 10px; color: var(--text-dim); min-width: 30px; text-align: right; }
 
-.progress-bar-container {
-  width: 60px;
-  height: 8px;
-  background: var(--bg-dark);
-  border-radius: 4px;
-  overflow: hidden;
-}
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.stat-item { text-align: center; padding: 10px 5px; background: var(--bg-room); border-radius: 8px; }
+.stat-value { font-size: 18px; font-weight: 700; background: linear-gradient(135deg, var(--accent), var(--accent-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.stat-label { font-size: 8px; color: var(--text-dim); margin-top: 2px; }
 
-.progress-bar-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--success), var(--accent));
-  border-radius: 4px;
-  transition: width 0.5s;
-}
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-}
-
-.stat-item {
-  text-align: center;
-  padding: 12px 6px;
-  background: var(--bg-room);
-  border-radius: 10px;
-}
-
-.stat-value {
-  font-size: 22px;
-  font-weight: 700;
-  background: linear-gradient(135deg, var(--accent-light), var(--accent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.stat-label { font-size: 9px; color: var(--text-dim); margin-top: 4px; }
-
-.log-item {
-  display: flex;
-  gap: 8px;
-  padding: 8px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  font-size: 11px;
-}
-
-.log-icon { font-size: 14px; }
-.log-time { color: var(--text-dim); min-width: 50px; }
+.log-item { display: flex; gap: 8px; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 10px; }
+.log-icon { font-size: 12px; }
+.log-time { color: var(--text-dim); min-width: 45px; }
 .log-text { color: var(--text); }
 
-/* ===== FOOTER ===== */
-.footer {
-  background: linear-gradient(90deg, var(--accent), var(--hair-main));
-  padding: 12px;
-  text-align: center;
-}
+.footer { background: linear-gradient(90deg, var(--accent), var(--shirt-color)); padding: 10px; text-align: center; }
+.footer-text { font-size: 10px; color: rgba(255,255,255,0.9); }
 
-.footer-text { font-size: 11px; color: rgba(255,255,255,0.9); }
-
-/* ===== SCROLLBAR ===== */
-::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--bg-dark); }
-::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
 
-/* ===== RESPONSIVE ===== */
 @media (max-width: 400px) {
-  .character-scene { height: 380px; }
-  .char-wrapper { transform: scale(0.9); }
-  .chat-panel { height: 240px; }
+  .character-scene { height: 400px; }
+  .character-container { transform: scale(0.85); }
+  .chat-panel { height: 220px; }
 }
