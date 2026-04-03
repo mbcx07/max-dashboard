@@ -1,0 +1,15 @@
+{
+  "name": "max-dashboard",
+  "version": "1.0.0",
+  "description": "Dashboard para Max - Asistente Personal Digital",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": ["dashboard", "max", "assistant"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ws": "^8.20.0"
+  }
+}
