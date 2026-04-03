@@ -1,54 +1,60 @@
 {
-  "status": "Activa",
-  "updated": "2026-04-03T09:31:00Z",
-  "messages": [
-    "¡Analizando tu sitio web!",
-    "Trabajando en marketing...",
-    "Buscando estrategias...",
-    "¡Nuevo plan listo!",
-    "Revisando competencia...",
-    "Generando ideas...",
-    "Optimizando contenido...",
-    "¡Almost done!"
+  "status": "Online",
+  "updated": "2026-04-03T14:57:00Z",
+  "agents": [
+    {
+      "name": "Max",
+      "type": "max",
+      "role": "Asistente Personal Digital",
+      "badge": "Principal",
+      "status": "active",
+      "activity": "Coordinando proyectos"
+    }
   ],
   "projects": [
     {
       "name": "Psicofrecuencia.com",
       "description": "Sitio web para vender libros digitales de psicología",
       "status": "in-progress",
-      "progress": 15
+      "progress": 20
     },
     {
       "name": "Dashboard Max",
-      "description": "Panel de control para ver avances de proyectos",
+      "description": "Panel de control estilo Pokémon para ver avances",
       "status": "completed",
       "progress": 100
     }
   ],
   "stats": {
-    "tasks": 5,
-    "hours": 6,
-    "ideas": 15
+    "tasks": 8,
+    "projects": 2,
+    "hours": 12,
+    "ideas": 23
   },
   "activities": [
     {
       "icon": "🎉",
-      "text": "Dashboard creado y funcionando",
+      "text": "Dashboard estilo Pokémon creado",
       "time": "Ahora"
+    },
+    {
+      "icon": "📱",
+      "text": "PWA instalable configurada",
+      "time": "Hace 5 min"
+    },
+    {
+      "icon": "🎨",
+      "text": "Sprites de agentes diseñados",
+      "time": "Hace 15 min"
     },
     {
       "icon": "🔍",
       "text": "Analizando psicofrecuencia.com",
-      "time": "Hace 10 min"
+      "time": "Hace 30 min"
     },
     {
       "icon": "📚",
       "text": "Revisando estrategia de marketing",
-      "time": "Hace 30 min"
-    },
-    {
-      "icon": "💡",
-      "text": "Generando ideas para el sitio",
       "time": "Hace 1 hora"
     }
   ]

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<body>
+<canvas id="canvas192" width="192" height="192"></canvas>
+<canvas id="canvas512" width="512" height="512"></canvas>
+<script>
+function drawIcon(ctx, size) {
+  // Background
+  const gradient = ctx.createLinearGradient(0, 0, size, size);
+  gradient.addColorStop(0, '#6366f1');
+  gradient.addColorStop(1, '#4f46e5');
+  ctx.fillStyle = gradient;
+  ctx.beginPath();
+  ctx.roundRect(0, 0, size, size, size * 0.125);
+  ctx.fill();
+  
+  // Book emoji (simplified)
+  ctx.fillStyle = '#f1f5f9';
+  ctx.font = `${size * 0.5}px Arial`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('📚', size/2, size/2);
+}
+
+const canvas192 = document.getElementById('canvas192');
+drawIcon(canvas192.getContext('2d'), 192);
+
+const canvas512 = document.getElementById('canvas512');
+drawIcon(canvas512.getContext('2d'), 512);
+
+console.log('Icons created. Download from canvas.');
+</script>
+</body>
+</html>
