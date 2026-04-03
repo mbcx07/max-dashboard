@@ -3,120 +3,101 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#15111f">
+<meta name="theme-color" content="#1a1525">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="stylesheet" href="styles.css">
-<title>El Mundo de Max</title>
+<title>Max - Asistente Anime</title>
 </head>
 <body>
 
 <div class="game-container">
-  <!-- Room Scene -->
-  <div class="room-scene">
+  <!-- Anime Character Scene -->
+  <div class="character-scene">
+    <!-- Stars background -->
     <div class="stars-bg">
-      <div class="star-particle" style="top:10%;left:15%;animation-delay:0s"></div>
-      <div class="star-particle" style="top:25%;left:80%;animation-delay:0.5s"></div>
-      <div class="star-particle" style="top:40%;left:30%;animation-delay:1s"></div>
-      <div class="star-particle" style="top:15%;left:60%;animation-delay:1.5s"></div>
-      <div class="star-particle" style="top:35%;left:10%;animation-delay:2s"></div>
-      <div class="star-particle" style="top:20%;left:90%;animation-delay:0.3s"></div>
-      <div class="star-particle" style="top:45%;left:45%;animation-delay:1.2s"></div>
+      <div class="star-particle" style="top:8%;left:10%;animation-delay:0s"></div>
+      <div class="star-particle" style="top:15%;left:25%;animation-delay:0.3s"></div>
+      <div class="star-particle" style="top:5%;left:45%;animation-delay:0.6s"></div>
+      <div class="star-particle" style="top:20%;left:60%;animation-delay:0.9s"></div>
+      <div class="star-particle" style="top:12%;left:80%;animation-delay:1.2s"></div>
+      <div class="star-particle" style="top:25%;left:15%;animation-delay:1.5s"></div>
+      <div class="star-particle" style="top:30%;left:70%;animation-delay:0.2s"></div>
+      <div class="star-particle" style="top:18%;left:90%;animation-delay:0.8s"></div>
     </div>
     
-    <!-- Window -->
-    <div class="window">
-      <div class="window-frame"></div>
-      <div class="window-frame-v"></div>
-      <div class="moon"></div>
-    </div>
+    <!-- Moon -->
+    <div class="moon"></div>
     
-    <!-- Wall decorations -->
-    <div class="wall-poster left">📚</div>
-    <div class="wall-poster right">🎨</div>
-    
-    <!-- Desk Area -->
-    <div class="desk-area">
-      <div class="desk-drawer"></div>
-      <div class="desk-drawer"></div>
-      <div class="desk-surface"></div>
-      
-      <div class="desk-items">
-        <div class="coffee-cup">
-          <div class="cup-body">
-            <div class="cup-liquid"></div>
-          </div>
-          <div class="cup-handle"></div>
-          <div class="steam-container">
-            <span class="steam">~</span>
-            <span class="steam">~</span>
-            <span class="steam">~</span>
-          </div>
-        </div>
-        
-        <div class="book-stack">
-          <div class="book"></div>
-          <div class="book"></div>
-          <div class="book"></div>
-          <div class="book"></div>
-        </div>
-        
-        <div class="plant">
-          <div class="plant-leaves">🌿</div>
-          <div class="plant-pot"></div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Monitor -->
-    <div class="monitor">
-      <div class="monitor-frame">
-        <div class="monitor-screen">
-          <div class="screen-content">
-            <div id="screenText">
-              <div>> Cargando sistema...</div>
-              <div>> Iniciando Max v1.0</div>
-              <div>> Listo <span class="cursor"></span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="monitor-stand"></div>
-      <div class="monitor-base"></div>
-    </div>
-    
-    <!-- Character -->
-    <div class="character" id="character">
-      <div class="chair">
-        <div class="chair-back"></div>
-        <div class="chair-seat"></div>
-      </div>
-      <div class="char-sprite">
-        <!-- Hair back -->
-        <div class="char-hair-back"></div>
-        <!-- Head -->
-        <div class="char-head">
-          <div class="char-hair-front"></div>
-          <div class="char-bangs"></div>
-          <div class="char-eyes">
-            <div class="char-eye left"></div>
-            <div class="char-eye right"></div>
-          </div>
-          <div class="char-mouth" id="charMouth"></div>
-        </div>
-        <!-- Body -->
-        <div class="char-body"></div>
-        <!-- Arms -->
-        <div class="char-arm left"><div class="char-hand"></div></div>
-        <div class="char-arm right"><div class="char-hand"></div></div>
-      </div>
-      <!-- Speech bubble -->
+    <!-- Anime Character -->
+    <div class="anime-character">
       <div class="speech-bubble" id="speechBubble">
         ¡Hola! Soy Max 📚
       </div>
+      
+      <div class="char-container">
+        <!-- Hair back -->
+        <div class="char-hair-back"></div>
+        
+        <!-- Head -->
+        <div class="char-head"></div>
+        
+        <!-- Hair front -->
+        <div class="char-hair-front"></div>
+        
+        <!-- Bangs -->
+        <div class="char-bangs">
+          <div class="bang-strand"></div>
+          <div class="bang-strand"></div>
+          <div class="bang-strand"></div>
+          <div class="bang-strand"></div>
+          <div class="bang-strand"></div>
+        </div>
+        
+        <!-- Side hair -->
+        <div class="char-side-hair left"></div>
+        <div class="char-side-hair right"></div>
+        
+        <!-- Eyebrows -->
+        <div class="char-eyebrows">
+          <div class="eyebrow left"></div>
+          <div class="eyebrow right"></div>
+        </div>
+        
+        <!-- Eyes -->
+        <div class="char-eyes">
+          <div class="anime-eye">
+            <div class="eye-pupil"></div>
+          </div>
+          <div class="anime-eye">
+            <div class="eye-pupil"></div>
+          </div>
+        </div>
+        
+        <!-- Blush -->
+        <div class="char-blush left"></div>
+        <div class="char-blush right"></div>
+        
+        <!-- Nose -->
+        <div class="char-nose"></div>
+        
+        <!-- Mouth -->
+        <div class="char-mouth">
+          <div class="mouth-normal" id="charMouth"></div>
+        </div>
+        
+        <!-- Body -->
+        <div class="char-body"></div>
+      </div>
+    </div>
+    
+    <!-- Activity indicator -->
+    <div class="activity-indicator">
+      <span class="activity-icon" id="activityIcon">⌨️</span>
+      <span class="activity-text" id="activityText">Cargando...</span>
     </div>
   </div>
   
@@ -128,29 +109,20 @@
         <h3>Chat con Max</h3>
         <div class="chat-status">
           <span class="status-dot"></span>
-          <span>En línea</span>
+          <span>Conectada contigo</span>
         </div>
       </div>
     </div>
     <div class="chat-messages" id="chatMessages">
       <div class="message bot">
-        ¡Hola! Soy Max, tu asistente. 👋 Escribe algo y te responderé.
+        ¡Hola! Soy Max, tu asistente. 👋 
+        
+Escribe algo y te responderé en tiempo real.
       </div>
     </div>
     <div class="chat-input-area">
-      <input type="text" class="chat-input" id="chatInput" placeholder="Escribe un mensaje..." maxlength="200">
+      <input type="text" class="chat-input" id="chatInput" placeholder="Escribe un mensaje..." maxlength="500">
       <button class="chat-send" id="chatSend">➤</button>
-    </div>
-  </div>
-  
-  <!-- Activity Panel -->
-  <div class="activity-panel">
-    <div class="activity-header">
-      <span class="activity-icon-large" id="activityIcon">⌨️</span>
-      <div class="activity-info">
-        <h3 id="activityTitle">Cargando actividad...</h3>
-        <p id="activityDesc">Preparando el mundo</p>
-      </div>
     </div>
   </div>
   
@@ -173,22 +145,25 @@
   </div>
   
   <!-- Stats Grid -->
-  <div class="stats-grid">
-    <div class="stat-item">
-      <div class="stat-value" id="statTasks">0</div>
-      <div class="stat-label">Tareas</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-value" id="statProjects">0</div>
-      <div class="stat-label">Proyectos</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-value" id="statHours">0</div>
-      <div class="stat-label">Horas</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-value" id="statIdeas">0</div>
-      <div class="stat-label">Ideas</div>
+  <div class="stats-panel">
+    <div class="panel-title">📊 Estadísticas</div>
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-value" id="statTasks">0</div>
+        <div class="stat-label">Tareas</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" id="statProjects">0</div>
+        <div class="stat-label">Proyectos</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" id="statHours">0</div>
+        <div class="stat-label">Horas</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" id="statIdeas">0</div>
+        <div class="stat-label">Ideas</div>
+      </div>
     </div>
   </div>
   
@@ -213,60 +188,53 @@
 
 <script>
 // ===== DATA =====
-let data = {
-  status: "Online",
-  updated: new Date().toISOString(),
-  currentActivity: { icon: "⌨️", title: "Cargando...", description: "Preparando el mundo", screen: "idle" },
-  projects: [],
-  stats: { tasks: 0, projects: 0, hours: 0, ideas: 0 },
-  activities: []
-};
+let data = null;
 
-// ===== MESSAGES FOR SPEECH BUBBLE =====
+// ===== MESSAGES =====
 const MESSAGES = [
-  "¡Trabajando en tus proyectos!",
-  "Analizando datos...",
-  "¡Nueva idea detectada!",
-  "Revisando el progreso...",
-  "Optimizando todo...",
-  "¡Casi termino esto!",
-  "Pensando en marketing...",
-  "Organizando tareas..."
+  "¡Trabajando en tus proyectos! 💜",
+  "Analizando datos... 📊",
+  "¡Nueva idea detectada! ✨",
+  "Revisando el progreso... 📈",
+  "Optimizando todo... ⚙️",
+  "¡Casi termino esto! 🎉",
+  "Pensando en marketing... 💭",
+  "Organizando tareas... 📋"
 ];
 
-// ===== RESPONSES FOR CHAT =====
+let currentMessage = 0;
+
+// ===== RESPONSES =====
 const RESPONSES = {
   greeting: [
     "¡Hola! 👋 ¿En qué puedo ayudarte?",
-    "¡Hey! ¿Qué necesitas?",
+    "¡Hey! Soy Max, tu asistente personal 💜",
     "¡Hola! Estoy aquí para ayudarte 📚"
   ],
   status: [
     "Todo va bien por aquí 😊",
-    "Trabajando en tus proyectos...",
-    "Analizando nuevas ideas 💡"
+    "Trabajando en tus proyectos... 💜",
+    "Analizando nuevas ideas ✨"
   ],
   help: [
-    "Puedo ayudarte con:\n• Ver proyectos\n• Revisar estadísticas\n• Responder preguntas",
+    "Puedo ayudarte con:\n• Ver proyectos\n• Estadísticas\n• Responder preguntas\n• ¡Y más! 💜",
     "¿Qué necesitas? Pregúntame lo que quieras 📚"
   ],
   projects: [
-    "Tienes 2 proyectos activos:\n• Psicofrecuencia.com (25%)\n• Dashboard Max (90%)",
-    "Los proyectos van avanzando bien. ¿Quieres detalles?"
+    "Tienes 2 proyectos:\n• Psicofrecuencia.com (25%)\n• Dashboard Max (95%) 💜",
+    "Los proyectos van avanzando bien. ¿Quieres detalles? 📊"
   ],
   unknown: [
     "Interesante pregunta... déjame pensar 🤔",
-    "Hmm, no estoy segura. ¿Puedes ser más específico?",
-    "¡Buena pregunta! Te responderé lo mejor que pueda."
+    "Hmm, déjame procesar eso... 💭",
+    "¡Buena pregunta! Te responderé lo mejor que pueda 💜"
   ],
   positive: [
-    "¡Excelente! Me alegra escuchar eso 😊",
-    "¡Genial! Sigamos así 📚",
-    "¡Perfecto! Todo marcha bien 🎉"
+    "¡Excelente! Me alegra 😊💜",
+    "¡Genial! Sigamos así 🎉",
+    "¡Perfecto! Todo marcha bien ✨"
   ]
 };
-
-let currentMessage = 0;
 
 // ===== CHAT FUNCTIONS =====
 function addMessage(text, isUser = false) {
@@ -281,20 +249,26 @@ function addMessage(text, isUser = false) {
 function getResponse(input) {
   const text = input.toLowerCase().trim();
   
-  if (text.match(/hola|hey|hi|buenos|qué tal/)) {
+  if (text.match(/hola|hey|hi|buenos|qué tal|saludos/)) {
     return RESPONSES.greeting[Math.floor(Math.random() * RESPONSES.greeting.length)];
   }
-  if (text.match(/cómo estás|status|estado|qué haces/)) {
+  if (text.match(/cómo estás|status|estado|qué haces|qué tal/)) {
     return RESPONSES.status[Math.floor(Math.random() * RESPONSES.status.length)];
   }
-  if (text.match(/ayuda|help|qué puedes|qué haces/)) {
+  if (text.match(/ayuda|help|qué puedes|qué haces|funciones/)) {
     return RESPONSES.help[Math.floor(Math.random() * RESPONSES.help.length)];
   }
-  if (text.match(/proyectos|projects|trabajos/)) {
+  if (text.match(/proyectos|projects|trabajos|avances/)) {
     return RESPONSES.projects[Math.floor(Math.random() * RESPONSES.projects.length)];
   }
-  if (text.match(/gracias|genial|excelente|perfecto|bien/)) {
+  if (text.match(/gracias|genial|excelente|perfecto|bien|ok|grax/)) {
     return RESPONSES.positive[Math.floor(Math.random() * RESPONSES.positive.length)];
+  }
+  if (text.match(/quién eres|quien eres|tu nombre|te llamas/)) {
+    return "Soy Max, tu asistente personal digital 💜 Estoy aquí para ayudarte con tus proyectos y tareas.";
+  }
+  if (text.match(/moisés|moises|lic/)) {
+    return "¡Moisés! Tu asistente personal está aquí para ayudarte 📚 ¿Qué necesitas?";
   }
   
   return RESPONSES.unknown[Math.floor(Math.random() * RESPONSES.unknown.length)];
@@ -310,20 +284,19 @@ function sendMessage() {
   addMessage(text, true);
   input.value = '';
   
-  // Animate character talking
+  // Animate character
   const mouth = document.getElementById('charMouth');
-  mouth.classList.remove('idle');
+  mouth.className = 'mouth-normal';
   
-  // Show thinking in bubble
+  // Show thinking
   document.getElementById('speechBubble').textContent = 'Pensando... 🤔';
   
-  // Respond after delay
+  // Respond
   setTimeout(() => {
     const response = getResponse(text);
     addMessage(response, false);
-    document.getElementById('speechBubble').textContent = response.substring(0, 30) + (response.length > 30 ? '...' : '');
-    mouth.classList.add('idle');
-  }, 800 + Math.random() * 500);
+    document.getElementById('speechBubble').textContent = response.split('\n')[0].substring(0, 35) + (response.length > 35 ? '...' : '');
+  }, 500 + Math.random() * 500);
 }
 
 // Event listeners
@@ -331,20 +304,6 @@ document.getElementById('chatSend').addEventListener('click', sendMessage);
 document.getElementById('chatInput').addEventListener('keypress', (e) => {
   if (e.key === 'Enter') sendMessage();
 });
-
-// ===== SCREEN TEXT =====
-const SCREEN_TEXTS = {
-  coding: ["> Escribiendo código...", "> dashboard.js", "> Compilando..."],
-  thinking: ["> Analizando...", "> Procesando datos...", "> 🤔 Pensando..."],
-  writing: ["> Redactando...", "> content.md", "> Guardando..."],
-  researching: ["> Buscando...", "> Analizando...", "> 🔍 Investigando..."],
-  idle: ["> En espera...", "> Listo para ayudar", "> 📚 Esperando..."]
-};
-
-function updateScreen(activity) {
-  const texts = SCREEN_TEXTS[activity] || SCREEN_TEXTS.idle;
-  document.getElementById('screenText').innerHTML = texts.map(t => `<div>${t}</div>`).join('') + '<div><span class="cursor"></span></div>';
-}
 
 // ===== RENDER FUNCTIONS =====
 function renderProjects(projects) {
@@ -408,9 +367,7 @@ function updateStats(stats) {
 
 function updateActivity(currentActivity) {
   document.getElementById('activityIcon').textContent = currentActivity?.icon || '⌨️';
-  document.getElementById('activityTitle').textContent = currentActivity?.title || 'En espera';
-  document.getElementById('activityDesc').textContent = currentActivity?.description || 'Esperando tareas';
-  updateScreen(currentActivity?.screen || 'idle');
+  document.getElementById('activityText').textContent = currentActivity?.title || 'En espera';
   
   if (currentActivity?.message) {
     document.getElementById('speechBubble').textContent = currentActivity.message;
@@ -432,8 +389,7 @@ async function loadData() {
       new Date(data.updated).toLocaleTimeString('es-MX', {hour:'2-digit',minute:'2-digit'});
   } catch (e) {
     console.error('Error loading data:', e);
-    document.getElementById('activityTitle').textContent = 'Sin conexión';
-    document.getElementById('activityDesc').textContent = 'Reconectando...';
+    document.getElementById('activityText').textContent = 'Sin conexión';
   }
 }
 
@@ -444,7 +400,7 @@ function nextMessage() {
 }
 
 // ===== INITIALIZE =====
-setInterval(nextMessage, 6000);
+setInterval(nextMessage, 8000);
 setInterval(loadData, 60000);
 loadData();
 

@@ -1,22 +1,11 @@
 {
-  "updated": "2026-04-03T16:18:00Z",
+  "updated": "2026-04-03T17:15:00Z",
   "currentActivity": {
-    "icon": "💬",
-    "title": "Agregando chat interactivo",
-    "description": "El personaje ahora responde mensajes",
-    "screen": "coding",
-    "message": "¡Probando el nuevo chat!"
+    "icon": "💜",
+    "title": "Mejorando el dashboard",
+    "description": "Agregando personaje estilo anime",
+    "message": "¡Nuevo look anime! 💜"
   },
-  "agents": [
-    {
-      "name": "Max",
-      "type": "main",
-      "status": "working",
-      "location": "desk",
-      "activity": "Programando chat interactivo",
-      "sprite": "girl-purple"
-    }
-  ],
   "projects": [
     {
       "name": "Psicofrecuencia.com",
@@ -26,51 +15,42 @@
     },
     {
       "name": "Dashboard Max",
-      "description": "Panel visual estilo The Sims/Pokémon con chat",
+      "description": "Panel visual estilo anime con chat conectado",
       "status": "in-progress",
-      "progress": 95
+      "progress": 98
     }
   ],
   "stats": {
-    "tasks": 18,
+    "tasks": 22,
     "projects": 2,
-    "hours": 12,
-    "ideas": 47,
-    "commits": 10,
-    "files": 14
+    "hours": 15,
+    "ideas": 55
   },
   "activities": [
     {
-      "icon": "💬",
-      "text": "Chat interactivo implementado",
+      "icon": "🎨",
+      "text": "Personaje anime creado",
       "time": "Ahora"
     },
     {
-      "icon": "🎨",
-      "text": "Animaciones mejoradas",
+      "icon": "💬",
+      "text": "Chat interactivo implementado",
       "time": "Hace 5 min"
     },
     {
-      "icon": "⌨️",
-      "text": "CSS optimizado para sprites",
+      "icon": "✨",
+      "text": "Animaciones estilo anime",
       "time": "Hace 10 min"
     },
     {
       "icon": "📚",
-      "text": "Investigando técnicas de pixel art",
+      "text": "Investigando estilo chibi",
       "time": "Hace 15 min"
     },
     {
-      "icon": "✨",
-      "text": "Agregando efectos de luz",
+      "icon": "🔧",
+      "text": "Timeout aumentado a 600s",
       "time": "Hace 20 min"
     }
-  ],
-  "world": {
-    "location": "office",
-    "timeOfDay": "night",
-    "mood": "focused",
-    "coffeeLevel": 55,
-    "energyLevel": 90
-  }
+  ]
 }
