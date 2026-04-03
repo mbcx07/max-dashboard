@@ -3,248 +3,293 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#12101a">
+<meta name="theme-color" content="#0a0e1a">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<link rel="apple-touch-icon" href="icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-<title>Max - Asistente Anime</title>
+<title>Max Dashboard - Futuristic AI Assistant</title>
 </head>
 <body>
 
-<div class="game-container">
-  <!-- Character Scene -->
-  <div class="character-scene">
-    <!-- Stars -->
-    <div class="stars">
-      <div class="star"></div>
-      <div class="star"></div>
-      <div class="star"></div>
-      <div class="star"></div>
-      <div class="star"></div>
+<div class="dashboard">
+  <!-- Animated Background -->
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
+  
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 40 40" fill="none">
+          <circle cx="20" cy="20" r="18" stroke="url(#gradient1)" stroke-width="2"/>
+          <circle cx="20" cy="20" r="12" stroke="url(#gradient2)" stroke-width="1.5"/>
+          <circle cx="20" cy="20" r="6" fill="url(#gradient3)"/>
+          <defs>
+            <linearGradient id="gradient1" x1="0" y1="0" x2="40" y2="40">
+              <stop offset="0%" stop-color="#00f0ff"/>
+              <stop offset="100%" stop-color="#ff006e"/>
+            </linearGradient>
+            <linearGradient id="gradient2" x1="0" y1="0" x2="40" y2="40">
+              <stop offset="0%" stop-color="#ff006e"/>
+              <stop offset="100%" stop-color="#a855f7"/>
+            </linearGradient>
+            <radialGradient id="gradient3">
+              <stop offset="0%" stop-color="#00f0ff"/>
+              <stop offset="100%" stop-color="#7c3aed"/>
+            </radialGradient>
+          </defs>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span class="logo-name">MAX</span>
+        <span class="logo-subtitle">AI ASSISTANT</span>
+      </div>
     </div>
-    
-    <!-- Moon -->
-    <div class="moon"></div>
-    
-    <!-- Character -->
-    <div class="character">
-      <!-- Speech bubble -->
-      <div class="speech-bubble" id="speechBubble">¡Hola! Soy Max 💜</div>
+    <div class="status-bar">
+      <div class="status-item">
+        <span class="status-dot online"></span>
+        <span class="status-label">ONLINE</span>
+      </div>
+      <div class="status-item">
+        <span class="status-icon">⚡</span>
+        <span class="status-value" id="modelStatus">GLM-5</span>
+      </div>
+      <div class="status-item time">
+        <span class="status-value" id="currentTime">--:--:--</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main">
+    <!-- Stats Grid -->
+    <section class="stats-grid">
+      <div class="stat-card" data-animation="fade-in" style="--delay: 0">
+        <div class="stat-icon tasks">📋</div>
+        <div class="stat-content">
+          <span class="stat-value" id="statTasks">0</span>
+          <span class="stat-label">TASKS</span>
+        </div>
+        <div class="stat-chart">
+          <svg viewBox="0 0 100 30" class="sparkline" id="sparkTasks"></svg>
+        </div>
+      </div>
       
-      <!-- Head -->
-      <div class="head">
-        <!-- Hair back -->
-        <div class="hair-back"></div>
-        
-        <!-- Hair sides -->
-        <div class="hair-side left"></div>
-        <div class="hair-side right"></div>
-        
-        <!-- Face container -->
-        <div class="face-container">
-          <!-- Face -->
-          <div class="face">
-            <!-- Hair front -->
-            <div class="hair-front"></div>
-            
-            <!-- Bangs -->
-            <div class="bangs">
-              <div class="bang"></div>
-              <div class="bang"></div>
-              <div class="bang"></div>
-              <div class="bang"></div>
-              <div class="bang"></div>
-            </div>
-            
-            <!-- Eyebrows -->
-            <div class="eyebrows">
-              <div class="eyebrow left"></div>
-              <div class="eyebrow right"></div>
-            </div>
-            
-            <!-- Eyes -->
-            <div class="eyes">
-              <div class="eye">
-                <div class="eye-iris">
-                  <div class="eye-pupil"></div>
-                </div>
-                <div class="eye-shine large"></div>
-                <div class="eye-shine small"></div>
-                <div class="eye-shine tiny"></div>
-              </div>
-              <div class="eye">
-                <div class="eye-iris">
-                  <div class="eye-pupil"></div>
-                </div>
-                <div class="eye-shine large"></div>
-                <div class="eye-shine small"></div>
-                <div class="eye-shine tiny"></div>
-              </div>
-            </div>
-            
-            <!-- Blush -->
-            <div class="blush left"></div>
-            <div class="blush right"></div>
-            
-            <!-- Nose -->
-            <div class="nose"></div>
-            
-            <!-- Mouth -->
-            <div class="mouth">
-              <div class="mouth-shape" id="charMouth"></div>
+      <div class="stat-card" data-animation="fade-in" style="--delay: 0.1s">
+        <div class="stat-icon projects">📁</div>
+        <div class="stat-content">
+          <span class="stat-value" id="statProjects">0</span>
+          <span class="stat-label">PROJECTS</span>
+        </div>
+        <div class="stat-chart">
+          <svg viewBox="0 0 100 30" class="sparkline" id="sparkProjects"></svg>
+        </div>
+      </div>
+      
+      <div class="stat-card" data-animation="fade-in" style="--delay: 0.2s">
+        <div class="stat-icon hours">⏱️</div>
+        <div class="stat-content">
+          <span class="stat-value" id="statHours">0</span>
+          <span class="stat-label">HOURS</span>
+        </div>
+        <div class="stat-chart">
+          <svg viewBox="0 0 100 30" class="sparkline" id="sparkHours"></svg>
+        </div>
+      </div>
+      
+      <div class="stat-card" data-animation="fade-in" style="--delay: 0.3s">
+        <div class="stat-icon ideas">💡</div>
+        <div class="stat-content">
+          <span class="stat-value" id="statIdeas">0</span>
+          <span class="stat-label">IDEAS</span>
+        </div>
+        <div class="stat-chart">
+          <svg viewBox="0 0 100 30" class="sparkline" id="sparkIdeas"></svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Grid -->
+    <div class="content-grid">
+      <!-- Projects Panel -->
+      <section class="panel projects-panel" data-animation="fade-in" style="--delay: 0.4s">
+        <div class="panel-header">
+          <h2 class="panel-title">
+            <span class="title-icon">🚀</span>
+            ACTIVE PROJECTS
+          </h2>
+          <span class="panel-badge" id="projectCount">2</span>
+        </div>
+        <div class="panel-content">
+          <div id="projectsList" class="projects-list">
+            <!-- Projects loaded dynamically -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Chat Panel -->
+      <section class="panel chat-panel" data-animation="fade-in" style="--delay: 0.5s">
+        <div class="panel-header">
+          <h2 class="panel-title">
+            <span class="title-icon">💬</span>
+            LIVE CHAT
+          </h2>
+          <div class="connection-status">
+            <span class="conn-dot" id="connDot"></span>
+            <span class="conn-text" id="connText">CONNECTING...</span>
+          </div>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+          <div class="chat-welcome">
+            <div class="welcome-icon">🤖</div>
+            <div class="welcome-text">
+              <strong>MAX AI Assistant</strong>
+              <p>Connected in real-time. Send me a message!</p>
             </div>
           </div>
         </div>
-      </div>
-      
-      <!-- Neck -->
-      <div class="neck"></div>
-      
-      <!-- Body -->
-      <div class="body"></div>
-      
-      <!-- Arms -->
-      <div class="arm left">
-        <div class="hand"></div>
-      </div>
-      <div class="arm right">
-        <div class="hand"></div>
-      </div>
-      
-      <!-- Activity badge -->
-      <div class="activity-badge">
-        <span class="activity-icon" id="activityIcon">💜</span>
-        <span class="activity-text" id="activityText">Cargando...</span>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Chat Panel -->
-  <div class="chat-panel">
-    <div class="chat-header">
-      <div class="chat-avatar">📚</div>
-      <div class="chat-title">
-        <h3>Chat con Max</h3>
-        <div class="chat-status">
-          <span class="status-dot"></span>
-          <span>Conectada contigo</span>
+        <div class="chat-input-container">
+          <input type="text" class="chat-input" id="chatInput" placeholder="Type a message to Max..." maxlength="1000">
+          <button class="chat-send" id="chatSend">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 2L11 13M22 2L15 22L11 13L2 9L22 2Z"/>
+            </svg>
+          </button>
         </div>
-      </div>
-    </div>
-    <div class="chat-messages" id="chatMessages">
-      <div class="message bot">¡Hola! Soy Max 💜 Escribe algo y te responderé.</div>
-    </div>
-    <div class="chat-input-area">
-      <input type="text" class="chat-input" id="chatInput" placeholder="Escribe un mensaje..." maxlength="500">
-      <button class="chat-send" id="chatSend">➤</button>
-    </div>
-  </div>
-  
-  <!-- Projects Panel -->
-  <div class="projects-panel">
-    <div class="panel-title">📁 Proyectos Activos</div>
-    <div id="projectsList">
-      <div class="project-item">
-        <span class="project-icon">📂</span>
-        <div class="project-info">
-          <div class="project-name">Cargando...</div>
-          <div class="project-desc">Preparando</div>
+      </section>
+
+      <!-- Activity Panel -->
+      <section class="panel activity-panel" data-animation="fade-in" style="--delay: 0.6s">
+        <div class="panel-header">
+          <h2 class="panel-title">
+            <span class="title-icon">📊</span>
+            ACTIVITY FEED
+          </h2>
         </div>
-        <div class="progress-bar-container"><div class="progress-bar-fill" style="width:0%"></div></div>
-        <span class="project-percent">0%</span>
-      </div>
+        <div class="panel-content">
+          <div id="activityList" class="activity-list">
+            <!-- Activity loaded dynamically -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Metrics Panel -->
+      <section class="panel metrics-panel" data-animation="fade-in" style="--delay: 0.7s">
+        <div class="panel-header">
+          <h2 class="panel-title">
+            <span class="title-icon">📈</span>
+            PERFORMANCE
+          </h2>
+        </div>
+        <div class="panel-content">
+          <div class="metrics-chart" id="metricsChart">
+            <canvas id="perfChart"></canvas>
+          </div>
+          <div class="metrics-stats">
+            <div class="metric">
+              <span class="metric-label">Response Time</span>
+              <span class="metric-value" id="metricResponse">--ms</span>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Messages</span>
+              <span class="metric-value" id="metricMessages">0</span>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Uptime</span>
+              <span class="metric-value" id="metricUptime">--</span>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
-  </div>
-  
-  <!-- Stats Grid -->
-  <div class="stats-panel">
-    <div class="panel-title">📊 Estadísticas</div>
-    <div class="stats-grid">
-      <div class="stat-item">
-        <div class="stat-value" id="statTasks">0</div>
-        <div class="stat-label">Tareas</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-value" id="statProjects">0</div>
-        <div class="stat-label">Proyectos</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-value" id="statHours">0</div>
-        <div class="stat-label">Horas</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-value" id="statIdeas">0</div>
-        <div class="stat-label">Ideas</div>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Log Panel -->
-  <div class="log-panel">
-    <div class="panel-title">📋 Actividad</div>
-    <div id="logList">
-      <div class="log-item">
-        <span class="log-icon">⚡</span>
-        <span class="log-time">--:--</span>
-        <span class="log-text">Iniciando...</span>
-      </div>
-    </div>
-  </div>
-  
+  </main>
+
   <!-- Footer -->
-  <div class="footer">
-    <div class="footer-text">📚 Max — Asistente Personal Digital</div>
-    <div class="footer-text" style="opacity:0.7">Actualizado: <span id="lastUpdate">--</span></div>
-  </div>
+  <footer class="footer">
+    <div class="footer-left">
+      <span class="footer-brand">MAX Dashboard v2.0</span>
+      <span class="footer-divider">|</span>
+      <span class="footer-status">Neural Interface Active</span>
+    </div>
+    <div class="footer-right">
+      <span class="footer-update">Last sync: <span id="lastSync">--</span></span>
+    </div>
+  </footer>
 </div>
 
 <script>
-// Messages
-const MESSAGES = [
-  "¡Trabajando en tus proyectos! 💜",
-  "Analizando datos... 📊",
-  "¡Nueva idea! ✨",
-  "Revisando progreso... 📈",
-  "Organizando tareas... 📋",
-  "¡Casi termino! 🎉",
-  "Pensando... 💭",
-  "¡Lista para ayudar! 💪"
-];
+// ===== WEBSOCKET CONNECTION =====
+let ws = null;
+let reconnectAttempts = 0;
+const maxReconnectAttempts = 10;
+let messageCount = 0;
+let startTime = Date.now();
 
-let currentMessage = 0;
+function connectWebSocket() {
+  const wsUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'ws://127.0.0.1:18800/ws?senderId=dashboard&senderName=Dashboard'
+    : `ws://${window.location.hostname}:18800/ws?senderId=dashboard&senderName=Dashboard`;
 
-// Responses
-const RESPONSES = {
-  greeting: ["¡Hola! 👋 ¿En qué puedo ayudarte?", "¡Hey! Soy Max 💜", "¡Hola! Estoy aquí para ayudarte 📚"],
-  status: ["Todo va bien 😊", "Trabajando en proyectos... 💜", "Analizando ideas ✨"],
-  help: ["Puedo ayudarte con:\n• Proyectos\n• Estadísticas\n• Preguntas 💜", "¿Qué necesitas? 📚"],
-  projects: ["Tienes 2 proyectos:\n• Psicofrecuencia.com (25%)\n• Dashboard (99%) 💜", "Proyectos avanzando 📊"],
-  unknown: ["Interesante... 🤔", "Hmm, pensando... 💭", "¡Buena pregunta! 💜"],
-  positive: ["¡Excelente! 😊💜", "¡Genial! 🎉", "¡Perfecto! ✨"]
-};
-
-// Chat
-function addMessage(text, isUser = false) {
-  const container = document.getElementById('chatMessages');
-  const msg = document.createElement('div');
-  msg.className = `message ${isUser ? 'user' : 'bot'}`;
-  msg.textContent = text;
-  container.appendChild(msg);
-  container.scrollTop = container.scrollHeight;
+  ws = new WebSocket(wsUrl);
+  
+  ws.onopen = () => {
+    console.log('✅ WebSocket connected');
+    setConnectionStatus(true);
+    reconnectAttempts = 0;
+    addSystemMessage('🟢 Connected to Max in real-time');
+  };
+  
+  ws.onmessage = (event) => {
+    try {
+      const data = JSON.parse(event.data);
+      handleWebSocketMessage(data);
+    } catch (e) {
+      console.error('Parse error:', e);
+    }
+  };
+  
+  ws.onclose = () => {
+    console.log('WebSocket closed');
+    setConnectionStatus(false);
+    if (reconnectAttempts < maxReconnectAttempts) {
+      setTimeout(() => {
+        reconnectAttempts++;
+        addSystemMessage(`🔄 Reconnecting... (${reconnectAttempts}/${maxReconnectAttempts})`);
+        connectWebSocket();
+      }, 2000 * reconnectAttempts);
+    } else {
+      addSystemMessage('🔴 Connection lost. Using fallback mode.');
+      enableFallbackMode();
+    }
+  };
+  
+  ws.onerror = (err) => {
+    console.error('WebSocket error:', err);
+    setConnectionStatus(false);
+  };
 }
 
-function getResponse(input) {
-  const text = input.toLowerCase().trim();
-  if (text.match(/hola|hey|hi|buenos/)) return RESPONSES.greeting[Math.floor(Math.random() * 3)];
-  if (text.match(/cómo estás|status|qué tal/)) return RESPONSES.status[Math.floor(Math.random() * 3)];
-  if (text.match(/ayuda|help|qué puedes/)) return RESPONSES.help[Math.floor(Math.random() * 2)];
-  if (text.match(/proyectos|projects/)) return RESPONSES.projects[Math.floor(Math.random() * 2)];
-  if (text.match(/gracias|genial|perfecto|bien/)) return RESPONSES.positive[Math.floor(Math.random() * 3)];
-  if (text.match(/quién eres|tu nombre/)) return "Soy Max, tu asistente personal 💜";
-  return RESPONSES.unknown[Math.floor(Math.random() * 3)];
+function handleWebSocketMessage(data) {
+  switch (data.type) {
+    case 'chat.typing':
+      showTypingIndicator();
+      break;
+    case 'chat.stream':
+      updateTypingMessage(data.content, false);
+      break;
+    case 'chat.response':
+      addMessage(data.content, 'bot', data.messageId);
+      hideTypingIndicator();
+      updateMetrics();
+      break;
+    case 'chat.error':
+      addSystemMessage(`⚠️ Error: ${data.error}`);
+      hideTypingIndicator();
+      break;
+  }
 }
 
 function sendMessage() {
@@ -252,37 +297,182 @@ function sendMessage() {
   const text = input.value.trim();
   if (!text) return;
   
-  addMessage(text, true);
+  addMessage(text, 'user');
   input.value = '';
-  document.getElementById('speechBubble').textContent = 'Pensando... 💭';
   
-  setTimeout(() => {
-    const response = getResponse(text);
-    addMessage(response, false);
-    document.getElementById('speechBubble').textContent = response.split('\n')[0].substring(0, 25) + (response.length > 25 ? '...' : '');
-  }, 500);
+  // Show typing
+  showTypingIndicator();
+  
+  if (ws && ws.readyState === WebSocket.OPEN) {
+    ws.send(JSON.stringify({
+      type: 'chat.send',
+      content: text,
+      senderId: 'dashboard',
+      senderName: 'Dashboard User'
+    }));
+  } else {
+    // Fallback: simulate response
+    setTimeout(() => {
+      hideTypingIndicator();
+      const responses = [
+        "¡Entendido! Procesando tu solicitud... 💜",
+        "Interesante pregunta. Déjame pensar... 🤔",
+        "¡Perfecto! Trabajando en ello... ⚡",
+        "Recibido. Analizando... 📊",
+        "¡Claro! Aquí tienes la información... 📚"
+      ];
+      addMessage(responses[Math.floor(Math.random() * responses.length)], 'bot');
+      updateMetrics();
+    }, 1000 + Math.random() * 2000);
+  }
 }
 
-document.getElementById('chatSend').addEventListener('click', sendMessage);
-document.getElementById('chatInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') sendMessage(); });
+let typingElement = null;
 
-// Render
+function showTypingIndicator() {
+  const container = document.getElementById('chatMessages');
+  if (typingElement) return;
+  
+  typingElement = document.createElement('div');
+  typingElement.className = 'message bot typing';
+  typingElement.innerHTML = '<div class="typing-dots"><span></span><span></span><span></span></div>';
+  container.appendChild(typingElement);
+  container.scrollTop = container.scrollHeight;
+}
+
+function updateTypingMessage(content, done) {
+  if (typingElement) {
+    typingElement.innerHTML = `<div class="typing-dots"><span></span><span></span><span></span></div>`;
+  }
+}
+
+function hideTypingIndicator() {
+  if (typingElement) {
+    typingElement.remove();
+    typingElement = null;
+  }
+}
+
+function addMessage(text, type, id = null) {
+  const container = document.getElementById('chatMessages');
+  const msg = document.createElement('div');
+  msg.className = `message ${type}`;
+  if (id) msg.id = `msg-${id}`;
+  msg.textContent = text;
+  container.appendChild(msg);
+  container.scrollTop = container.scrollHeight;
+  messageCount++;
+}
+
+function addSystemMessage(text) {
+  const container = document.getElementById('chatMessages');
+  const msg = document.createElement('div');
+  msg.className = 'message system';
+  msg.textContent = text;
+  container.appendChild(msg);
+  container.scrollTop = container.scrollHeight;
+}
+
+function setConnectionStatus(connected) {
+  const dot = document.getElementById('connDot');
+  const text = document.getElementById('connText');
+  
+  if (connected) {
+    dot.className = 'conn-dot online';
+    text.textContent = 'CONNECTED';
+  } else {
+    dot.className = 'conn-dot offline';
+    text.textContent = 'OFFLINE';
+  }
+}
+
+function enableFallbackMode() {
+  // Fallback mode uses polling or simulated responses
+  addSystemMessage('📡 Fallback mode: Simulated responses');
+}
+
+function updateMetrics() {
+  const elapsed = Math.floor((Date.now() - startTime) / 1000);
+  const hours = Math.floor(elapsed / 3600);
+  const mins = Math.floor((elapsed % 3600) / 60);
+  
+  document.getElementById('metricMessages').textContent = messageCount;
+  document.getElementById('metricUptime').textContent = hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
+}
+
+// ===== STATS & CHARTS =====
+function updateTime() {
+  const now = new Date();
+  document.getElementById('currentTime').textContent = now.toLocaleTimeString('en-US', { hour12: false });
+}
+
+function generateSparkline(id, values) {
+  const svg = document.getElementById(id);
+  if (!svg) return;
+  
+  const width = 100;
+  const height = 30;
+  const max = Math.max(...values, 1);
+  
+  let path = `M 0 ${height - (values[0] / max) * height}`;
+  values.forEach((v, i) => {
+    const x = (i / (values.length - 1)) * width;
+    const y = height - (v / max) * height;
+    path += ` L ${x} ${y}`;
+  });
+  
+  svg.innerHTML = `
+    <defs>
+      <linearGradient id="grad-${id}" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.8"/>
+        <stop offset="100%" stop-color="#00f0ff" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <path d="${path} L 100 30 L 0 30 Z" fill="url(#grad-${id})"/>
+    <path d="${path}" fill="none" stroke="#00f0ff" stroke-width="1.5"/>
+  `;
+}
+
 function renderProjects(projects) {
   const container = document.getElementById('projectsList');
   if (!projects?.length) {
-    container.innerHTML = '<div class="project-item"><span class="project-icon">📭</span><div class="project-info"><div class="project-name">Sin proyectos</div></div><div class="progress-bar-container"><div class="progress-bar-fill" style="width:0%"></div></div><span class="project-percent">0%</span></div>';
+    container.innerHTML = '<div class="empty-state">No active projects</div>';
     return;
   }
-  container.innerHTML = projects.map(p => `<div class="project-item ${p.status === 'in-progress' ? 'active' : ''}"><span class="project-icon">${p.status === 'completed' ? '✅' : p.status === 'in-progress' ? '🔄' : '📂'}</span><div class="project-info"><div class="project-name">${p.name}</div><div class="project-desc">${p.description}</div></div><div class="progress-bar-container"><div class="progress-bar-fill" style="width:${p.progress}%"></div></div><span class="project-percent">${p.progress}%</span></div>`).join('');
+  
+  container.innerHTML = projects.map(p => `
+    <div class="project-card ${p.status === 'in-progress' ? 'active' : ''}">
+      <div class="project-header">
+        <span class="project-icon">${p.status === 'completed' ? '✅' : p.status === 'in-progress' ? '🔄' : '📂'}</span>
+        <span class="project-name">${p.name}</span>
+      </div>
+      <div class="project-desc">${p.description}</div>
+      <div class="project-progress">
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: ${p.progress}%"></div>
+        </div>
+        <span class="progress-value">${p.progress}%</span>
+      </div>
+    </div>
+  `).join('');
+  
+  document.getElementById('projectCount').textContent = projects.length;
 }
 
-function renderLog(activities) {
-  const container = document.getElementById('logList');
+function renderActivity(activities) {
+  const container = document.getElementById('activityList');
   if (!activities?.length) {
-    container.innerHTML = '<div class="log-item"><span class="log-icon">📭</span><span class="log-time">--:--</span><span class="log-text">Sin actividad</span></div>';
+    container.innerHTML = '<div class="empty-state">No recent activity</div>';
     return;
   }
-  container.innerHTML = activities.slice(0, 5).map(a => `<div class="log-item"><span class="log-icon">${a.icon}</span><span class="log-time">${a.time}</span><span class="log-text">${a.text}</span></div>`).join('');
+  
+  container.innerHTML = activities.map(a => `
+    <div class="activity-item">
+      <span class="activity-icon">${a.icon}</span>
+      <span class="activity-time">${a.time}</span>
+      <span class="activity-text">${a.text}</span>
+    </div>
+  `).join('');
 }
 
 function updateStats(stats) {
@@ -290,34 +480,60 @@ function updateStats(stats) {
   document.getElementById('statProjects').textContent = stats?.projects || 0;
   document.getElementById('statHours').textContent = stats?.hours || 0;
   document.getElementById('statIdeas').textContent = stats?.ideas || 0;
+  
+  // Generate sparklines
+  generateSparkline('sparkTasks', [5, 8, 12, 15, stats?.tasks || 0]);
+  generateSparkline('sparkProjects', [1, 1, 2, 2, stats?.projects || 0]);
+  generateSparkline('sparkHours', [2, 5, 8, 12, stats?.hours || 0]);
+  generateSparkline('sparkIdeas', [10, 25, 40, 50, stats?.ideas || 0]);
 }
 
-function updateActivity(currentActivity) {
-  document.getElementById('activityIcon').textContent = currentActivity?.icon || '💜';
-  document.getElementById('activityText').textContent = currentActivity?.title || 'En espera';
-  if (currentActivity?.message) document.getElementById('speechBubble').textContent = currentActivity.message;
-}
-
-// Load
+// ===== LOAD DATA =====
 async function loadData() {
   try {
     const res = await fetch('data.json?t=' + Date.now());
     const data = await res.json();
-    updateActivity(data.currentActivity);
-    renderProjects(data.projects);
     updateStats(data.stats);
-    renderLog(data.activities);
-    document.getElementById('lastUpdate').textContent = new Date(data.updated).toLocaleTimeString('es-MX', {hour:'2-digit',minute:'2-digit'});
+    renderProjects(data.projects);
+    renderActivity(data.activities);
+    document.getElementById('lastSync').textContent = new Date(data.updated).toLocaleTimeString();
   } catch (e) {
-    document.getElementById('activityText').textContent = 'Sin conexión';
+    console.error('Load error:', e);
   }
 }
 
-setInterval(() => { currentMessage = (currentMessage + 1) % MESSAGES.length; document.getElementById('speechBubble').textContent = MESSAGES[currentMessage]; }, 8000);
-setInterval(loadData, 60000);
-loadData();
+// ===== INIT =====
+function init() {
+  // Connect WebSocket
+  connectWebSocket();
+  
+  // Update time every second
+  updateTime();
+  setInterval(updateTime, 1000);
+  
+  // Load data
+  loadData();
+  setInterval(loadData, 30000);
+  
+  // Chat input handlers
+  document.getElementById('chatInput').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') sendMessage();
+  });
+  document.getElementById('chatSend').addEventListener('click', sendMessage);
+  
+  // Animate cards on load
+  document.querySelectorAll('[data-animation]').forEach((el, i) => {
+    el.style.animationDelay = el.style.getPropertyValue('--delay') || '0s';
+    el.classList.add('animate');
+  });
+}
 
-if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
+document.addEventListener('DOMContentLoaded', init);
+
+// Service Worker for PWA
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(() => {});
+}
 </script>
 </body>
 </html>
