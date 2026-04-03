@@ -3,214 +3,109 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#1a1a2e">
+<meta name="theme-color" content="#1a1525">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
+<link rel="stylesheet" href="styles.css">
 <title>El Mundo de Max</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--bg-dark:#1a1a2e;--bg-floor:#2d3a4f;--bg-wall:#3d4a5f;--desk:#5c4033;--desk-light:#8b6914;--screen:#0a0a15;--text:#f1f5f9;--text-dim:#94a3b8;--accent:#6366f1;--accent-glow:#818cf8;--success:#22c55e;--warning:#f59e0b}
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-.font-pixel{font-family:'Press Start 2P',monospace}
-
-body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg-dark);color:var(--text);min-height:100vh;overflow-x:hidden}
-
-/* Game World Container */
-.game-world{position:relative;width:100%;max-width:500px;margin:0 auto;background:var(--bg-wall);border-radius:0 0 20px 20px;box-shadow:0 10px 40px rgba(0,0,0,.5)}
-
-/* Room/Office Scene */
-.room{position:relative;width:100%;height:280px;background:linear-gradient(180deg,var(--bg-wall) 0%,var(--bg-wall) 60%,var(--bg-floor) 60%,var(--bg-floor) 100%);overflow:hidden}
-
-/* Window with stars */
-.window{position:absolute;top:20px;left:50%;transform:translateX(-50%);width:100px;height:60px;background:linear-gradient(180deg,#1a1a3e 0%,#2a2a4e 100%);border:4px solid #4a4a6a;border-radius:8px}
-.window::before{content:'';position:absolute;top:50%;left:0;right:0;height:4px;background:#4a4a6a}
-.window::after{content:'';position:absolute;top:0;bottom:0;left:50%;width:4px;background:#4a4a6a}
-.stars{position:absolute;width:100%;height:100%}
-.star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;animation:twinkle 2s infinite}
-@keyframes twinkle{0%,100%{opacity:.3}50%{opacity:1}}
-
-/* Desk */
-.desk{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);width:280px;height:80px}
-.desk-top{position:absolute;top:0;left:0;right:0;height:15px;background:linear-gradient(180deg,var(--desk-light),var(--desk));border-radius:4px 4px 0 0}
-.desk-front{position:absolute;top:15px;left:10px;right:10px;bottom:0;background:var(--desk);border-radius:0 0 4px 4px}
-.drawer{position:absolute;top:20px;left:20px;width:40px;height:30px;background:var(--desk-light);border-radius:2px;border:2px solid #3d2817}
-.drawer:nth-child(2){left:70px}
-
-/* Computer Monitor */
-.monitor{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:140px;height:90px;background:var(--screen);border:4px solid #333;border-radius:8px;box-shadow:0 0 20px var(--accent-glow)}
-.monitor-stand{position:absolute;bottom:-15px;left:50%;transform:translateX(-50%);width:20px;height:15px;background:#333}
-.screen-content{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
-.screen-text{font-size:6px;color:#22c55e;font-family:monospace;white-space:nowrap;animation:typing 3s infinite}
-@keyframes typing{0%,100%{opacity:1}50%{opacity:.5}}
-
-/* Max Character */
-.character{position:absolute;bottom:100px;left:50%;transform:translateX(-50%);animation:characterBounce 1s infinite}
-@keyframes characterBounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-3px)}}
-
-.character-body{position:relative;width:40px;height:50px}
-/* Head */
-.head{position:absolute;top:0;left:50%;transform:translateX(-50%);width:28px;height:28px;background:#fcd5ce;border-radius:8px;border:2px solid #e8b4a8}
-.hair{position:absolute;top:-4px;left:50%;transform:translateX(-50%);width:30px;height:12px;background:#8b5cf6;border-radius:8px 8px 0 0}
-.bangs{position:absolute;top:2px;left:50%;transform:translateX(-50%);width:24px;height:6px;background:#8b5cf6;border-radius:0 0 4px 4px}
-.eyes{position:absolute;top:10px;left:50%;transform:translateX(-50%);display:flex;gap:6px}
-.eye{width:5px;height:5px;background:#1a1a2e;border-radius:50%;animation:blink 4s infinite}
-@keyframes blink{0%,95%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
-.mouth{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);width:8px;height:4px;background:#e8a4a4;border-radius:0 0 4px 4px}
-/* Body */
-.body{position:absolute;top:26px;left:50%;transform:translateX(-50%);width:26px;height:24px;background:linear-gradient(180deg,#6366f1,var(--accent));border-radius:6px}
-.arm{position:absolute;top:28px;width:8px;height:18px;background:#6366f1;border-radius:4px}
-.arm.left{left:2px;transform:rotate(20deg)}
-.arm.right{right:2px;transform:rotate(-20deg);animation:typingArm .5s infinite}
-@keyframes typingArm{0%,100%{transform:rotate(-20deg)}50%{transform:rotate(-15deg)}}
-/* Chair */
-.chair{position:absolute;bottom:-25px;left:50%;transform:translateX(-50%);width:50px;height:30px;background:#333;border-radius:4px}
-.chair-back{position:absolute;top:-35px;left:50%;transform:translateX(-50%);width:45px;height:35px;background:#2d2d2d;border-radius:4px}
-
-/* Speech Bubble */
-.speech-bubble{position:absolute;top:-70px;left:50%;transform:translateX(-50%);background:#fff;color:#1a1a2e;padding:8px 12px;border-radius:12px;font-size:11px;white-space:nowrap;box-shadow:0 2px 10px rgba(0,0,0,.2);animation:showBubble 5s infinite}
-.speech-bubble::after{content:'';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);border-left:8px solid transparent;border-right:8px solid transparent;border-top:8px solid #fff}
-@keyframes showBubble{0%,10%,100%{opacity:0;transform:translateX(-50%) translateY(5px)}15%,85%{opacity:1;transform:translateX(-50%) translateY(0)}}
-
-/* Items on desk */
-.desk-items{position:absolute;top:5px;left:10px;right:10px;display:flex;justify-content:space-between;align-items:flex-end}
-.coffee{width:16px;height:20px;background:#8b4513;border-radius:0 0 4px 4px;position:relative}
-.coffee::before{content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%);width:14px;height:6px;background:#d2691e;border-radius:4px}
-.steam{position:absolute;top:-12px;left:50%;transform:translateX(-50%);font-size:10px;animation:steamFloat 1s infinite}
-@keyframes steamFloat{0%,100%{opacity:.5;transform:translateX(-50%) translateY(0)}50%{opacity:0;transform:translateX(-50%) translateY(-5px)}}
-.book-stack{display:flex;flex-direction:column;gap:2px}
-.book{width:20px;height:4px;border-radius:1px}
-.book:nth-child(1){background:#ef4444;width:22px}
-.book:nth-child(2){background:#22c55e;width:18px}
-.book:nth-child(3){background:#f59e0b;width:20px}
-.plant{width:20px;height:25px;position:relative}
-.pot{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:16px;height:10px;background:#d2691e;border-radius:0 0 4px 4px}
-.leaves{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);font-size:16px}
-
-/* Activity Display */
-.activity-panel{background:var(--bg-dark);padding:12px;border-top:3px solid var(--accent)}
-.activity-header{display:flex;align-items:center;gap:8px;margin-bottom:10px}
-.activity-icon{font-size:20px;animation:working 1s infinite}
-@keyframes working{0%,100%{transform:rotate(0deg)}25%{transform:rotate(10deg)}75%{transform:rotate(-10deg)}}
-.activity-title{font-size:12px;font-weight:bold;color:var(--text)}
-.activity-desc{font-size:11px;color:var(--text-dim);margin-top:4px}
-
-/* Projects Bar */
-.projects-bar{background:var(--bg-floor);padding:12px;border-top:1px solid rgba(255,255,255,.1)}
-.projects-title{font-size:10px;color:var(--text-dim);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
-.project-item{display:flex;align-items:center;gap:8px;margin-bottom:8px}
-.project-dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
-.project-dot.active{background:var(--success);box-shadow:0 0 8px var(--success)}
-.project-name{font-size:12px;flex:1}
-.project-progress{font-size:10px;color:var(--text-dim)}
-
-/* Stats Grid */
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:12px;background:var(--bg-dark)}
-.stat-item{text-align:center}
-.stat-value{font-size:18px;font-weight:bold;background:linear-gradient(135deg,var(--accent),#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.stat-label{font-size:9px;color:var(--text-dim)}
-
-/* Action Log */
-.action-log{background:var(--bg-floor);padding:12px;max-height:120px;overflow-y:auto}
-.log-item{display:flex;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05)}
-.log-time{font-size:9px;color:var(--text-dim);min-width:40px}
-.log-text{font-size:11px;color:var(--text)}
-.log-icon{font-size:12px}
-
-/* Footer */
-.footer{background:var(--accent);padding:8px;text-align:center}
-.footer-text{font-size:9px;color:#fff;opacity:.8}
-.install-hint{font-size:10px;color:#fff;margin-top:4px;cursor:pointer}
-
-/* Scrollbar */
-::-webkit-scrollbar{width:4px}
-::-webkit-scrollbar-track{background:var(--bg-dark)}
-::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px}
-
-/* Responsive */
-@media(max-width:400px){.room{height:240px}.desk{width:240px}.monitor{width:120px;height:75px}.speech-bubble{font-size:9px}}
-
-/* Loading */
-.loading{position:fixed;top:0;left:0;right:0;bottom:0;background:var(--bg-dark);display:flex;align-items:center;justify-content:center;z-index:9999}
-.loading.hidden{display:none}
-.loading-text{font-size:14px;color:var(--accent);animation:pulse 1s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
-</style>
 </head>
 <body>
 
-<div class="loading" id="loading">
-  <p class="loading-text">📚 Cargando el mundo de Max...</p>
-</div>
-
-<div class="game-world">
+<div class="game-container">
   <!-- Room Scene -->
-  <div class="room">
+  <div class="room-scene">
+    <div class="wall-pattern"></div>
+    
     <!-- Window with stars -->
     <div class="window">
+      <div class="window-frame"></div>
+      <div class="window-frame-v"></div>
       <div class="stars">
-        <div class="star" style="top:20%;left:20%"></div>
-        <div class="star" style="top:40%;left:60%"></div>
-        <div class="star" style="top:70%;left:30%"></div>
-        <div class="star" style="top:30%;left:80%"></div>
+        <div class="star" style="top:15%;left:20%"></div>
+        <div class="star" style="top:35%;left:70%;animation-delay:0.5s"></div>
+        <div class="star" style="top:60%;left:40%;animation-delay:1s"></div>
+        <div class="star" style="top:25%;left:85%;animation-delay:1.5s"></div>
       </div>
     </div>
+    <div class="moon"></div>
     
     <!-- Desk -->
     <div class="desk">
       <div class="desk-top"></div>
       <div class="desk-front">
-        <div class="drawer"></div>
-        <div class="drawer"></div>
+        <div class="desk-drawer"></div>
+        <div class="desk-drawer"></div>
       </div>
-      <!-- Items on desk -->
       <div class="desk-items">
-        <div>
-          <div class="coffee">
-            <div class="steam">~</div>
-          </div>
+        <div class="coffee-cup">
+          <div class="cup-top"></div>
+          <div class="cup-body"></div>
+          <div class="cup-handle"></div>
+          <div class="steam">~</div>
         </div>
         <div class="book-stack">
           <div class="book"></div>
           <div class="book"></div>
           <div class="book"></div>
+          <div class="book"></div>
         </div>
         <div class="plant">
-          <div class="pot"></div>
-          <div class="leaves">🌿</div>
+          <div class="plant-leaves">🌿</div>
+          <div class="plant-pot"></div>
         </div>
       </div>
     </div>
     
-    <!-- Computer Monitor -->
+    <!-- Monitor -->
     <div class="monitor">
-      <div class="screen-content">
-        <div class="screen-text" id="screenText">Trabajando...</div>
+      <div class="monitor-frame">
+        <div class="monitor-screen">
+          <div class="screen-content">
+            <div class="screen-lines">
+              <div id="screenLine1">> Cargando...</div>
+              <div id="screenLine2">> Esperando...</div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="monitor-stand"></div>
+      <div class="monitor-base"></div>
     </div>
     
-    <!-- Max Character -->
+    <!-- Character -->
     <div class="character" id="character">
-      <div class="speech-bubble" id="speechBubble">¡Hola! Soy Max 📚</div>
-      <div class="character-body">
-        <div class="chair">
-          <div class="chair-back"></div>
-        </div>
-        <div class="head">
-          <div class="hair"></div>
-          <div class="bangs"></div>
-          <div class="eyes">
-            <div class="eye"></div>
-            <div class="eye"></div>
+      <div class="chair">
+        <div class="chair-back"></div>
+        <div class="chair-seat"></div>
+      </div>
+      <div class="char-sprite">
+        <!-- Hair -->
+        <div class="char-hair"></div>
+        <div class="char-bangs"></div>
+        <!-- Head -->
+        <div class="char-head">
+          <div class="char-eyes">
+            <div class="char-eye"></div>
+            <div class="char-eye"></div>
           </div>
-          <div class="mouth"></div>
+          <div class="char-mouth"></div>
         </div>
-        <div class="body"></div>
-        <div class="arm left"></div>
-        <div class="arm right"></div>
+        <!-- Body -->
+        <div class="char-body"></div>
+        <!-- Arms -->
+        <div class="char-arm left">
+          <div class="char-hand"></div>
+        </div>
+        <div class="char-arm right">
+          <div class="char-hand"></div>
+        </div>
+      </div>
+      <!-- Speech Bubble -->
+      <div class="speech-bubble" id="speechBubble">
+        ¡Hola! Soy Max 📚
       </div>
     </div>
   </div>
@@ -218,22 +113,27 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg-dark);color
   <!-- Activity Panel -->
   <div class="activity-panel">
     <div class="activity-header">
-      <span class="activity-icon" id="activityIcon">⌨️</span>
-      <div>
-        <div class="activity-title" id="activityTitle">Cargando...</div>
-        <div class="activity-desc" id="activityDesc">Espere un momento</div>
+      <span class="activity-icon-large" id="activityIcon">⌨️</span>
+      <div class="activity-info">
+        <h3 id="activityTitle">Cargando actividad...</h3>
+        <p id="activityDesc">Preparando el mundo</p>
       </div>
     </div>
   </div>
   
-  <!-- Projects Bar -->
-  <div class="projects-bar">
-    <div class="projects-title">📁 Proyectos Activos</div>
+  <!-- Projects Panel -->
+  <div class="projects-panel">
+    <div class="panel-title">📁 Proyectos Activos</div>
     <div id="projectsList">
       <div class="project-item">
-        <div class="project-dot active"></div>
-        <span class="project-name">Cargando proyectos...</span>
-        <span class="project-progress">--</span>
+        <div class="project-icon">📂</div>
+        <div class="project-info">
+          <div class="project-name">Cargando...</div>
+          <div class="project-desc">Preparando proyectos</div>
+        </div>
+        <div class="project-progress">
+          <div class="progress-circle" style="--progress:0%">0%</div>
+        </div>
       </div>
     </div>
   </div>
@@ -258,13 +158,14 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg-dark);color
     </div>
   </div>
   
-  <!-- Action Log -->
-  <div class="action-log">
+  <!-- Activity Log -->
+  <div class="log-panel">
+    <div class="panel-title">📋 Actividad Reciente</div>
     <div id="logList">
       <div class="log-item">
         <span class="log-icon">⚡</span>
         <span class="log-time">--:--</span>
-        <span class="log-text">Iniciando sistema...</span>
+        <span class="log-text">Iniciando...</span>
       </div>
     </div>
   </div>
@@ -272,7 +173,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg-dark);color
   <!-- Footer -->
   <div class="footer">
     <div class="footer-text">📚 Max — Asistente Personal Digital</div>
-    <div class="footer-text" style="opacity:.6">Última actualización: <span id="lastUpdate">--</span></div>
+    <div class="footer-text" style="opacity:0.7">Última actualización: <span id="lastUpdate">--</span></div>
   </div>
 </div>
 
@@ -289,32 +190,30 @@ const MESSAGES = [
   "Organizando tareas..."
 ];
 
-// Icons for activities
-const ACTIVITY_ICONS = {
-  coding: "⌨️",
-  writing: "✍️",
-  thinking: "💭",
-  analyzing: "🔍",
-  creating: "🎨",
-  organizing: "📁",
-  communicating: "💬",
-  default: "⚡"
+// Screen text options
+const SCREEN_TEXTS = {
+  coding: ["> Escribiendo código...", "> dashboard.js", "> Compilando..."],
+  thinking: ["> Analizando...", "> Procesando datos...", "> 🤔 Pensando..."],
+  writing: ["> Redactando...", "> content.md", "> Guardando..."],
+  researching: ["> Buscando...", "> Analizando resultados...", "> 🔍 Investigando..."],
+  idle: ["> En espera...", "> Listo para ayudar", "> Esperando tareas..."]
 };
 
 let currentMessage = 0;
 let data = null;
 
-// Animate speech bubble
+// Update screen text based on activity
+function updateScreen(activity) {
+  const texts = SCREEN_TEXTS[activity] || SCREEN_TEXTS.idle;
+  document.getElementById('screenLine1').textContent = texts[0];
+  document.getElementById('screenLine2').textContent = texts[1];
+}
+
+// Cycle through messages
 function nextMessage() {
   const bubble = document.getElementById('speechBubble');
   currentMessage = (currentMessage + 1) % MESSAGES.length;
   bubble.textContent = MESSAGES[currentMessage];
-}
-
-// Update screen text based on current activity
-function updateScreen(activity) {
-  const screen = document.getElementById('screenText');
-  screen.textContent = activity || 'Procesando...';
 }
 
 // Render projects
@@ -323,30 +222,44 @@ function renderProjects(projects) {
   if (!projects || projects.length === 0) {
     container.innerHTML = `
       <div class="project-item">
-        <div class="project-dot"></div>
-        <span class="project-name">Sin proyectos activos</span>
-        <span class="project-progress">--</span>
+        <div class="project-icon">📭</div>
+        <div class="project-info">
+          <div class="project-name">Sin proyectos</div>
+          <div class="project-desc">Esperando asignaciones</div>
+        </div>
+        <div class="project-progress">
+          <div class="progress-circle" style="--progress:0%">0%</div>
+        </div>
       </div>
     `;
     return;
   }
   
-  container.innerHTML = projects.map(p => `
-    <div class="project-item">
-      <div class="project-dot ${p.status === 'in-progress' ? 'active' : ''}"></div>
-      <span class="project-name">${p.name}</span>
-      <span class="project-progress">${p.progress}%</span>
-    </div>
-  `).join('');
+  container.innerHTML = projects.map(p => {
+    const icon = p.status === 'completed' ? '✅' : p.status === 'in-progress' ? '🔄' : '📂';
+    const activeClass = p.status === 'in-progress' ? 'active' : '';
+    return `
+      <div class="project-item ${activeClass}">
+        <div class="project-icon">${icon}</div>
+        <div class="project-info">
+          <div class="project-name">${p.name}</div>
+          <div class="project-desc">${p.description}</div>
+        </div>
+        <div class="project-progress">
+          <div class="progress-circle" style="--progress:${p.progress}%">${p.progress}%</div>
+        </div>
+      </div>
+    `;
+  }).join('');
 }
 
-// Render action log
+// Render activity log
 function renderLog(activities) {
   const container = document.getElementById('logList');
   if (!activities || activities.length === 0) {
     container.innerHTML = `
       <div class="log-item">
-        <span class="log-icon">⚡</span>
+        <span class="log-icon">📭</span>
         <span class="log-time">--:--</span>
         <span class="log-text">Sin actividad reciente</span>
       </div>
@@ -373,41 +286,33 @@ function updateStats(stats) {
 
 // Update activity panel
 function updateActivity(currentActivity) {
-  document.getElementById('activityIcon').textContent = 
-    currentActivity?.icon || ACTIVITY_ICONS.default;
-  document.getElementById('activityTitle').textContent = 
-    currentActivity?.title || 'En espera';
-  document.getElementById('activityDesc').textContent = 
-    currentActivity?.description || 'Esperando nuevas tareas';
-  updateScreen(currentActivity?.screen || 'En espera');
+  document.getElementById('activityIcon').textContent = currentActivity?.icon || '⌨️';
+  document.getElementById('activityTitle').textContent = currentActivity?.title || 'En espera';
+  document.getElementById('activityDesc').textContent = currentActivity?.description || 'Esperando tareas';
+  updateScreen(currentActivity?.screen || 'idle');
+  
+  if (currentActivity?.message) {
+    document.getElementById('speechBubble').textContent = currentActivity.message;
+  }
 }
 
-// Fetch data from JSON
+// Fetch data
 async function loadData() {
   try {
     const res = await fetch('data.json?t=' + Date.now());
     data = await res.json();
     
-    // Update all components
     updateActivity(data.currentActivity);
     renderProjects(data.projects);
     updateStats(data.stats);
     renderLog(data.activities);
     
-    // Update timestamp
     document.getElementById('lastUpdate').textContent = 
       new Date(data.updated).toLocaleTimeString('es-MX', {hour:'2-digit',minute:'2-digit'});
-    
-    // Update speech bubble with current activity
-    if (data.currentActivity?.message) {
-      document.getElementById('speechBubble').textContent = data.currentActivity.message;
-    }
-    
-    // Hide loading
-    document.getElementById('loading').classList.add('hidden');
   } catch (e) {
     console.error('Error loading data:', e);
-    document.getElementById('loading').classList.add('hidden');
+    document.getElementById('activityTitle').textContent = 'Sin conexión';
+    document.getElementById('activityDesc').textContent = 'Reconectando...';
   }
 }
 
@@ -420,13 +325,6 @@ loadData();
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').catch(() => {});
 }
-
-// Install prompt
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-});
 </script>
 </body>
 </html>

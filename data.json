@@ -1,20 +1,20 @@
 {
-  "updated": "2026-04-03T15:35:00Z",
+  "updated": "2026-04-03T16:05:00Z",
   "currentActivity": {
-    "icon": "⌨️",
-    "title": "Trabajando en el Dashboard",
-    "description": "Creando interfaz estilo The Sims/Pokémon",
-    "screen": "dashboard.js",
-    "message": "¡Me encanta como queda!"
+    "icon": "🎨",
+    "title": "Mejorando animaciones",
+    "description": "Agregando efectos estilo The Sims/Pokémon",
+    "screen": "styles.css",
+    "message": "¡Trabajando en los gráficos!"
   },
   "agents": [
     {
       "name": "Max",
       "type": "main",
-      "sprite": "girl-purple",
       "status": "working",
       "location": "desk",
-      "activity": "Escribiendo código HTML"
+      "activity": "Diseñando animaciones CSS",
+      "sprite": "girl-purple"
     }
   ],
   "projects": [
@@ -22,57 +22,55 @@
       "name": "Psicofrecuencia.com",
       "description": "Sitio web para vender libros digitales",
       "status": "in-progress",
-      "progress": 25,
-      "tasks": ["Diseño del sitio", "Contenido", "SEO", "Tienda"]
+      "progress": 25
     },
     {
       "name": "Dashboard Max",
-      "description": "Panel visual estilo Sims/Pokémon",
+      "description": "Panel visual estilo The Sims/Pokémon",
       "status": "in-progress",
-      "progress": 85,
-      "tasks": ["Diseño", "Animaciones", "Datos dinámicos", "PWA"]
+      "progress": 90
     }
   ],
   "stats": {
-    "tasks": 12,
+    "tasks": 15,
     "projects": 2,
-    "hours": 8,
-    "ideas": 34,
-    "commits": 5,
-    "files": 8
+    "hours": 10,
+    "ideas": 42,
+    "commits": 8,
+    "files": 12
   },
   "activities": [
     {
       "icon": "🎨",
-      "text": "Diseñando personaje estilo pixel art",
+      "text": "Creando animaciones estilo videojuego",
       "time": "Ahora"
     },
     {
       "icon": "⌨️",
-      "text": "Creando animaciones del personaje",
+      "text": "Escribiendo CSS para sprites",
       "time": "Hace 2 min"
     },
     {
-      "icon": "📱",
-      "text": "Configurando PWA instalable",
+      "icon": "📚",
+      "text": "Investigando técnicas de pixel art",
       "time": "Hace 5 min"
     },
     {
-      "icon": "🔄",
-      "text": "Subiendo cambios a GitHub",
+      "icon": "🔍",
+      "text": "Buscando referencias de Stardew Valley",
       "time": "Hace 10 min"
     },
     {
-      "icon": "💭",
-      "text": "Analizando requisitos del dashboard",
+      "icon": "💡",
+      "text": "Implementando efectos de luz",
       "time": "Hace 15 min"
     }
   ],
   "world": {
     "location": "office",
-    "timeOfDay": "afternoon",
+    "timeOfDay": "night",
     "mood": "focused",
-    "coffeeLevel": 75,
+    "coffeeLevel": 60,
     "energyLevel": 85
   }
 }
