@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#1a1525">
+<meta name="theme-color" content="#1a1428">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="manifest.json">
@@ -15,18 +15,16 @@
 <body>
 
 <div class="game-container">
-  <!-- Anime Character Scene -->
+  <!-- Character Scene -->
   <div class="character-scene">
-    <!-- Stars background -->
-    <div class="stars-bg">
-      <div class="star-particle" style="top:8%;left:10%;animation-delay:0s"></div>
-      <div class="star-particle" style="top:15%;left:25%;animation-delay:0.3s"></div>
-      <div class="star-particle" style="top:5%;left:45%;animation-delay:0.6s"></div>
-      <div class="star-particle" style="top:20%;left:60%;animation-delay:0.9s"></div>
-      <div class="star-particle" style="top:12%;left:80%;animation-delay:1.2s"></div>
-      <div class="star-particle" style="top:25%;left:15%;animation-delay:1.5s"></div>
-      <div class="star-particle" style="top:30%;left:70%;animation-delay:0.2s"></div>
-      <div class="star-particle" style="top:18%;left:90%;animation-delay:0.8s"></div>
+    <!-- Ambient particles -->
+    <div class="particles">
+      <div class="particle" style="top:10%;left:15%;animation-delay:0s"></div>
+      <div class="particle" style="top:25%;left:80%;animation-delay:1s"></div>
+      <div class="particle" style="top:40%;left:30%;animation-delay:2s"></div>
+      <div class="particle" style="top:15%;left:60%;animation-delay:0.5s"></div>
+      <div class="particle" style="top:35%;left:10%;animation-delay:1.5s"></div>
+      <div class="particle" style="top:20%;left:90%;animation-delay:2.5s"></div>
     </div>
     
     <!-- Moon -->
@@ -34,70 +32,79 @@
     
     <!-- Anime Character -->
     <div class="anime-character">
+      <!-- Speech bubble -->
       <div class="speech-bubble" id="speechBubble">
-        ¡Hola! Soy Max 📚
+        ¡Hola! Soy Max 💜
       </div>
       
-      <div class="char-container">
+      <div class="char-wrapper">
         <!-- Hair back -->
-        <div class="char-hair-back"></div>
+        <div class="hair-back"></div>
+        <div class="hair-strand left"></div>
+        <div class="hair-strand right"></div>
+        <div class="hair-strand back-left"></div>
+        <div class="hair-strand back-right"></div>
         
         <!-- Head -->
-        <div class="char-head"></div>
+        <div class="head">
+          <!-- Face -->
+          <div class="face">
+            <!-- Eyebrows -->
+            <div class="eyebrows">
+              <div class="eyebrow left"></div>
+              <div class="eyebrow right"></div>
+            </div>
+            
+            <!-- Eyes -->
+            <div class="eyes">
+              <div class="eye">
+                <div class="eye-shine"></div>
+                <div class="eye-shine small"></div>
+              </div>
+              <div class="eye">
+                <div class="eye-shine"></div>
+                <div class="eye-shine small"></div>
+              </div>
+            </div>
+            
+            <!-- Blush -->
+            <div class="blush left"></div>
+            <div class="blush right"></div>
+            
+            <!-- Nose -->
+            <div class="nose"></div>
+            
+            <!-- Mouth -->
+            <div class="mouth">
+              <div class="mouth-shape" id="charMouth"></div>
+            </div>
+          </div>
+        </div>
         
         <!-- Hair front -->
-        <div class="char-hair-front"></div>
+        <div class="hair-front"></div>
         
         <!-- Bangs -->
-        <div class="char-bangs">
-          <div class="bang-strand"></div>
-          <div class="bang-strand"></div>
-          <div class="bang-strand"></div>
-          <div class="bang-strand"></div>
-          <div class="bang-strand"></div>
+        <div class="bangs">
+          <div class="bang"></div>
+          <div class="bang"></div>
+          <div class="bang"></div>
+          <div class="bang"></div>
+          <div class="bang"></div>
         </div>
         
-        <!-- Side hair -->
-        <div class="char-side-hair left"></div>
-        <div class="char-side-hair right"></div>
-        
-        <!-- Eyebrows -->
-        <div class="char-eyebrows">
-          <div class="eyebrow left"></div>
-          <div class="eyebrow right"></div>
-        </div>
-        
-        <!-- Eyes -->
-        <div class="char-eyes">
-          <div class="anime-eye">
-            <div class="eye-pupil"></div>
-          </div>
-          <div class="anime-eye">
-            <div class="eye-pupil"></div>
-          </div>
-        </div>
-        
-        <!-- Blush -->
-        <div class="char-blush left"></div>
-        <div class="char-blush right"></div>
-        
-        <!-- Nose -->
-        <div class="char-nose"></div>
-        
-        <!-- Mouth -->
-        <div class="char-mouth">
-          <div class="mouth-normal" id="charMouth"></div>
-        </div>
+        <!-- Neck -->
+        <div class="neck"></div>
         
         <!-- Body -->
-        <div class="char-body"></div>
+        <div class="body"></div>
       </div>
-    </div>
-    
-    <!-- Activity indicator -->
-    <div class="activity-indicator">
-      <span class="activity-icon" id="activityIcon">⌨️</span>
-      <span class="activity-text" id="activityText">Cargando...</span>
+      
+      <!-- Activity badge -->
+      <div class="activity-badge">
+        <span class="activity-icon" id="activityIcon">💜</span>
+        <span class="activity-text" id="activityText">Cargando...</span>
+      </div>
     </div>
   </div>
   
@@ -114,11 +121,9 @@
       </div>
     </div>
     <div class="chat-messages" id="chatMessages">
-      <div class="message bot">
-        ¡Hola! Soy Max, tu asistente. 👋 
-        
-Escribe algo y te responderé en tiempo real.
-      </div>
+      <div class="message bot">¡Hola! Soy Max, tu asistente personal. 💜
+
+Escribe algo y te responderé.</div>
     </div>
     <div class="chat-input-area">
       <input type="text" class="chat-input" id="chatInput" placeholder="Escribe un mensaje..." maxlength="500">
@@ -136,9 +141,7 @@ Escribe algo y te responderé en tiempo real.
           <div class="project-name">Cargando...</div>
           <div class="project-desc">Preparando proyectos</div>
         </div>
-        <div class="progress-bar-container">
-          <div class="progress-bar-fill" style="width:0%"></div>
-        </div>
+        <div class="progress-bar-container"><div class="progress-bar-fill" style="width:0%"></div></div>
         <span class="project-percent">0%</span>
       </div>
     </div>
@@ -187,19 +190,16 @@ Escribe algo y te responderé en tiempo real.
 </div>
 
 <script>
-// ===== DATA =====
-let data = null;
-
 // ===== MESSAGES =====
 const MESSAGES = [
   "¡Trabajando en tus proyectos! 💜",
   "Analizando datos... 📊",
   "¡Nueva idea detectada! ✨",
   "Revisando el progreso... 📈",
-  "Optimizando todo... ⚙️",
+  "Organizando tareas... 📋",
   "¡Casi termino esto! 🎉",
-  "Pensando en marketing... 💭",
-  "Organizando tareas... 📋"
+  "Pensando en soluciones... 💭",
+  "¡Lista para ayudarte! 💪"
 ];
 
 let currentMessage = 0;
@@ -208,7 +208,7 @@ let currentMessage = 0;
 const RESPONSES = {
   greeting: [
     "¡Hola! 👋 ¿En qué puedo ayudarte?",
-    "¡Hey! Soy Max, tu asistente personal 💜",
+    "¡Hey! Soy Max, tu asistente 💜",
     "¡Hola! Estoy aquí para ayudarte 📚"
   ],
   status: [
@@ -217,17 +217,17 @@ const RESPONSES = {
     "Analizando nuevas ideas ✨"
   ],
   help: [
-    "Puedo ayudarte con:\n• Ver proyectos\n• Estadísticas\n• Responder preguntas\n• ¡Y más! 💜",
+    "Puedo ayudarte con:\n• Ver proyectos\n• Estadísticas\n• Responder preguntas 💜",
     "¿Qué necesitas? Pregúntame lo que quieras 📚"
   ],
   projects: [
-    "Tienes 2 proyectos:\n• Psicofrecuencia.com (25%)\n• Dashboard Max (95%) 💜",
-    "Los proyectos van avanzando bien. ¿Quieres detalles? 📊"
+    "Tienes 2 proyectos:\n• Psicofrecuencia.com (25%)\n• Dashboard Max (98%) 💜",
+    "Los proyectos van avanzando. ¿Quieres detalles? 📊"
   ],
   unknown: [
-    "Interesante pregunta... déjame pensar 🤔",
-    "Hmm, déjame procesar eso... 💭",
-    "¡Buena pregunta! Te responderé lo mejor que pueda 💜"
+    "Interesante pregunta... 🤔",
+    "Hmm, déjame pensar eso... 💭",
+    "¡Buena pregunta! Te responderé 💜"
   ],
   positive: [
     "¡Excelente! Me alegra 😊💜",
@@ -265,10 +265,10 @@ function getResponse(input) {
     return RESPONSES.positive[Math.floor(Math.random() * RESPONSES.positive.length)];
   }
   if (text.match(/quién eres|quien eres|tu nombre|te llamas/)) {
-    return "Soy Max, tu asistente personal digital 💜 Estoy aquí para ayudarte con tus proyectos y tareas.";
+    return "Soy Max, tu asistente personal digital 💜 Estoy aquí para ayudarte con tus proyectos.";
   }
   if (text.match(/moisés|moises|lic/)) {
-    return "¡Moisés! Tu asistente personal está aquí para ayudarte 📚 ¿Qué necesitas?";
+    return "¡Moisés! Tu asistente está aquí 📚 ¿Qué necesitas?";
   }
   
   return RESPONSES.unknown[Math.floor(Math.random() * RESPONSES.unknown.length)];
@@ -280,26 +280,18 @@ function sendMessage() {
   
   if (!text) return;
   
-  // Add user message
   addMessage(text, true);
   input.value = '';
   
-  // Animate character
-  const mouth = document.getElementById('charMouth');
-  mouth.className = 'mouth-normal';
+  document.getElementById('speechBubble').textContent = 'Pensando... 💭';
   
-  // Show thinking
-  document.getElementById('speechBubble').textContent = 'Pensando... 🤔';
-  
-  // Respond
   setTimeout(() => {
     const response = getResponse(text);
     addMessage(response, false);
-    document.getElementById('speechBubble').textContent = response.split('\n')[0].substring(0, 35) + (response.length > 35 ? '...' : '');
+    document.getElementById('speechBubble').textContent = response.split('\n')[0].substring(0, 30) + (response.length > 30 ? '...' : '');
   }, 500 + Math.random() * 500);
 }
 
-// Event listeners
 document.getElementById('chatSend').addEventListener('click', sendMessage);
 document.getElementById('chatInput').addEventListener('keypress', (e) => {
   if (e.key === 'Enter') sendMessage();
@@ -309,36 +301,14 @@ document.getElementById('chatInput').addEventListener('keypress', (e) => {
 function renderProjects(projects) {
   const container = document.getElementById('projectsList');
   if (!projects || projects.length === 0) {
-    container.innerHTML = `
-      <div class="project-item">
-        <span class="project-icon">📭</span>
-        <div class="project-info">
-          <div class="project-name">Sin proyectos</div>
-          <div class="project-desc">Esperando asignaciones</div>
-        </div>
-        <div class="progress-bar-container"><div class="progress-bar-fill" style="width:0%"></div></div>
-        <span class="project-percent">0%</span>
-      </div>
-    `;
+    container.innerHTML = `<div class="project-item"><span class="project-icon">📭</span><div class="project-info"><div class="project-name">Sin proyectos</div><div class="project-desc">Esperando asignaciones</div></div><div class="progress-bar-container"><div class="progress-bar-fill" style="width:0%"></div></div><span class="project-percent">0%</span></div>`;
     return;
   }
   
   container.innerHTML = projects.map(p => {
     const icon = p.status === 'completed' ? '✅' : p.status === 'in-progress' ? '🔄' : '📂';
     const activeClass = p.status === 'in-progress' ? 'active' : '';
-    return `
-      <div class="project-item ${activeClass}">
-        <span class="project-icon">${icon}</span>
-        <div class="project-info">
-          <div class="project-name">${p.name}</div>
-          <div class="project-desc">${p.description}</div>
-        </div>
-        <div class="progress-bar-container">
-          <div class="progress-bar-fill" style="width:${p.progress}%"></div>
-        </div>
-        <span class="project-percent">${p.progress}%</span>
-      </div>
-    `;
+    return `<div class="project-item ${activeClass}"><span class="project-icon">${icon}</span><div class="project-info"><div class="project-name">${p.name}</div><div class="project-desc">${p.description}</div></div><div class="progress-bar-container"><div class="progress-bar-fill" style="width:${p.progress}%"></div></div><span class="project-percent">${p.progress}%</span></div>`;
   }).join('');
 }
 
@@ -349,13 +319,7 @@ function renderLog(activities) {
     return;
   }
   
-  container.innerHTML = activities.slice(0, 5).map(a => `
-    <div class="log-item">
-      <span class="log-icon">${a.icon}</span>
-      <span class="log-time">${a.time}</span>
-      <span class="log-text">${a.text}</span>
-    </div>
-  `).join('');
+  container.innerHTML = activities.slice(0, 5).map(a => `<div class="log-item"><span class="log-icon">${a.icon}</span><span class="log-time">${a.time}</span><span class="log-text">${a.text}</span></div>`).join('');
 }
 
 function updateStats(stats) {
@@ -366,9 +330,8 @@ function updateStats(stats) {
 }
 
 function updateActivity(currentActivity) {
-  document.getElementById('activityIcon').textContent = currentActivity?.icon || '⌨️';
+  document.getElementById('activityIcon').textContent = currentActivity?.icon || '💜';
   document.getElementById('activityText').textContent = currentActivity?.title || 'En espera';
-  
   if (currentActivity?.message) {
     document.getElementById('speechBubble').textContent = currentActivity.message;
   }
@@ -378,15 +341,12 @@ function updateActivity(currentActivity) {
 async function loadData() {
   try {
     const res = await fetch('data.json?t=' + Date.now());
-    data = await res.json();
-    
+    const data = await res.json();
     updateActivity(data.currentActivity);
     renderProjects(data.projects);
     updateStats(data.stats);
     renderLog(data.activities);
-    
-    document.getElementById('lastUpdate').textContent = 
-      new Date(data.updated).toLocaleTimeString('es-MX', {hour:'2-digit',minute:'2-digit'});
+    document.getElementById('lastUpdate').textContent = new Date(data.updated).toLocaleTimeString('es-MX', {hour:'2-digit',minute:'2-digit'});
   } catch (e) {
     console.error('Error loading data:', e);
     document.getElementById('activityText').textContent = 'Sin conexión';
@@ -399,12 +359,10 @@ function nextMessage() {
   document.getElementById('speechBubble').textContent = MESSAGES[currentMessage];
 }
 
-// ===== INITIALIZE =====
 setInterval(nextMessage, 8000);
 setInterval(loadData, 60000);
 loadData();
 
-// Service Worker
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').catch(() => {});
 }
