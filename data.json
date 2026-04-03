@@ -1,0 +1,55 @@
+{
+  "status": "Activa",
+  "updated": "2026-04-03T09:31:00Z",
+  "messages": [
+    "¡Analizando tu sitio web!",
+    "Trabajando en marketing...",
+    "Buscando estrategias...",
+    "¡Nuevo plan listo!",
+    "Revisando competencia...",
+    "Generando ideas...",
+    "Optimizando contenido...",
+    "¡Almost done!"
+  ],
+  "projects": [
+    {
+      "name": "Psicofrecuencia.com",
+      "description": "Sitio web para vender libros digitales de psicología",
+      "status": "in-progress",
+      "progress": 15
+    },
+    {
+      "name": "Dashboard Max",
+      "description": "Panel de control para ver avances de proyectos",
+      "status": "completed",
+      "progress": 100
+    }
+  ],
+  "stats": {
+    "tasks": 5,
+    "hours": 6,
+    "ideas": 15
+  },
+  "activities": [
+    {
+      "icon": "🎉",
+      "text": "Dashboard creado y funcionando",
+      "time": "Ahora"
+    },
+    {
+      "icon": "🔍",
+      "text": "Analizando psicofrecuencia.com",
+      "time": "Hace 10 min"
+    },
+    {
+      "icon": "📚",
+      "text": "Revisando estrategia de marketing",
+      "time": "Hace 30 min"
+    },
+    {
+      "icon": "💡",
+      "text": "Generando ideas para el sitio",
+      "time": "Hace 1 hora"
+    }
+  ]
+}

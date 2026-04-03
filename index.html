@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Dashboard de Max</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--p:#6366f1;--pd:#4f46e5;--s:#f472b6;--a:#22d3ee;--bg:#0f172a;--c:#1e293b;--t:#f1f5f9;--ts:#94a3b8;--g:#22c55e;--w:#f59e0b}
+body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--t);min-height:100vh}
+.container{max-width:800px;margin:0 auto;padding:1rem}
+.header{display:flex;justify-content:space-between;align-items:center;padding:1rem;background:var(--c);border-radius:12px;margin-bottom:1rem}
+.logo{display:flex;align-items:center;gap:.5rem}
+.logo h1{font-size:1.25rem;background:linear-gradient(135deg,var(--p),var(--s));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.status{display:flex;align-items:center;gap:.5rem;padding:.5rem 1rem;background:rgba(34,197,94,.2);border-radius:20px;font-size:.875rem}
+.pulse{width:8px;height:8px;background:var(--g);border-radius:50%;animation:p 2s infinite}
+@keyframes p{0%,100%{opacity:1}50%{opacity:.5}}
+.office{position:relative;width:100%;height:250px;background:linear-gradient(180deg,#2d3a4f 0%,#2d3a4f 50%,#3d4a5f 50%,#3d4a5f 100%);border-radius:8px;margin-bottom:1rem;overflow:hidden}
+.desk{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);text-align:center}
+.monitor{width:70px;height:50px;background:#1a1a2e;border:3px solid #333;border-radius:4px;margin:0 auto;animation:glow 2s infinite alternate}
+@keyframes glow{from{box-shadow:0 0 10px var(--p)}to{box-shadow:0 0 20px var(--a)}}
+.char{position:absolute;bottom:90px;left:50%;transform:translateX(-50%);text-align:center;animation:bounce 2s infinite}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-5px)}}
+.char-body{width:30px;height:35px;background:linear-gradient(135deg,var(--p),var(--pd));border-radius:4px;margin:0 auto;position:relative}
+.char-head{width:28px;height:28px;background:#fcd5ce;border-radius:6px;margin:0 auto 2px}
+.char-eyes{display:flex;justify-content:center;gap:6px;padding-top:8px}
+.eye{width:4px;height:4px;background:#1a1a2e;border-radius:50%}
+.speech{position:absolute;top:-40px;left:50%;transform:translateX(-50%);background:#fff;color:#1a1a2e;padding:6px 10px;border-radius:8px;font-size:11px;white-space:nowrap;animation:show 5s infinite}
+@keyframes show{0%,40%,100%{opacity:0}45%,95%{opacity:1}}
+.projects{margin-bottom:1rem}
+.project{background:var(--c);border-radius:12px;padding:1rem;margin-bottom:.75rem;border-left:4px solid var(--p)}
+.project.active{border-left-color:var(--g)}
+.project h3{font-size:1rem;margin-bottom:.25rem}
+.project p{font-size:.875rem;color:var(--ts);margin-bottom:.5rem}
+.progress{width:100%;height:6px;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden}
+.progress-bar{height:100%;background:linear-gradient(90deg,var(--p),var(--a));border-radius:3px;transition:width .5s}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin-bottom:1rem}
+.stat{background:var(--c);border-radius:12px;padding:1rem;text-align:center}
+.stat-icon{font-size:1.5rem}
+.stat-value{font-size:1.75rem;font-weight:bold;background:linear-gradient(135deg,var(--p),var(--a));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stat-label{font-size:.75rem;color:var(--ts)}
+.activity{background:var(--c);border-radius:12px;padding:.5rem;max-height:200px;overflow-y:auto}
+.activity-item{display:flex;gap:.75rem;padding:.5rem;border-radius:8px}
+.activity-item:hover{background:rgba(255,255,255,.05)}
+.activity-icon{font-size:1.25rem}
+.activity-text{font-size:.875rem}
+.activity-time{font-size:.7rem;color:var(--ts)}
+.footer{text-align:center;padding:1rem;color:var(--ts);font-size:.75rem}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="header">
+<div class="logo"><span style="font-size:2rem">📚</span><h1>Dashboard de Max</h1></div>
+<div class="status"><span class="pulse"></span><span id="status">Cargando...</span></div>
+</div>
+
+<div class="office">
+<div class="desk">
+<div class="monitor"></div>
+<div style="width:50px;height:10px;background:#333;border-radius:2px;margin:5px auto 0"></div>
+</div>
+<div class="char">
+<div class="speech" id="speech">Cargando...</div>
+<div class="char-head"><div class="char-eyes"><span class="eye"></span><span class="eye"></span></div></div>
+<div class="char-body"></div>
+</div>
+</div>
+
+<div class="projects">
+<h2 style="margin-bottom:.75rem;font-size:1rem;color:var(--ts)">📁 Proyectos</h2>
+<div id="projects">Cargando proyectos...</div>
+</div>
+
+<div class="stats">
+<div class="stat"><div class="stat-icon">📝</div><div class="stat-value" id="tasks">0</div><div class="stat-label">Tareas</div></div>
+<div class="stat"><div class="stat-icon">📁</div><div class="stat-value" id="projectsCount">0</div><div class="stat-label">Proyectos</div></div>
+<div class="stat"><div class="stat-icon">⏱️</div><div class="stat-value" id="hours">0</div><div class="stat-label">Horas</div></div>
+<div class="stat"><div class="stat-icon">✨</div><div class="stat-value" id="ideas">0</div><div class="stat-label">Ideas</div></div>
+</div>
+
+<div style="margin-bottom:1rem">
+<h2 style="margin-bottom:.75rem;font-size:1rem;color:var(--ts)">📋 Actividad Reciente</h2>
+<div class="activity" id="activities">Cargando actividades...</div>
+</div>
+
+<div class="footer">
+<p>Max — Asistente Personal Digital</p>
+<p style="margin-top:.25rem;opacity:.7">Última actualización: <span id="time"></span></p>
+</div>
+</div>
+
+<script>
+let msgIndex=0;
+async function loadData(){
+try{
+const r=await fetch('data.json?t='+Date.now());
+const d=await r.json();
+document.getElementById('status').textContent=d.status||'Activa';
+document.getElementById('speech').textContent=d.messages?d.messages[msgIndex%(d.messages.length||1)]:'Trabajando...';
+if(d.messages)setInterval(()=>{msgIndex++;document.getElementById('speech').textContent=d.messages[msgIndex%d.messages.length]},5000);
+if(d.projects){
+document.getElementById('projects').innerHTML=d.projects.map(p=>`
+<div class="project${p.status==='in-progress'?' active':''}">
+<h3>${p.name}</h3>
+<p>${p.description}</p>
+<div class="progress"><div class="progress-bar" style="width:${p.progress}%"></div></div>
+</div>
+`).join('');
+document.getElementById('projectsCount').textContent=d.projects.length;
+}
+if(d.stats){
+document.getElementById('tasks').textContent=d.stats.tasks||0;
+document.getElementById('hours').textContent=d.stats.hours||0;
+document.getElementById('ideas').textContent=d.stats.ideas||0;
+}
+if(d.activities){
+document.getElementById('activities').innerHTML=d.activities.map(a=>`
+<div class="activity-item">
+<span class="activity-icon">${a.icon}</span>
+<div><p class="activity-text">${a.text}</p><span class="activity-time">${a.time}</span></div>
+</div>
+`).join('');
+}
+document.getElementById('time').textContent=new Date(d.updated).toLocaleString('es-MX');
+}catch(e){
+document.getElementById('status').textContent='Offline';
+document.getElementById('speech').textContent='Sin conexión';
+}
+}
+loadData();
+setInterval(loadData,60000);
+</script>
+</body>
+</html>
