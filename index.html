@@ -10,7 +10,7 @@
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-<title>Max Dashboard - Futuristic AI Assistant</title>
+<title>Max Dashboard - Asistente Personal</title>
 </head>
 <body>
 
@@ -45,17 +45,17 @@
       </div>
       <div class="logo-text">
         <span class="logo-name">MAX</span>
-        <span class="logo-subtitle">AI ASSISTANT</span>
+        <span class="logo-subtitle">ASISTENTE PERSONAL</span>
       </div>
     </div>
     <div class="status-bar">
       <div class="status-item">
         <span class="status-dot online"></span>
-        <span class="status-label">ONLINE</span>
+        <span class="status-label">ACTIVO</span>
       </div>
       <div class="status-item">
         <span class="status-icon">⚡</span>
-        <span class="status-value" id="modelStatus">GLM-5</span>
+        <span class="status-value">GLM-5</span>
       </div>
       <div class="status-item time">
         <span class="status-value" id="currentTime">--:--:--</span>
@@ -67,40 +67,40 @@
   <main class="main">
     <!-- Stats Grid -->
     <section class="stats-grid">
-      <div class="stat-card" data-animation="fade-in" style="--delay: 0">
+      <div class="stat-card">
         <div class="stat-icon tasks">📋</div>
         <div class="stat-content">
           <span class="stat-value" id="statTasks">0</span>
-          <span class="stat-label">TASKS</span>
+          <span class="stat-label">TAREAS</span>
         </div>
         <div class="stat-chart">
           <svg viewBox="0 0 100 30" class="sparkline" id="sparkTasks"></svg>
         </div>
       </div>
       
-      <div class="stat-card" data-animation="fade-in" style="--delay: 0.1s">
+      <div class="stat-card">
         <div class="stat-icon projects">📁</div>
         <div class="stat-content">
           <span class="stat-value" id="statProjects">0</span>
-          <span class="stat-label">PROJECTS</span>
+          <span class="stat-label">PROYECTOS</span>
         </div>
         <div class="stat-chart">
           <svg viewBox="0 0 100 30" class="sparkline" id="sparkProjects"></svg>
         </div>
       </div>
       
-      <div class="stat-card" data-animation="fade-in" style="--delay: 0.2s">
+      <div class="stat-card">
         <div class="stat-icon hours">⏱️</div>
         <div class="stat-content">
           <span class="stat-value" id="statHours">0</span>
-          <span class="stat-label">HOURS</span>
+          <span class="stat-label">HORAS</span>
         </div>
         <div class="stat-chart">
           <svg viewBox="0 0 100 30" class="sparkline" id="sparkHours"></svg>
         </div>
       </div>
       
-      <div class="stat-card" data-animation="fade-in" style="--delay: 0.3s">
+      <div class="stat-card">
         <div class="stat-icon ideas">💡</div>
         <div class="stat-content">
           <span class="stat-value" id="statIdeas">0</span>
@@ -115,91 +115,80 @@
     <!-- Main Grid -->
     <div class="content-grid">
       <!-- Projects Panel -->
-      <section class="panel projects-panel" data-animation="fade-in" style="--delay: 0.4s">
+      <section class="panel projects-panel">
         <div class="panel-header">
           <h2 class="panel-title">
             <span class="title-icon">🚀</span>
-            ACTIVE PROJECTS
+            PROYECTOS ACTIVOS
           </h2>
           <span class="panel-badge" id="projectCount">2</span>
         </div>
         <div class="panel-content">
-          <div id="projectsList" class="projects-list">
-            <!-- Projects loaded dynamically -->
-          </div>
+          <div id="projectsList" class="projects-list"></div>
         </div>
       </section>
 
       <!-- Chat Panel -->
-      <section class="panel chat-panel" data-animation="fade-in" style="--delay: 0.5s">
+      <section class="panel chat-panel">
         <div class="panel-header">
           <h2 class="panel-title">
             <span class="title-icon">💬</span>
-            LIVE CHAT
+            CHAT CON MAX
           </h2>
           <div class="connection-status">
-            <span class="conn-dot" id="connDot"></span>
-            <span class="conn-text" id="connText">CONNECTING...</span>
+            <span class="conn-dot online"></span>
+            <span class="conn-text">CONECTADO</span>
           </div>
         </div>
         <div class="chat-messages" id="chatMessages">
           <div class="chat-welcome">
             <div class="welcome-icon">🤖</div>
             <div class="welcome-text">
-              <strong>MAX AI Assistant</strong>
-              <p>Connected in real-time. Send me a message!</p>
+              <strong>MAX - Asistente Personal</strong>
+              <p>Escribe para interactuar conmigo 💜</p>
             </div>
           </div>
         </div>
         <div class="chat-input-container">
-          <input type="text" class="chat-input" id="chatInput" placeholder="Type a message to Max..." maxlength="1000">
-          <button class="chat-send" id="chatSend">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M22 2L11 13M22 2L15 22L11 13L2 9L22 2Z"/>
-            </svg>
-          </button>
+          <input type="text" class="chat-input" id="chatInput" placeholder="Escribe un mensaje..." maxlength="1000">
+          <button class="chat-send" id="chatSend">➤</button>
         </div>
       </section>
 
       <!-- Activity Panel -->
-      <section class="panel activity-panel" data-animation="fade-in" style="--delay: 0.6s">
+      <section class="panel activity-panel">
         <div class="panel-header">
           <h2 class="panel-title">
             <span class="title-icon">📊</span>
-            ACTIVITY FEED
+            ACTIVIDAD RECIENTE
           </h2>
         </div>
         <div class="panel-content">
-          <div id="activityList" class="activity-list">
-            <!-- Activity loaded dynamically -->
-          </div>
+          <div id="activityList" class="activity-list"></div>
         </div>
       </section>
 
       <!-- Metrics Panel -->
-      <section class="panel metrics-panel" data-animation="fade-in" style="--delay: 0.7s">
+      <section class="panel metrics-panel">
         <div class="panel-header">
           <h2 class="panel-title">
             <span class="title-icon">📈</span>
-            PERFORMANCE
+            MÉTRICAS
           </h2>
         </div>
         <div class="panel-content">
-          <div class="metrics-chart" id="metricsChart">
-            <canvas id="perfChart"></canvas>
-          </div>
           <div class="metrics-stats">
             <div class="metric">
-              <span class="metric-label">Response Time</span>
-              <span class="metric-value" id="metricResponse">--ms</span>
-            </div>
-            <div class="metric">
-              <span class="metric-label">Messages</span>
+              <span class="metric-label">Mensajes</span>
               <span class="metric-value" id="metricMessages">0</span>
             </div>
             <div class="metric">
-              <span class="metric-label">Uptime</span>
-              <span class="metric-value" id="metricUptime">--</span>
+              <span class="metric-label">Sesión</span>
+              <span class="metric-value" id="metricUptime">0m</span>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Estado</span>
+              <span class="metric-value" style="color:#00ff88">●</span>
             </div>
           </div>
         </div>
@@ -212,29 +201,22 @@
     <div class="footer-left">
       <span class="footer-brand">MAX Dashboard v2.0</span>
       <span class="footer-divider">|</span>
-      <span class="footer-status">Neural Interface Active</span>
+      <span class="footer-status">Sistema Activo</span>
     </div>
     <div class="footer-right">
-      <span class="footer-update">Last sync: <span id="lastSync">--</span></span>
+      <span class="footer-update">Actualizado: <span id="lastSync">--</span></span>
     </div>
   </footer>
 </div>
 
 <script>
-// ===== WEBSOCKET CONNECTION =====
-let ws = null;
-let reconnectAttempts = 0;
-const maxReconnectAttempts = 10;
-let messageCount = 0;
-let startTime = Date.now();
-
-// Fallback: Simulador de respuestas de Max (cuando WebSocket no está disponible)
+// ===== RESPUESTAS DE MAX =====
 const maxResponses = {
   greeting: ["¡Hola! 👋 Soy Max, tu asistente digital. ¿En qué puedo ayudarte?", "¡Hey! Max aquí 💜 ¿Qué necesitas?", "¡Hola! Estoy lista para ayudarte 📚"],
   status: ["Todo funcionando perfectamente ✨", "Sistema operativo al 100% 💜", "Trabajando en tus proyectos 🚀"],
-  projects: ["Tienes 2 proyectos activos:\n• Psicofrecuencia.com (25%)\n• Dashboard Max (100%) 💜", "Los proyectos van bien. ¿Quieres que te dé detalles?"],
-  help: ["Puedo ayudarte con:\n• Ver estado de proyectos\n• Estadísticas de trabajo\n• Responder preguntas\n• Conectarte con Max en tiempo real 💜", "Solo pregunta lo que necesitas. Estoy aquí para ayudarte 📚"],
-  unknown: ["Interesante pregunta... déjame pensar 💭", "Hmm, no estoy segura de entender. ¿Podrías reformular? 🤔", "¡Buena pregunta! Te respondo 💜"]
+  projects: ["Tienes 2 proyectos activos:\n• Psicofrecuencia.com (25%)\n• Dashboard Max (100%) 💜", "Los proyectos van bien. ¿Quieres detalles?"],
+  help: ["Puedo ayudarte con:\n• Estado de proyectos\n• Estadísticas\n• Responder preguntas 💜", "Pregunta lo que necesitas 📚"],
+  unknown: ["Interesante pregunta... 💭", "Hmm, déjame pensar... 🤔", "¡Buena pregunta! 💜"]
 };
 
 function getMaxResponse(text) {
@@ -242,77 +224,43 @@ function getMaxResponse(text) {
   if (t.match(/hola|hey|hi|buenos|qué tal/)) return maxResponses.greeting[Math.floor(Math.random() * 3)];
   if (t.match(/cómo estás|status|estado|qué haces/)) return maxResponses.status[Math.floor(Math.random() * 3)];
   if (t.match(/proyectos|projects|trabajos/)) return maxResponses.projects[Math.floor(Math.random() * 2)];
-  if (t.match(/ayuda|help|qué puedes|qué haces/)) return maxResponses.help[Math.floor(Math.random() * 2)];
-  if (t.match(/quién eres|tu nombre/)) return "Soy Max, tu asistente personal digital 💜 Estoy aquí para ayudarte con tus proyectos y tareas.";
+  if (t.match(/ayuda|help|qué puedes/)) return maxResponses.help[Math.floor(Math.random() * 2)];
+  if (t.match(/quién eres|tu nombre/)) return "Soy Max, tu asistente personal digital 💜";
   if (t.match(/gracias|genial|perfecto|ok/)) return "¡De nada! 😊💜";
   return maxResponses.unknown[Math.floor(Math.random() * 3)];
 }
 
-function connectWebSocket() {
-  // Intentar WebSocket local primero
-  const wsUrl = 'ws://127.0.0.1:18800/ws?senderId=dashboard&senderName=Dashboard';
-  
-  try {
-    ws = new WebSocket(wsUrl);
-    
-    ws.onopen = () => {
-      console.log('✅ WebSocket connected');
-      setConnectionStatus(true);
-      reconnectAttempts = 0;
-      addSystemMessage('🟢 Connected to Max in real-time');
-    };
-    
-    ws.onmessage = (event) => {
-      try {
-        const data = JSON.parse(event.data);
-        handleWebSocketMessage(data);
-      } catch (e) {
-        console.error('Parse error:', e);
-      }
-    };
-    
-    ws.onclose = () => {
-      console.log('WebSocket closed');
-      setConnectionStatus(false);
-      enableFallbackMode();
-    };
-    
-    ws.onerror = (err) => {
-      console.error('WebSocket error:', err);
-      setConnectionStatus(false);
-      enableFallbackMode();
-    };
-  } catch (e) {
-    console.error('WebSocket init error:', e);
-    enableFallbackMode();
-  }
+// ===== CHAT =====
+let messageCount = 0;
+let startTime = Date.now();
+let typingEl = null;
+
+function addMessage(text, type) {
+  const container = document.getElementById('chatMessages');
+  const msg = document.createElement('div');
+  msg.className = `message ${type}`;
+  msg.textContent = text;
+  container.appendChild(msg);
+  container.scrollTop = container.scrollHeight;
+  messageCount++;
+  document.getElementById('metricMessages').textContent = messageCount;
 }
 
-function handleWebSocketMessage(data) {
-  switch (data.type) {
-    case 'chat.typing':
-      showTypingIndicator();
-      break;
-    case 'chat.stream':
-      updateTypingMessage(data.content, false);
-      break;
-    case 'chat.response':
-      addMessage(data.content, 'bot', data.messageId);
-      hideTypingIndicator();
-      updateMetrics();
-      break;
-    case 'chat.error':
-      addSystemMessage(`⚠️ Error: ${data.error}`);
-      hideTypingIndicator();
-      break;
-  }
+function showTyping() {
+  if (typingEl) return;
+  const container = document.getElementById('chatMessages');
+  typingEl = document.createElement('div');
+  typingEl.className = 'message bot typing';
+  typingEl.innerHTML = '<div class="typing-dots"><span></span><span></span><span></span></div>';
+  container.appendChild(typingEl);
+  container.scrollTop = container.scrollHeight;
 }
 
-function enableFallbackMode() {
-  // Fallback mode: respuestas simuladas cuando WebSocket no está disponible
-  setConnectionStatus(false);
-  addSystemMessage('📡 Modo fallback: Conectado vía simulación');
-  console.log('Fallback mode enabled - using simulated responses');
+function hideTyping() {
+  if (typingEl) {
+    typingEl.remove();
+    typingEl = null;
+  }
 }
 
 function sendMessage() {
@@ -322,141 +270,49 @@ function sendMessage() {
   
   addMessage(text, 'user');
   input.value = '';
+  showTyping();
   
-  // Show typing
-  showTypingIndicator();
-  
-  if (ws && ws.readyState === WebSocket.OPEN) {
-    ws.send(JSON.stringify({
-      type: 'chat.send',
-      content: text,
-      senderId: 'dashboard',
-      senderName: 'Dashboard User'
-    }));
-  } else {
-    // Fallback: usar respuestas simuladas
-    setTimeout(() => {
-      hideTypingIndicator();
-      const response = getMaxResponse(text);
-      addMessage(response, 'bot');
-      updateMetrics();
-    }, 800 + Math.random() * 1000);
-  }
+  setTimeout(() => {
+    hideTyping();
+    const response = getMaxResponse(text);
+    addMessage(response, 'bot');
+  }, 600 + Math.random() * 800);
 }
 
-let typingElement = null;
+document.getElementById('chatSend').addEventListener('click', sendMessage);
+document.getElementById('chatInput').addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') sendMessage();
+});
 
-function showTypingIndicator() {
-  const container = document.getElementById('chatMessages');
-  if (typingElement) return;
-  
-  typingElement = document.createElement('div');
-  typingElement.className = 'message bot typing';
-  typingElement.innerHTML = '<div class="typing-dots"><span></span><span></span><span></span></div>';
-  container.appendChild(typingElement);
-  container.scrollTop = container.scrollHeight;
-}
-
-function updateTypingMessage(content, done) {
-  if (typingElement) {
-    typingElement.innerHTML = `<div class="typing-dots"><span></span><span></span><span></span></div>`;
-  }
-}
-
-function hideTypingIndicator() {
-  if (typingElement) {
-    typingElement.remove();
-    typingElement = null;
-  }
-}
-
-function addMessage(text, type, id = null) {
-  const container = document.getElementById('chatMessages');
-  const msg = document.createElement('div');
-  msg.className = `message ${type}`;
-  if (id) msg.id = `msg-${id}`;
-  msg.textContent = text;
-  container.appendChild(msg);
-  container.scrollTop = container.scrollHeight;
-  messageCount++;
-}
-
-function addSystemMessage(text) {
-  const container = document.getElementById('chatMessages');
-  const msg = document.createElement('div');
-  msg.className = 'message system';
-  msg.textContent = text;
-  container.appendChild(msg);
-  container.scrollTop = container.scrollHeight;
-}
-
-function setConnectionStatus(connected) {
-  const dot = document.getElementById('connDot');
-  const text = document.getElementById('connText');
-  
-  if (connected) {
-    dot.className = 'conn-dot online';
-    text.textContent = 'CONNECTED';
-  } else {
-    dot.className = 'conn-dot offline';
-    text.textContent = 'OFFLINE';
-  }
-}
-
-function enableFallbackMode() {
-  // Fallback mode uses polling or simulated responses
-  addSystemMessage('📡 Fallback mode: Simulated responses');
-}
-
-function updateMetrics() {
-  const elapsed = Math.floor((Date.now() - startTime) / 1000);
-  const hours = Math.floor(elapsed / 3600);
-  const mins = Math.floor((elapsed % 3600) / 60);
-  
-  document.getElementById('metricMessages').textContent = messageCount;
-  document.getElementById('metricUptime').textContent = hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
-}
-
-// ===== STATS & CHARTS =====
+// ===== STATS =====
 function updateTime() {
   const now = new Date();
   document.getElementById('currentTime').textContent = now.toLocaleTimeString('en-US', { hour12: false });
+  const elapsed = Math.floor((Date.now() - startTime) / 1000);
+  const mins = Math.floor(elapsed / 60);
+  document.getElementById('metricUptime').textContent = mins > 0 ? `${mins}m` : '<1m';
 }
 
 function generateSparkline(id, values) {
   const svg = document.getElementById(id);
   if (!svg) return;
-  
-  const width = 100;
-  const height = 30;
   const max = Math.max(...values, 1);
-  
+  const height = 30;
   let path = `M 0 ${height - (values[0] / max) * height}`;
   values.forEach((v, i) => {
-    const x = (i / (values.length - 1)) * width;
+    const x = (i / (values.length - 1)) * 100;
     const y = height - (v / max) * height;
     path += ` L ${x} ${y}`;
   });
-  
-  svg.innerHTML = `
-    <defs>
-      <linearGradient id="grad-${id}" x1="0%" y1="0%" x2="0%" y2="100%">
-        <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.8"/>
-        <stop offset="100%" stop-color="#00f0ff" stop-opacity="0"/>
-      </linearGradient>
-    </defs>
-    <path d="${path} L 100 30 L 0 30 Z" fill="url(#grad-${id})"/>
-    <path d="${path}" fill="none" stroke="#00f0ff" stroke-width="1.5"/>
-  `;
+  svg.innerHTML = `<defs><linearGradient id="g-${id}" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#00f0ff" stop-opacity="0.8"/><stop offset="100%" stop-color="#00f0ff" stop-opacity="0"/></linearGradient></defs><path d="${path} L 100 ${height} L 0 ${height} Z" fill="url(#g-${id})"/><path d="${path}" fill="none" stroke="#00f0ff" stroke-width="1.5"/>`;
 }
 
 function renderProjects(projects) {
   const container = document.getElementById('projectsList');
   if (!projects?.length) {
-    container.innerHTML = '<div class="empty-state">No active projects</div>';
+    container.innerHTML = '<div class="empty-state">Sin proyectos activos</div>';
     return;
   }
-  
   container.innerHTML = projects.map(p => `
     <div class="project-card ${p.status === 'in-progress' ? 'active' : ''}">
       <div class="project-header">
@@ -465,24 +321,20 @@ function renderProjects(projects) {
       </div>
       <div class="project-desc">${p.description}</div>
       <div class="project-progress">
-        <div class="progress-bar">
-          <div class="progress-fill" style="width: ${p.progress}%"></div>
-        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width: ${p.progress}%"></div></div>
         <span class="progress-value">${p.progress}%</span>
       </div>
     </div>
   `).join('');
-  
   document.getElementById('projectCount').textContent = projects.length;
 }
 
 function renderActivity(activities) {
   const container = document.getElementById('activityList');
   if (!activities?.length) {
-    container.innerHTML = '<div class="empty-state">No recent activity</div>';
+    container.innerHTML = '<div class="empty-state">Sin actividad reciente</div>';
     return;
   }
-  
   container.innerHTML = activities.map(a => `
     <div class="activity-item">
       <span class="activity-icon">${a.icon}</span>
@@ -497,15 +349,12 @@ function updateStats(stats) {
   document.getElementById('statProjects').textContent = stats?.projects || 0;
   document.getElementById('statHours').textContent = stats?.hours || 0;
   document.getElementById('statIdeas').textContent = stats?.ideas || 0;
-  
-  // Generate sparklines
   generateSparkline('sparkTasks', [5, 8, 12, 15, stats?.tasks || 0]);
   generateSparkline('sparkProjects', [1, 1, 2, 2, stats?.projects || 0]);
   generateSparkline('sparkHours', [2, 5, 8, 12, stats?.hours || 0]);
   generateSparkline('sparkIdeas', [10, 25, 40, 50, stats?.ideas || 0]);
 }
 
-// ===== LOAD DATA =====
 async function loadData() {
   try {
     const res = await fetch('data.json?t=' + Date.now());
@@ -520,37 +369,12 @@ async function loadData() {
 }
 
 // ===== INIT =====
-function init() {
-  // Connect WebSocket
-  connectWebSocket();
-  
-  // Update time every second
-  updateTime();
-  setInterval(updateTime, 1000);
-  
-  // Load data
-  loadData();
-  setInterval(loadData, 30000);
-  
-  // Chat input handlers
-  document.getElementById('chatInput').addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') sendMessage();
-  });
-  document.getElementById('chatSend').addEventListener('click', sendMessage);
-  
-  // Animate cards on load
-  document.querySelectorAll('[data-animation]').forEach((el, i) => {
-    el.style.animationDelay = el.style.getPropertyValue('--delay') || '0s';
-    el.classList.add('animate');
-  });
-}
+setInterval(updateTime, 1000);
+updateTime();
+loadData();
+setInterval(loadData, 30000);
 
-document.addEventListener('DOMContentLoaded', init);
-
-// Service Worker for PWA
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js').catch(() => {});
-}
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
 </script>
 </body>
 </html>

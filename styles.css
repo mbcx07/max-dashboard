@@ -549,7 +549,7 @@ body {
 
 .conn-text {
   font-family: 'Orbitron', monospace;
-  color: var(--text-secondary);
+  color: #00ff88;
 }
 
 .chat-input-container {
