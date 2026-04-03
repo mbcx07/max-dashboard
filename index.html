@@ -10,6 +10,7 @@
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<script src="voice.js"></script>
 <title>Max Dashboard - Asistente Personal</title>
 </head>
 <body>
@@ -50,8 +51,8 @@
     </div>
     <div class="status-bar">
       <div class="status-item">
-        <span class="status-dot online"></span>
-        <span class="status-label">ACTIVO</span>
+        <span class="status-dot online" id="mainStatus"></span>
+        <span class="status-label" id="mainStatusLabel">ACTIVO</span>
       </div>
       <div class="status-item">
         <span class="status-icon">⚡</span>
@@ -65,6 +66,43 @@
 
   <!-- Main Content -->
   <main class="main">
+    <!-- Voice Call Panel -->
+    <section class="panel voice-panel">
+      <div class="panel-header">
+        <h2 class="panel-title">
+          <span class="title-icon">📞</span>
+          LLAMADA CON MAX
+        </h2>
+        <div class="connection-status">
+          <span class="conn-dot" id="callDot"></span>
+          <span class="conn-text" id="callStatus">LISTO</span>
+        </div>
+      </div>
+      <div class="voice-container">
+        <div class="voice-avatar" id="voiceAvatar">
+          <div class="avatar-circle">
+            <span class="avatar-icon">🤖</span>
+          </div>
+          <div class="avatar-wave" id="avatarWave"></div>
+        </div>
+        <div class="voice-transcript" id="voiceTranscript">
+          <p class="transcript-label">Transcripción:</p>
+          <p class="transcript-text" id="transcriptText">Presiona "Iniciar Llamada" para hablar con Max</p>
+        </div>
+        <div class="voice-controls">
+          <button class="call-btn" id="callBtn">
+            <span class="btn-icon">📞</span>
+            <span class="btn-text">Iniciar Llamada</span>
+          </button>
+          <button class="end-btn hidden" id="endBtn">
+            <span class="btn-icon">📵</span>
+            <span class="btn-text">Terminar</span>
+          </button>
+        </div>
+        <p class="voice-hint" id="voiceHint">Conversación en tiempo real como llamada telefónica</p>
+      </div>
+    </section>
+
     <!-- Stats Grid -->
     <section class="stats-grid">
       <div class="stat-card">
@@ -168,29 +206,22 @@
         </div>
       </section>
 
-      <!-- Metrics Panel -->
-      <section class="panel metrics-panel">
+      <!-- File Upload Panel -->
+      <section class="panel upload-panel">
         <div class="panel-header">
           <h2 class="panel-title">
-            <span class="title-icon">📈</span>
-            MÉTRICAS
+            <span class="title-icon">📎</span>
+            SUBIR ARCHIVOS
           </h2>
         </div>
         <div class="panel-content">
-          <div class="metrics-stats">
-            <div class="metric">
-              <span class="metric-label">Mensajes</span>
-              <span class="metric-value" id="metricMessages">0</span>
-            </div>
-            <div class="metric">
-              <span class="metric-label">Sesión</span>
-              <span class="metric-value" id="metricUptime">0m</span>
-            </div>
-            <div class="metric">
-              <span class="metric-label">Estado</span>
-              <span class="metric-value" style="color:#00ff88">●</span>
-            </div>
+          <div class="upload-area" id="uploadArea">
+            <input type="file" id="fileInput" multiple hidden>
+            <div class="upload-icon">📁</div>
+            <p class="upload-text">Arrastra archivos aquí o haz clic para seleccionar</p>
+            <p class="upload-hint">PDF, imágenes, documentos</p>
           </div>
+          <div id="fileList" class="file-list"></div>
         </div>
       </section>
     </div>
@@ -212,28 +243,120 @@
 <script>
 // ===== RESPUESTAS DE MAX =====
 const maxResponses = {
-  greeting: ["¡Hola! 👋 Soy Max, tu asistente digital. ¿En qué puedo ayudarte?", "¡Hey! Max aquí 💜 ¿Qué necesitas?", "¡Hola! Estoy lista para ayudarte 📚"],
-  status: ["Todo funcionando perfectamente ✨", "Sistema operativo al 100% 💜", "Trabajando en tus proyectos 🚀"],
-  projects: ["Tienes 2 proyectos activos:\n• Psicofrecuencia.com (25%)\n• Dashboard Max (100%) 💜", "Los proyectos van bien. ¿Quieres detalles?"],
-  help: ["Puedo ayudarte con:\n• Estado de proyectos\n• Estadísticas\n• Responder preguntas 💜", "Pregunta lo que necesitas 📚"],
-  unknown: ["Interesante pregunta... 💭", "Hmm, déjame pensar... 🤔", "¡Buena pregunta! 💜"]
+  greeting: ["¡Hola! ¿En qué puedo ayudarte?", "¡Hey! ¿Qué necesitas?", "¡Hola! Estoy aquí para ayudarte"],
+  status: ["Todo funciona perfectamente", "Sistema al 100%", "Todo en orden"],
+  projects: ["Tienes 2 proyectos activos:\n• Psicofrecuencia.com (25%)\n• Dashboard Max (100%)", "Los proyectos van bien"],
+  help: ["Puedo ayudarte con:\n• Estado de proyectos\n• Estadísticas\n• Preguntas generales", "Pregunta lo que necesitas"],
+  unknown: ["Interesante pregunta...", "Déjame pensar...", "Buena pregunta"]
 };
 
 function getMaxResponse(text) {
   const t = text.toLowerCase();
-  if (t.match(/hola|hey|hi|buenos|qué tal/)) return maxResponses.greeting[Math.floor(Math.random() * 3)];
-  if (t.match(/cómo estás|status|estado|qué haces/)) return maxResponses.status[Math.floor(Math.random() * 3)];
-  if (t.match(/proyectos|projects|trabajos/)) return maxResponses.projects[Math.floor(Math.random() * 2)];
+  if (t.match(/hola|hey|hi|buenos/)) return maxResponses.greeting[Math.floor(Math.random() * 3)];
+  if (t.match(/cómo estás|status|estado/)) return maxResponses.status[Math.floor(Math.random() * 3)];
+  if (t.match(/proyectos|projects/)) return maxResponses.projects[Math.floor(Math.random() * 2)];
   if (t.match(/ayuda|help|qué puedes/)) return maxResponses.help[Math.floor(Math.random() * 2)];
-  if (t.match(/quién eres|tu nombre/)) return "Soy Max, tu asistente personal digital 💜";
-  if (t.match(/gracias|genial|perfecto|ok/)) return "¡De nada! 😊💜";
+  if (t.match(/quién eres|tu nombre/)) return "Soy Max, tu asistente personal digital";
+  if (t.match(/gracias|genial|perfecto/)) return "¡De nada!";
   return maxResponses.unknown[Math.floor(Math.random() * 3)];
+}
+
+// ===== VOICE CALL SYSTEM =====
+let voiceCall = null;
+let isCallActive = false;
+
+function initVoiceCall() {
+  voiceCall = new MaxVoiceCall({
+    onTranscript: (text, isFinal) => {
+      const transcriptText = document.getElementById('transcriptText');
+      if (isFinal) {
+        transcriptText.textContent = text;
+      } else {
+        transcriptText.textContent = text + '...';
+      }
+    },
+    onStatusChange: (status) => {
+      const callDot = document.getElementById('callDot');
+      const callStatus = document.getElementById('callStatus');
+      const avatarWave = document.getElementById('avatarWave');
+      
+      const statusMap = {
+        'idle': { dot: '', status: 'LISTO', wave: '' },
+        'connecting': { dot: 'connecting', status: 'CONECTANDO...', wave: '' },
+        'listening': { dot: 'listening', status: '🎤 ESCUCHANDO', wave: 'active' },
+        'thinking': { dot: 'thinking', status: '💭 PENSANDO', wave: 'thinking' },
+        'speaking': { dot: 'speaking', status: '🗣️ HABLANDO', wave: 'speaking' }
+      };
+      
+      const s = statusMap[status] || statusMap.idle;
+      callDot.className = 'conn-dot ' + s.dot;
+      callStatus.textContent = s.status;
+      avatarWave.className = 'avatar-wave ' + s.wave;
+    },
+    getAIResponse: async (text) => {
+      return getMaxResponse(text);
+    }
+  });
+  
+  // Check support
+  const support = voiceCall.isSupported();
+  if (!support.both) {
+    document.getElementById('voiceHint').textContent = '⚠️ Tu navegador no soporta voz. Usa Chrome o Edge.';
+    document.getElementById('callBtn').disabled = true;
+  }
+}
+
+function toggleCall() {
+  if (isCallActive) {
+    voiceCall.endCall();
+    isCallActive = false;
+    document.getElementById('callBtn').classList.remove('hidden');
+    document.getElementById('endBtn').classList.add('hidden');
+  } else {
+    voiceCall.startCall();
+    isCallActive = true;
+    document.getElementById('callBtn').classList.add('hidden');
+    document.getElementById('endBtn').classList.remove('hidden');
+  }
+}
+
+document.getElementById('callBtn').addEventListener('click', toggleCall);
+document.getElementById('endBtn').addEventListener('click', toggleCall);
+
+// ===== FILE UPLOAD =====
+const uploadArea = document.getElementById('uploadArea');
+const fileInput = document.getElementById('fileInput');
+const fileList = document.getElementById('fileList');
+
+uploadArea.addEventListener('click', () => fileInput.click());
+uploadArea.addEventListener('dragover', (e) => {
+  e.preventDefault();
+  uploadArea.classList.add('dragover');
+});
+uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('dragover'));
+uploadArea.addEventListener('drop', (e) => {
+  e.preventDefault();
+  uploadArea.classList.remove('dragover');
+  handleFiles(e.dataTransfer.files);
+});
+fileInput.addEventListener('change', (e) => handleFiles(e.target.files));
+
+function handleFiles(files) {
+  Array.from(files).forEach(file => {
+    const item = document.createElement('div');
+    item.className = 'file-item';
+    item.innerHTML = `
+      <span class="file-icon">📄</span>
+      <span class="file-name">${file.name}</span>
+      <span class="file-size">${(file.size / 1024).toFixed(1)} KB</span>
+      <span class="file-status">✓ Subido</span>
+    `;
+    fileList.appendChild(item);
+  });
 }
 
 // ===== CHAT =====
 let messageCount = 0;
-let startTime = Date.now();
-let typingEl = null;
 
 function addMessage(text, type) {
   const container = document.getElementById('chatMessages');
@@ -243,24 +366,6 @@ function addMessage(text, type) {
   container.appendChild(msg);
   container.scrollTop = container.scrollHeight;
   messageCount++;
-  document.getElementById('metricMessages').textContent = messageCount;
-}
-
-function showTyping() {
-  if (typingEl) return;
-  const container = document.getElementById('chatMessages');
-  typingEl = document.createElement('div');
-  typingEl.className = 'message bot typing';
-  typingEl.innerHTML = '<div class="typing-dots"><span></span><span></span><span></span></div>';
-  container.appendChild(typingEl);
-  container.scrollTop = container.scrollHeight;
-}
-
-function hideTyping() {
-  if (typingEl) {
-    typingEl.remove();
-    typingEl = null;
-  }
 }
 
 function sendMessage() {
@@ -270,13 +375,11 @@ function sendMessage() {
   
   addMessage(text, 'user');
   input.value = '';
-  showTyping();
   
   setTimeout(() => {
-    hideTyping();
     const response = getMaxResponse(text);
     addMessage(response, 'bot');
-  }, 600 + Math.random() * 800);
+  }, 600);
 }
 
 document.getElementById('chatSend').addEventListener('click', sendMessage);
@@ -288,9 +391,6 @@ document.getElementById('chatInput').addEventListener('keypress', (e) => {
 function updateTime() {
   const now = new Date();
   document.getElementById('currentTime').textContent = now.toLocaleTimeString('en-US', { hour12: false });
-  const elapsed = Math.floor((Date.now() - startTime) / 1000);
-  const mins = Math.floor(elapsed / 60);
-  document.getElementById('metricUptime').textContent = mins > 0 ? `${mins}m` : '<1m';
 }
 
 function generateSparkline(id, values) {
@@ -369,6 +469,7 @@ async function loadData() {
 }
 
 // ===== INIT =====
+initVoiceCall();
 setInterval(updateTime, 1000);
 updateTime();
 loadData();
