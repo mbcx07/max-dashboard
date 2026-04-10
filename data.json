@@ -1,21 +1,21 @@
 {
-  "updated": "2026-04-10T16:50:00Z",
+  "updated": "2026-04-10T18:09:00Z",
   "currentActivity": {
-    "icon": "🎵",
-    "title": "Notia renombrada",
-    "description": "App de audio + Whisper + IA con nuevo nombre",
-    "message": "High Noter → Notia ✅"
+    "icon": "🩺",
+    "title": "Protocolo Hemorroides",
+    "description": "Biodescodificación + 5 Leyes + Frecuencias Rife + Hipnosis",
+    "message": "4 protocolos listos 📚"
   },
   "projects": [
     {
       "name": "Psicofrecuencia.com",
       "description": "Sitio web para vender libros digitales de psicología",
       "status": "in-progress",
-      "progress": 50
+      "progress": 55
     },
     {
       "name": "Notia",
-      "description": "App de grabación, transcripción, resumen y chat con IA (antes High Noter)",
+      "description": "App de audio + transcripción Whisper + IA (antes High Noter)",
       "status": "completed",
       "progress": 100
     },
@@ -27,40 +27,40 @@
     }
   ],
   "stats": {
-    "tasks": 55,
+    "tasks": 58,
     "projects": 3,
-    "hours": 23,
-    "ideas": 82
+    "hours": 25,
+    "ideas": 86
   },
   "activities": [
     {
-      "icon": "🧠",
-      "text": "Psicología Frecuencial documentada",
+      "icon": "🩺",
+      "text": "Protocolo Hemorroides creado",
       "time": "AHORA"
     },
     {
-      "icon": "📋",
-      "text": "Protocolo de Migraña creado",
+      "icon": "🧠",
+      "text": "Psicología Frecuencial documentada",
       "time": "1 hr"
     },
     {
       "icon": "📋",
-      "text": "Protocolo de Ansiedad creado",
+      "text": "Protocolo Migraña creado",
       "time": "2 hr"
     },
     {
       "icon": "📋",
-      "text": "Protocolo de Insomnio creado",
+      "text": "Protocolo Ansiedad creado",
       "time": "3 hr"
     },
     {
-      "icon": "🔮",
-      "text": "Biodescodificación aprendida",
+      "icon": "📋",
+      "text": "Protocolo Insomnio creado",
       "time": "4 hr"
     },
     {
-      "icon": "🌊",
-      "text": "Frecuencias Rife aprendidas",
+      "icon": "🎵",
+      "text": "Notia renombrada (antes High Noter)",
       "time": "5 hr"
     }
   ]
