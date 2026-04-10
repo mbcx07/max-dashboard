@@ -1,17 +1,17 @@
 {
-  "updated": "2026-04-10T11:14:00Z",
+  "updated": "2026-04-10T15:14:00Z",
   "currentActivity": {
     "icon": "🧠",
     "title": "Psicología Frecuencial",
     "description": "Sistema integrativo: Rife + Binaurales + Biodescodificación + 5 Leyes + Hipnosis",
-    "message": "Protocolos listos para usar 🎧"
+    "message": "3 protocolos listos 🎧"
   },
   "projects": [
     {
       "name": "Psicofrecuencia.com",
       "description": "Sitio web para vender libros digitales de psicología",
       "status": "in-progress",
-      "progress": 40
+      "progress": 50
     },
     {
       "name": "High Noter",
@@ -27,10 +27,10 @@
     }
   ],
   "stats": {
-    "tasks": 52,
+    "tasks": 55,
     "projects": 3,
-    "hours": 22,
-    "ideas": 78
+    "hours": 23,
+    "ideas": 82
   },
   "activities": [
     {
@@ -46,22 +46,22 @@
     {
       "icon": "📋",
       "text": "Protocolo de Ansiedad creado",
-      "time": "45 min"
+      "time": "2 hr"
+    },
+    {
+      "icon": "📋",
+      "text": "Protocolo de Insomnio creado",
+      "time": "3 hr"
     },
     {
       "icon": "🔮",
       "text": "Biodescodificación aprendida",
-      "time": "2 hr"
+      "time": "4 hr"
     },
     {
       "icon": "🌊",
       "text": "Frecuencias Rife aprendidas",
-      "time": "3 hr"
-    },
-    {
-      "icon": "📚",
-      "text": "117 Protocolos Hipnóticos extraídos",
-      "time": "4 hr"
+      "time": "5 hr"
     }
   ]
 }
