@@ -1,10 +1,10 @@
 {
-  "updated": "2026-04-10T15:14:00Z",
+  "updated": "2026-04-10T16:50:00Z",
   "currentActivity": {
-    "icon": "🧠",
-    "title": "Psicología Frecuencial",
-    "description": "Sistema integrativo: Rife + Binaurales + Biodescodificación + 5 Leyes + Hipnosis",
-    "message": "3 protocolos listos 🎧"
+    "icon": "🎵",
+    "title": "Notia renombrada",
+    "description": "App de audio + Whisper + IA con nuevo nombre",
+    "message": "High Noter → Notia ✅"
   },
   "projects": [
     {
@@ -14,8 +14,8 @@
       "progress": 50
     },
     {
-      "name": "High Noter",
-      "description": "App de grabación, transcripción, resumen y chat con IA",
+      "name": "Notia",
+      "description": "App de grabación, transcripción, resumen y chat con IA (antes High Noter)",
       "status": "completed",
       "progress": 100
     },
