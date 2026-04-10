@@ -1,17 +1,17 @@
 {
-  "updated": "2026-04-10T04:33:00Z",
+  "updated": "2026-04-10T11:14:00Z",
   "currentActivity": {
-    "icon": "⚡",
-    "title": "High Noter Completado",
-    "description": "App de audio + Whisper + IA lista para usar",
-    "message": "¡Al 100%! 🎉"
+    "icon": "🧠",
+    "title": "Psicología Frecuencial",
+    "description": "Sistema integrativo: Rife + Binaurales + Biodescodificación + 5 Leyes + Hipnosis",
+    "message": "Protocolos listos para usar 🎧"
   },
   "projects": [
     {
       "name": "Psicofrecuencia.com",
       "description": "Sitio web para vender libros digitales de psicología",
       "status": "in-progress",
-      "progress": 25
+      "progress": 40
     },
     {
       "name": "High Noter",
@@ -27,41 +27,41 @@
     }
   ],
   "stats": {
-    "tasks": 48,
+    "tasks": 52,
     "projects": 3,
-    "hours": 21,
-    "ideas": 73
+    "hours": 22,
+    "ideas": 78
   },
   "activities": [
     {
-      "icon": "🎉",
-      "text": "High Noter completado al 100%",
+      "icon": "🧠",
+      "text": "Psicología Frecuencial documentada",
       "time": "AHORA"
     },
     {
-      "icon": "🚀",
-      "text": "Túnel Cloudflare activo",
-      "time": "2 min"
+      "icon": "📋",
+      "text": "Protocolo de Migraña creado",
+      "time": "1 hr"
     },
     {
-      "icon": "📱",
-      "text": "Accesible desde celular",
-      "time": "3 min"
+      "icon": "📋",
+      "text": "Protocolo de Ansiedad creado",
+      "time": "45 min"
     },
     {
-      "icon": "⚡",
-      "text": "OpenClaw actualizado a 2026.4.9",
-      "time": "15 min"
+      "icon": "🔮",
+      "text": "Biodescodificación aprendida",
+      "time": "2 hr"
     },
     {
-      "icon": "🎨",
-      "text": "Frontend con diseño distintivo",
-      "time": "20 min"
+      "icon": "🌊",
+      "text": "Frecuencias Rife aprendidas",
+      "time": "3 hr"
     },
     {
-      "icon": "🎤",
-      "text": "Whisper configurado",
-      "time": "25 min"
+      "icon": "📚",
+      "text": "117 Protocolos Hipnóticos extraídos",
+      "time": "4 hr"
     }
   ]
 }
