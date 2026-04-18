@@ -1,0 +1,71 @@
+{
+  "tipos": [
+    { "id": "incapacidad_eg", "nombre": "INCAPACIDAD EG", "categoria": "incapacidad", "color": "#ef4444" },
+    { "id": "incapacidad_ma", "nombre": "INCAPACIDAD MA", "categoria": "incapacidad", "color": "#ef4444" },
+    { "id": "incapacidad_rt", "nombre": "INCAPACIDAD RT", "categoria": "incapacidad", "color": "#ef4444" },
+    { "id": "licencia_con_sueldo", "nombre": "LICENCIA CON SUELDO", "categoria": "licencia", "color": "#f59e0b" },
+    { "id": "licencia_sin_sueldo_1_3", "nombre": "LICENCIA SIN SUELDO (1-3 DÍAS)", "categoria": "licencia", "color": "#f59e0b" },
+    { "id": "licencia_sin_sueldo_mas3", "nombre": "LICENCIA SIN SUELDO (>3 DÍAS)", "categoria": "licencia", "color": "#f59e0b" },
+    { "id": "licencia_sin_sueldo_mas60", "nombre": "LICENCIA SIN SUELDO (>60 DÍAS)", "categoria": "licencia", "color": "#f59e0b" },
+    { "id": "guardia_festiva", "nombre": "GUARDIA FESTIVA", "categoria": "guardia", "color": "#3b82f6" },
+    { "id": "guardias_festivas", "nombre": "GUARDIAS FESTIVAS", "categoria": "guardia", "color": "#3b82f6" },
+    { "id": "comision", "nombre": "COMISIÓN", "categoria": "comision", "color": "#8b5cf6" },
+    { "id": "comision_curso", "nombre": "COMISIÓN A CURSO", "categoria": "comision", "color": "#8b5cf6" },
+    { "id": "comision_cambio_adscripcion", "nombre": "COMISIÓN CAMBIO ADSCRIPCIÓN", "categoria": "comision", "color": "#8b5cf6" },
+    { "id": "comision_sindical", "nombre": "COMISIÓN SINDICAL", "categoria": "comision", "color": "#8b5cf6" },
+    { "id": "falta_injustificada", "nombre": "FALTA INJUSTIFICADA", "categoria": "falta", "color": "#dc2626" },
+    { "id": "nivelacion", "nombre": "NIVELACIÓN", "categoria": "horario", "color": "#06b6d4" },
+    { "id": "modificacion_horario", "nombre": "MODIFICACIÓN DE HORARIO", "categoria": "horario", "color": "#06b6d4" },
+    { "id": "modificacion_descansos", "nombre": "MODIFICACIÓN DE DESCANSOS", "categoria": "horario", "color": "#06b6d4" },
+    { "id": "permiso_economico_vacaciones", "nombre": "PERMISO ECONÓMICO A CUENTA DE VACACIONES", "categoria": "permiso", "color": "#10b981" },
+    { "id": "hora_lactancia", "nombre": "HORA DE LACTANCIA", "categoria": "permiso", "color": "#10b981" },
+    { "id": "memo_vacs_autorizacion", "nombre": "MEMO VACS (AUTORIZACIÓN)", "categoria": "vacaciones", "color": "#14b8a6" },
+    { "id": "memo_vacs_cancelacion", "nombre": "MEMO VACS (CANCELACIÓN/SUSPENSIÓN)", "categoria": "vacaciones", "color": "#14b8a6" },
+    { "id": "memo_vacs_difirmiento", "nombre": "MEMO VACS (DIFERIMIENTO)", "categoria": "vacaciones", "color": "#14b8a6" },
+    { "id": "memo_vacs_disfrute", "nombre": "MEMO VACS (DISFRUTE DÍAS)", "categoria": "vacaciones", "color": "#14b8a6" },
+    { "id": "induccion_puesto", "nombre": "INDUCCIÓN AL PUESTO", "categoria": "otro", "color": "#6b7280" },
+    { "id": "nombramiento", "nombre": "NOMBRAMIENTO", "categoria": "otro", "color": "#6b7280" },
+    { "id": "just_omision_reg", "nombre": "JUST OMISIÓN DE REG", "categoria": "otro", "color": "#6b7280" },
+    { "id": "balance_plazas", "nombre": "BALANCE DE PLAZAS IMSS-SIAP", "categoria": "otro", "color": "#6b7280" },
+    { "id": "becas", "nombre": "BECAS", "categoria": "otro", "color": "#6b7280" },
+    { "id": "otro", "nombre": "OTRO", "categoria": "otro", "color": "#6b7280" }
+  ],
+  "categorias": [
+    { "id": "incapacidad", "nombre": "Incapacidades", "icono": "🏥", "color": "#ef4444" },
+    { "id": "licencia", "nombre": "Licencias", "icono": "📋", "color": "#f59e0b" },
+    { "id": "guardia", "nombre": "Guardias", "icono": "🛡️", "color": "#3b82f6" },
+    { "id": "comision", "nombre": "Comisiones", "icono": "🏢", "color": "#8b5cf6" },
+    { "id": "falta", "nombre": "Faltas", "icono": "❌", "color": "#dc2626" },
+    { "id": "horario", "nombre": "Horarios", "icono": "🕐", "color": "#06b6d4" },
+    { "id": "permiso", "nombre": "Permisos", "icono": "✅", "color": "#10b981" },
+    { "id": "vacaciones", "nombre": "Vacaciones", "icono": "🏖️", "color": "#14b8a6" },
+    { "id": "otro", "nombre": "Otros", "icono": "📄", "color": "#6b7280" }
+  ],
+  "horarios": [
+    { "clave": "1", "descripcion": "7:30 - 14:00", "horaEntrada": "07:30", "horaSalida": "14:00" },
+    { "clave": "2", "descripcion": "5:00 - 12:30", "horaEntrada": "05:00", "horaSalida": "12:30" },
+    { "clave": "3", "descripcion": "8:00 - 15:00", "horaEntrada": "08:00", "horaSalida": "15:00" },
+    { "clave": "4", "descripcion": "8:00 - 14:00", "horaEntrada": "08:00", "horaSalida": "14:00" },
+    { "clave": "5", "descripcion": "7:00 - 14:00", "horaEntrada": "07:00", "horaSalida": "14:00" },
+    { "clave": "6", "descripcion": "8:30 - 15:30", "horaEntrada": "08:30", "horaSalida": "15:30" },
+    { "clave": "7", "descripcion": "7:00 - 13:00", "horaEntrada": "07:00", "horaSalida": "13:00" },
+    { "clave": "8", "descripcion": "9:00 - 15:00", "horaEntrada": "09:00", "horaSalida": "15:00" }
+  ],
+  "descansos": [
+    { "clave": "1", "descripcion": "L, M, J, V" },
+    { "clave": "2", "descripcion": "LUN A VIE" },
+    { "clave": "3", "descripcion": "SÁBADO Y DOMINGO" },
+    { "clave": "4", "descripcion": "MARTES Y MIÉRCOLES" },
+    { "clave": "5", "descripcion": "MIÉRCOLES Y JUEVES" },
+    { "clave": "6", "descripcion": "JUEVES Y VIERNES" }
+  ],
+  "quienRecibe": [
+    "DEPTO. DE PERSONAL",
+    "RECURSOS HUMANOS",
+    "NÓMINA",
+    "PREVENCIÓN",
+    "JEFATURA DE SERVICIOS",
+    "SUBDIRECCIÓN MÉDICA",
+    "DIRECCIÓN"
+  ]
+}

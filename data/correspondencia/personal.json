@@ -1,0 +1,34 @@
+{
+  "totalRegistros": 8440,
+  "descripcion": "Base de datos de personal IMSS Delegación Regional BCS - Departamento de Personal",
+  "ultimoUpdate": "2026-04-18",
+  "empleados": [
+    { "matricula": "000001", "nombre": "GARCÍA HERNÁNDEZ MARÍA ELENA", "categoria": "C01", "puesto": "ENFERMERA GENERAL", "curp": "GEHM850101MBCSRA09", "rfc": "GEHM850101", "horario": "1", "descanso": "1", "sueldoMensual": 15234.56, "sueldoHora": 87.85 },
+    { "matricula": "000002", "nombre": "LÓPEZ MARTÍNEZ CARLOS ALBERTO", "categoria": "C02", "puesto": "ENFERMERA ESPECIALISTA", "curp": "LMCA820315HBCSRA05", "rfc": "LMCA820315", "horario": "1", "descanso": "2", "sueldoMensual": 18456.78, "sueldoHora": 106.42 },
+    { "matricula": "000003", "nombre": "RODRÍGUEZ DÍAZ ANA PATRICIA", "categoria": "C03", "puesto": "TÉCNICO EN RADIOLOGÍA", "curp": "RDAP790622MBCSRA03", "rfc": "RDAP790622", "horario": "2", "descanso": "3", "sueldoMensual": 17890.23, "sueldoHora": 103.16 },
+    { "matricula": "000004", "nombre": "MARTÍNEZ FLORES JOSÉ LUIS", "categoria": "C04", "puesto": "MÉDICO GENERAL", "curp": "MFJL870410HBCSRA07", "rfc": "MFJL870410", "horario": "1", "descanso": "1", "sueldoMensual": 25678.90, "sueldoHora": 148.04 },
+    { "matricula": "000005", "nombre": "SÁNCHEZ RAMÍREZ LAURA VERÓNICA", "categoria": "C05", "puesto": "TRABAJADORA SOCIAL", "curp": "SRLV900815MBCSRA02", "rfc": "SRLV900815", "horario": "3", "descanso": "4", "sueldoMensual": 16234.56, "sueldoHora": 93.59 },
+    { "matricula": "000006", "nombre": "HERNÁNDEZ TORRES MIGUEL ÁNGEL", "categoria": "C06", "puesto": "TÉCNICO EN LABORATORIO", "curp": "HTMA831205HBCSRA08", "rfc": "HTMA831205", "horario": "4", "descanso": "5", "sueldoMensual": 14567.89, "sueldoHora": 83.99 },
+    { "matricula": "000007", "nombre": "GONZÁLEZ MORALES PATRICIA", "categoria": "C07", "puesto": "AUXILIAR DE SERVICIOS ADMINISTRATIVOS", "curp": "GOMP880607MBCSRA01", "rfc": "GOMP880607", "horario": "1", "descanso": "6", "sueldoMensual": 12345.67, "sueldoHora": 71.18 },
+    { "matricula": "000008", "nombre": "DÍAZ VÁSQUEZ ROBERTO", "categoria": "C08", "puesto": "TÉCNICO EN INFORMÁTICA", "curp": "DVRB750918HBCSRA04", "rfc": "DVRB750918", "horario": "3", "descanso": "2", "sueldoMensual": 19876.54, "sueldoHora": 114.63 },
+    { "matricula": "000009", "nombre": "TORRES AGUILAR SILVIA ELENA", "categoria": "C09", "puesto": "NUTRICIONISTA", "curp": "TASE920302MBCSRA06", "rfc": "TASE920302", "horario": "1", "descanso": "1", "sueldoMensual": 16789.01, "sueldoHora": 96.82 },
+    { "matricula": "000010", "nombre": "VÁSQUEZ MEDINA FRANCISCO JAVIER", "categoria": "C10", "puesto": "MÉDICO ESPECIALISTA", "curp": "VMFJ800724HBCSRA10", "rfc": "VMFJ800724", "horario": "2", "descanso": "3", "sueldoMensual": 34567.89, "sueldoHora": 199.35 },
+    { "matricula": "000011", "nombre": "MENDOZA CASTRO ISABEL", "categoria": "C01", "puesto": "ENFERMERA GENERAL", "curp": "MCI860509MBCSRA11", "rfc": "MCI860509", "horario": "1", "descanso": "1", "sueldoMensual": 15234.56, "sueldoHora": 87.85 },
+    { "matricula": "000012", "nombre": "CASTRO ORTIZ DANIEL", "categoria": "C03", "puesto": "TÉCNICO EN RADIOLOGÍA", "curp": "CODA840111HBCSRA12", "rfc": "CODA840111", "horario": "5", "descanso": "4", "sueldoMensual": 17890.23, "sueldoHora": 103.16 },
+    { "matricula": "000013", "nombre": "RAMÍREZ LUNA VICTORIA", "categoria": "C02", "puesto": "ENFERMERA ESPECIALISTA", "curp": "RLVA910820MBCSRA13", "rfc": "RLVA910820", "horario": "1", "descanso": "2", "sueldoMensual": 18456.78, "sueldoHora": 106.42 },
+    { "matricula": "000014", "nombre": "FLORES NAVARRO SERGIO", "categoria": "C06", "puesto": "TÉCNICO EN LABORATORIO", "curp": "FNSA780305HBCSRA14", "rfc": "FNSA780305", "horario": "2", "descanso": "5", "sueldoMensual": 14567.89, "sueldoHora": 83.99 },
+    { "matricula": "000015", "nombre": "ORTIZ ESPINOZA GUADALUPE", "categoria": "C07", "puesto": "AUXILIAR DE SERVICIOS ADMINISTRATIVOS", "curp": "OEGA930714MBCSRA15", "rfc": "OEGA930714", "horario": "6", "descanso": "6", "sueldoMensual": 12345.67, "sueldoHora": 71.18 }
+  ],
+  "categorias": {
+    "C01": { "descripcion": "ENFERMERA GENERAL", "nivel": "Q01", "sueldoMensual": 15234.56, "sueldoHora": 87.85 },
+    "C02": { "descripcion": "ENFERMERA ESPECIALISTA", "nivel": "Q02", "sueldoMensual": 18456.78, "sueldoHora": 106.42 },
+    "C03": { "descripcion": "TÉCNICO EN RADIOLOGÍA", "nivel": "Q03", "sueldoMensual": 17890.23, "sueldoHora": 103.16 },
+    "C04": { "descripcion": "MÉDICO GENERAL", "nivel": "Q04", "sueldoMensual": 25678.90, "sueldoHora": 148.04 },
+    "C05": { "descripcion": "TRABAJADORA SOCIAL", "nivel": "Q05", "sueldoMensual": 16234.56, "sueldoHora": 93.59 },
+    "C06": { "descripcion": "TÉCNICO EN LABORATORIO", "nivel": "Q06", "sueldoMensual": 14567.89, "sueldoHora": 83.99 },
+    "C07": { "descripcion": "AUX. SERVICIOS ADMINISTRATIVOS", "nivel": "Q07", "sueldoMensual": 12345.67, "sueldoHora": 71.18 },
+    "C08": { "descripcion": "TÉCNICO EN INFORMÁTICA", "nivel": "Q08", "sueldoMensual": 19876.54, "sueldoHora": 114.63 },
+    "C09": { "descripcion": "NUTRICIONISTA", "nivel": "Q09", "sueldoMensual": 16789.01, "sueldoHora": 96.82 },
+    "C10": { "descripcion": "MÉDICO ESPECIALISTA", "nivel": "Q10", "sueldoMensual": 34567.89, "sueldoHora": 199.35 }
+  }
+}
