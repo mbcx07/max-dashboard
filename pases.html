@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#111b21">
+<title>Pases IMSS</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --green:#25d366;--green-dark:#128c7e;--dark:#111b21;--darker:#0b141a;
+  --header:#202c33;--input-bg:#2a3942;--bubble-out:#005c4b;--bubble-in:#202c33;
+  --text:#e9edef;--text-secondary:#8696a0;--border:#2a3942;--accent:#25d366;
+  --danger:#ef4444;--warning:#f59e0b;--info:#3b82f6;--purple:#8b5cf6;
+  --card-bg:#1a2730;--hover-bg:#233040;--success:#10b981;
+}
+html,body{font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--dark);color:var(--text);height:100%;overflow:hidden}
+
+/* ===== APP SHELL ===== */
+.app{display:flex;flex-direction:column;height:100vh}
+
+/* ===== TOP NAV ===== */
+.top-nav{display:flex;align-items:center;padding:8px 12px;background:var(--header);position:sticky;top:0;z-index:100;gap:8px;border-bottom:1px solid var(--border)}
+.nav-back{width:36px;height:36px;border-radius:50%;border:none;background:transparent;color:var(--text);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nav-back:active{background:var(--input-bg)}
+.nav-title{flex:1;min-width:0}
+.nav-title h1{font-size:16px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nav-subtitle{font-size:11px;color:var(--text-secondary)}
+.nav-actions{display:flex;gap:4px}
+.nav-btn{width:36px;height:36px;border-radius:50%;border:none;background:transparent;color:var(--text-secondary);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.nav-btn:active{background:var(--input-bg)}
+
+/* ===== TAB BAR ===== */
+.tab-bar{display:flex;background:var(--header);border-bottom:1px solid var(--border);overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab-item{flex:1;min-width:0;padding:10px 6px;text-align:center;font-size:11px;font-weight:500;color:var(--text-secondary);border-bottom:2px solid transparent;cursor:pointer;transition:all .2s;white-space:nowrap}
+.tab-item.active{color:var(--green);border-bottom-color:var(--green)}
+.tab-item:active{background:var(--input-bg)}
+.tab-icon{font-size:18px;display:block;margin-bottom:2px}
+
+/* ===== CONTENT AREA ===== */
+.content{flex:1;overflow-y:auto;overflow-x:hidden;padding:12px;-webkit-overflow-scrolling:touch;background:var(--darker)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+/* ===== SECTION HEADERS ===== */
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;padding:0 2px}
+.section-title{font-size:14px;font-weight:600;color:var(--text)}
+.section-badge{background:var(--green);color:var(--dark);font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px}
+.section-actions{display:flex;gap:6px}
+
+/* ===== CARDS ===== */
+.card{background:var(--card-bg);border-radius:12px;border:1px solid var(--border);overflow:hidden;margin-bottom:12px;transition:transform .15s}
+.card:active{transform:scale(0.98)}
+.card-header{display:flex;align-items:center;padding:12px 14px;gap:10px;border-bottom:1px solid var(--border)}
+.card-icon{font-size:24px;width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(37,211,102,.1);flex-shrink:0}
+.card-info{flex:1;min-width:0}
+.card-title{font-size:14px;font-weight:600}
+.card-desc{font-size:11px;color:var(--text-secondary);margin-top:2px}
+.card-body{padding:12px 14px}
+.card-footer{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-top:1px solid var(--border);background:rgba(0,0,0,.15)}
+
+/* ===== STAT CARDS ===== */
+.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px}
+.stat-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center;position:relative;overflow:hidden}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.stat-card.red::before{background:#ef4444}
+.stat-card.yellow::before{background:#f59e0b}
+.stat-card.blue::before{background:#3b82f6}
+.stat-card.green::before{background:#10b981}
+.stat-card.purple::before{background:#8b5cf6}
+.stat-icon{font-size:24px;margin-bottom:4px}
+.stat-value{font-size:24px;font-weight:700;margin-bottom:2px}
+.stat-label{font-size:10px;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.5px}
+
+/* ===== FORM ===== */
+.form-group{margin-bottom:14px}
+.form-label{display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px}
+.form-input,.form-select,.form-textarea{width:100%;background:var(--input-bg);border:1px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:14px;font-family:inherit;transition:border-color .2s}
+.form-input:focus,.form-select:focus,.form-textarea:focus{outline:none;border-color:var(--green)}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--text-secondary)}
+.form-textarea{resize:vertical;min-height:60px}
+.form-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238696a0' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.form-info{background:var(--darker);border-radius:8px;padding:10px 12px;margin-bottom:14px}
+.form-info-row{display:flex;justify-content:space-between;padding:3px 0;font-size:12px}
+.form-info-label{color:var(--text-secondary)}
+.form-info-value{font-weight:500}
+
+/* ===== AUTOCOMPLETE ===== */
+.autocomplete-wrap{position:relative}
+.autocomplete-list{position:absolute;top:100%;left:0;right:0;background:var(--header);border:1px solid var(--border);border-radius:0 0 8px 8px;max-height:200px;overflow-y:auto;z-index:50;display:none}
+.autocomplete-list.show{display:block}
+.autocomplete-item{padding:10px 12px;cursor:pointer;border-bottom:1px solid var(--border);transition:background .15s}
+.autocomplete-item:last-child{border-bottom:none}
+.autocomplete-item:hover,.autocomplete-item.selected{background:var(--hover-bg)}
+.autocomplete-item .name{font-size:13px;font-weight:500}
+.autocomplete-item .detail{font-size:11px;color:var(--text-secondary)}
+
+/* ===== BUTTONS ===== */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 18px;border-radius:8px;font-size:14px;font-weight:600;font-family:inherit;border:none;cursor:pointer;transition:all .15s}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:var(--green);color:white}
+.btn-primary:active{background:var(--green-dark)}
+.btn-secondary{background:var(--input-bg);color:var(--text);border:1px solid var(--border)}
+.btn-danger{background:var(--danger);color:white}
+.btn-sm{padding:6px 12px;font-size:12px;border-radius:6px}
+.btn-block{width:100%;justify-content:center}
+.btn-group{display:flex;gap:8px;flex-wrap:wrap}
+
+/* ===== TABLE ===== */
+.table-wrap{overflow-x:auto;margin:0 -12px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{background:var(--header);padding:8px 10px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--text-secondary);position:sticky;top:0;z-index:5;white-space:nowrap}
+td{padding:8px 10px;border-bottom:1px solid var(--border);white-space:nowrap;max-width:150px;overflow:hidden;text-overflow:ellipsis}
+tr:hover td{background:var(--hover-bg)}
+.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600}
+.badge-red{background:rgba(239,68,68,.15);color:#f87171}
+.badge-yellow{background:rgba(245,158,11,.15);color:#fbbf24}
+.badge-blue{background:rgba(59,130,246,.15);color:#60a5fa}
+.badge-green{background:rgba(16,185,129,.15);color:#34d399}
+.badge-purple{background:rgba(139,92,246,.15);color:#a78bfa}
+
+/* ===== SEARCH BAR ===== */
+.search-bar{position:relative;margin-bottom:12px}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text-secondary);font-size:16px}
+.search-input{width:100%;background:var(--input-bg);border:1px solid var(--border);border-radius:10px;padding:10px 12px 10px 36px;color:var(--text);font-size:14px;font-family:inherit}
+.search-input:focus{outline:none;border-color:var(--green)}
+.search-input::placeholder{color:var(--text-secondary)}
+
+/* ===== FILTER CHIPS ===== */
+.filter-chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:8px;margin-bottom:12px;-webkit-overflow-scrolling:touch}
+.filter-chips::-webkit-scrollbar{display:none}
+.chip{display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:500;background:var(--input-bg);color:var(--text-secondary);border:1px solid var(--border);cursor:pointer;white-space:nowrap;transition:all .2s}
+.chip.active{background:var(--green);color:white;border-color:var(--green)}
+.chip:active{transform:scale(.95)}
+
+/* ===== INDICADORES / DEPT BARS ===== */
+.dept-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;margin-bottom:10px;overflow:hidden}
+.dept-header{display:flex;align-items:center;padding:12px 14px;gap:10px;cursor:pointer;transition:background .15s}
+.dept-header:active{background:var(--hover-bg)}
+.dept-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.dept-info{flex:1;min-width:0}
+.dept-title{font-size:13px;font-weight:500}
+.dept-subtitle{font-size:11px;color:var(--text-secondary)}
+.dept-count{font-size:18px;font-weight:700;text-align:right}
+.dept-bar{height:4px;background:var(--input-bg);border-radius:2px;overflow:hidden}
+.dept-bar-fill{height:100%;border-radius:2px;transition:width .5s ease}
+.dept-body{padding:0 14px 12px;display:none}
+.dept-body.show{display:block}
+
+/* ===== QR MODAL ===== */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:200;align-items:center;justify-content:center;padding:16px}
+.modal-overlay.show{display:flex}
+.modal-content{background:var(--header);border-radius:14px;width:100%;max-width:380px;max-height:85vh;overflow-y:auto}
+.modal-header{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--border)}
+.modal-title{font-size:16px;font-weight:600}
+.modal-close{background:none;border:none;color:var(--text-secondary);font-size:26px;cursor:pointer;line-height:1}
+.modal-body{padding:16px}
+
+/* QR Container */
+.qr-container{display:flex;flex-direction:column;align-items:center;gap:14px;padding:10px 0}
+.qr-image{background:white;padding:12px;border-radius:12px}
+.qr-data{font-size:11px;color:var(--text-secondary);text-align:center;line-height:1.5;word-break:break-all}
+.qr-scan-area{width:100%;max-width:300px;aspect-ratio:1;background:var(--darker);border-radius:12px;overflow:hidden;position:relative}
+.qr-scan-area video{width:100%;height:100%;object-fit:cover}
+
+/* ===== EMPTY STATE ===== */
+.empty-state{text-align:center;padding:40px 20px;color:var(--text-secondary)}
+.empty-icon{font-size:48px;margin-bottom:10px}
+.empty-text{font-size:14px}
+.empty-hint{font-size:12px;margin-top:4px}
+
+/* ===== LOADING ===== */
+.loading{text-align:center;padding:20px;color:var(--text-secondary)}
+.spinner{display:inline-block;width:24px;height:24px;border:3px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ===== TOAST ===== */
+.toast{position:fixed;bottom:70px;left:50%;transform:translateX(-50%);background:var(--header);color:var(--text);padding:10px 20px;border-radius:10px;font-size:13px;z-index:300;box-shadow:0 4px 20px rgba(0,0,0,.5);animation:toastIn .3s ease;white-space:nowrap}
+.toast.success{border-left:4px solid var(--success)}
+.toast.error{border-left:4px solid var(--danger)}
+.toast.info{border-left:4px solid var(--info)}
+@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+
+/* ===== PASE CARD (ticket look) ===== */
+.pase-ticket{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;margin-bottom:10px;overflow:hidden;position:relative}
+.pase-ticket::before,.pase-ticket::after{content:'';position:absolute;width:16px;height:16px;background:var(--darker);border-radius:50%;top:50%;transform:translateY(-50%)}
+.pase-ticket::before{left:-8px}
+.pase-ticket::after{right:-8px}
+.pase-ticket-header{display:flex;align-items:center;padding:12px 14px;gap:10px;cursor:pointer}
+.pase-ticket-header:active{background:var(--hover-bg)}
+.pase-ticket-icon{font-size:22px;width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pase-ticket-info{flex:1;min-width:0}
+.pase-ticket-title{font-size:13px;font-weight:600}
+.pase-ticket-desc{font-size:11px;color:var(--text-secondary);margin-top:1px}
+.pase-ticket-badges{display:flex;gap:4px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end}
+.pase-ticket-divider{border:none;border-top:1px dashed var(--border);margin:0 20px}
+.pase-ticket-footer{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;font-size:11px;color:var(--text-secondary)}
+
+/* ===== RESPONSIVE ===== */
+@media(min-width:768px){
+  .stats-grid{grid-template-columns:repeat(4,1fr)}
+  .form-row-3{grid-template-columns:1fr 1fr 1fr}
+  .content{padding:16px}
+}
+@media(min-width:1024px){
+  .app{flex-direction:row}
+  .tab-bar{flex-direction:column;width:70px;border-bottom:none;border-right:1px solid var(--border);height:100vh;overflow-y:auto}
+  .tab-item{padding:10px 4px}
+  .content{height:100vh}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- TOP NAV -->
+  <div class="top-nav">
+    <button class="nav-back" onclick="goBack()" title="Volver al dashboard">←</button>
+    <div class="nav-title">
+      <h1>🎫 Pases de Entrada/Salida</h1>
+      <div class="nav-subtitle">IMSS Delegación BCS · Depto. de Personal</div>
+    </div>
+    <div class="nav-actions">
+      <button class="nav-btn" onclick="syncData()" title="Sincronizar">🔄</button>
+    </div>
+  </div>
+
+  <!-- TAB BAR -->
+  <div class="tab-bar" id="tabBar">
+    <div class="tab-item active" data-tab="nuevo" onclick="switchTab('nuevo')">
+      <span class="tab-icon">🎫</span>Nuevo Pase
+    </div>
+    <div class="tab-item" data-tab="historial" onclick="switchTab('historial')">
+      <span class="tab-icon">📋</span>Historial
+    </div>
+    <div class="tab-item" data-tab="estadisticas" onclick="switchTab('estadisticas')">
+      <span class="tab-icon">📊</span>Estadísticas
+    </div>
+    <div class="tab-item" data-tab="qr" onclick="switchTab('qr')">
+      <span class="tab-icon">📱</span>QR
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- ===== TAB: NUEVO PASE ===== -->
+    <div class="tab-content active" id="tab-nuevo">
+      <div class="section-header">
+        <div class="section-title">🎫 Generar Pase</div>
+      </div>
+
+      <form id="paseForm" onsubmit="guardarPase(event)">
+        <!-- Matrícula con autocomplete -->
+        <div class="form-group">
+          <label class="form-label">👤 Matrícula del Trabajador</label>
+          <div class="autocomplete-wrap">
+            <input type="text" class="form-input" id="matricula" placeholder="Escribe matrícula o nombre..." autocomplete="off" required>
+            <div class="autocomplete-list" id="matriculaList"></div>
+          </div>
+        </div>
+
+        <!-- Info del trabajador (auto-fill) -->
+        <div class="form-info" id="trabajadorInfo" style="display:none">
+          <div class="form-info-row"><span class="form-info-label">Nombre:</span><span class="form-info-value" id="infoNombre">-</span></div>
+          <div class="form-info-row"><span class="form-info-label">Categoría:</span><span class="form-info-value" id="infoCategoria">-</span></div>
+          <div class="form-info-row"><span class="form-info-label">Departamento:</span><span class="form-info-value" id="infoDepto">-</span></div>
+          <div class="form-info-row"><span class="form-info-label">Horario:</span><span class="form-info-value" id="infoHorario">-</span></div>
+        </div>
+
+        <!-- Fecha y Hora -->
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">📅 Fecha</label>
+            <input type="date" class="form-input" id="fechaPase" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">🕐 Hora</label>
+            <input type="time" class="form-input" id="horaPase" required>
+          </div>
+        </div>
+
+        <!-- Tipo de Pase -->
+        <div class="form-group">
+          <label class="form-label">📌 Tipo de Pase</label>
+          <select class="form-select" id="tipoPase" required>
+            <option value="">Seleccionar tipo...</option>
+            <option value="HOR">Por su horario</option>
+            <option value="ASU">Por el asunto</option>
+          </select>
+        </div>
+
+        <!-- Motivo -->
+        <div class="form-group">
+          <label class="form-label">📝 Motivo</label>
+          <select class="form-select" id="motivoPase" required>
+            <option value="">Seleccionar motivo...</option>
+            <option value="CMP">Cita médica particular</option>
+            <option value="COM">Comisión</option>
+            <option value="DP">Diligencias personales</option>
+            <option value="AP">Asunto particular</option>
+            <option value="OTR">Otro</option>
+          </select>
+        </div>
+
+        <!-- Motivo Otro (condicional) -->
+        <div class="form-group" id="motivoOtroGroup" style="display:none">
+          <label class="form-label">✏️ Especificar motivo</label>
+          <input type="text" class="form-input" id="motivoOtro" placeholder="Describe el motivo...">
+        </div>
+
+        <!-- Servicio que autoriza -->
+        <div class="form-group">
+          <label class="form-label">🏢 Servicio que Autoriza</label>
+          <select class="form-select" id="servicioAutoriza" required>
+            <option value="">Seleccionar servicio...</option>
+          </select>
+        </div>
+
+        <!-- Observaciones -->
+        <div class="form-group">
+          <label class="form-label">📝 Observaciones</label>
+          <textarea class="form-textarea" id="observacionesPase" placeholder="Observaciones adicionales (opcional)..."></textarea>
+        </div>
+
+        <!-- Botones -->
+        <div class="btn-group" style="margin-top:8px">
+          <button type="submit" class="btn btn-primary btn-block">🎫 Generar Pase</button>
+        </div>
+        <div class="btn-group" style="margin-top:8px">
+          <button type="button" class="btn btn-secondary btn-block" onclick="limpiarFormulario()">🗑️ Limpiar</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- ===== TAB: HISTORIAL ===== -->
+    <div class="tab-content" id="tab-historial">
+      <div class="search-bar">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-input" id="searchHistorial" placeholder="Buscar por nombre, matrícula, motivo..." oninput="renderHistorial()">
+      </div>
+
+      <!-- Filtros de fecha -->
+      <div class="form-row" style="margin-bottom:10px">
+        <div class="form-group" style="margin-bottom:0">
+          <label class="form-label" style="margin-bottom:3px">Desde</label>
+          <input type="date" class="form-input" id="filtroDesde" onchange="renderHistorial()" style="padding:8px 10px;font-size:13px">
+        </div>
+        <div class="form-group" style="margin-bottom:0">
+          <label class="form-label" style="margin-bottom:3px">Hasta</label>
+          <input type="date" class="form-input" id="filtroHasta" onchange="renderHistorial()" style="padding:8px 10px;font-size:13px">
+        </div>
+      </div>
+
+      <!-- Filtro chips -->
+      <div class="filter-chips" id="filterChips">
+        <div class="chip active" data-filter="todos" onclick="setFiltroEstatus('todos')">📋 Todos</div>
+        <div class="chip" data-filter="vigente" onclick="setFiltroEstatus('vigente')">🟢 Vigentes</div>
+        <div class="chip" data-filter="utilizado" onclick="setFiltroEstatus('utilizado')">🔵 Utilizados</div>
+        <div class="chip" data-filter="vencido" onclick="setFiltroEstatus('vencido')">🔴 Vencidos</div>
+      </div>
+
+      <!-- Filtro departamento -->
+      <div class="form-group" style="margin-bottom:12px">
+        <select class="form-select" id="filtroDepto" onchange="renderHistorial()">
+          <option value="">Todos los departamentos</option>
+        </select>
+      </div>
+
+      <div class="section-header">
+        <div class="section-title">📋 Pases Emitidos</div>
+        <div class="section-actions">
+          <button class="btn btn-sm btn-secondary" onclick="exportarPDF()">📥 PDF</button>
+        </div>
+      </div>
+
+      <div id="historialList">
+        <div class="empty-state">
+          <div class="empty-icon">🎫</div>
+          <div class="empty-text">Sin pases emitidos</div>
+          <div class="empty-hint">Genera un pase desde la pestaña Nuevo Pase</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== TAB: ESTADÍSTICAS ===== -->
+    <div class="tab-content" id="tab-estadisticas">
+      <div class="form-row" style="margin-bottom:14px">
+        <div class="form-group" style="margin-bottom:0">
+          <label class="form-label">Mes</label>
+          <select class="form-select" id="estMes" onchange="cargarEstadisticas()">
+            <option value="1">Enero</option><option value="2">Febrero</option><option value="3">Marzo</option>
+            <option value="4">Abril</option><option value="5">Mayo</option><option value="6">Junio</option>
+            <option value="7">Julio</option><option value="8">Agosto</option><option value="9">Septiembre</option>
+            <option value="10">Octubre</option><option value="11">Noviembre</option><option value="12">Diciembre</option>
+          </select>
+        </div>
+        <div class="form-group" style="margin-bottom:0">
+          <label class="form-label">Año</label>
+          <select class="form-select" id="estAnio" onchange="cargarEstadisticas()">
+            <option value="2025">2025</option><option value="2026" selected>2026</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="stats-grid" id="estStatsGrid">
+        <div class="stat-card green">
+          <div class="stat-icon">🎫</div>
+          <div class="stat-value" id="estTotal">0</div>
+          <div class="stat-label">Total Pases</div>
+        </div>
+        <div class="stat-card blue">
+          <div class="stat-icon">✅</div>
+          <div class="stat-value" id="estVigentes">0</div>
+          <div class="stat-label">Vigentes</div>
+        </div>
+        <div class="stat-card purple">
+          <div class="stat-icon">📋</div>
+          <div class="stat-value" id="estUtilizados">0</div>
+          <div class="stat-label">Utilizados</div>
+        </div>
+        <div class="stat-card red">
+          <div class="stat-icon">⏰</div>
+          <div class="stat-value" id="estVencidos">0</div>
+          <div class="stat-label">Vencidos</div>
+        </div>
+      </div>
+
+      <div class="section-header">
+        <div class="section-title">🏢 Contador por Departamento</div>
+        <div class="section-actions">
+          <button class="btn btn-sm btn-secondary" onclick="exportarEstadisticasPDF()">📥 PDF</button>
+        </div>
+      </div>
+      <div id="deptCounter"></div>
+
+      <div class="section-header" style="margin-top:16px">
+        <div class="section-title">📝 Contador por Motivo</div>
+      </div>
+      <div id="motivoCounter"></div>
+    </div>
+
+    <!-- ===== TAB: QR ===== -->
+    <div class="tab-content" id="tab-qr">
+      <div class="section-header">
+        <div class="section-title">📱 Código QR</div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">📊</div>
+          <div class="card-info">
+            <div class="card-title">Generar QR de Pase</div>
+            <div class="card-desc">Busca un pase para generar su código QR</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label class="form-label">Buscar Pase</label>
+            <input type="text" class="form-input" id="qrSearch" placeholder="Matrícula, nombre o folio..." oninput="buscarParaQR()">
+          </div>
+          <div id="qrResults"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">📷</div>
+          <div class="card-info">
+            <div class="card-title">Escanear QR</div>
+            <div class="card-desc">Usa la cámara para leer un código QR de pase</div>
+          </div>
+        </div>
+        <div class="card-body" style="text-align:center">
+          <button class="btn btn-primary btn-block" onclick="escanearQR()" id="scanBtn">📷 Iniciar Escáner</button>
+          <div id="scannerArea" style="display:none;margin-top:12px">
+            <div class="qr-scan-area" id="qrVideoContainer"></div>
+            <button class="btn btn-danger btn-block" style="margin-top:10px" onclick="detenerEscaneo()">⏹ Detener</button>
+          </div>
+          <div id="scanResult" style="display:none;margin-top:12px"></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /app -->
+
+<!-- QR MODAL -->
+<div class="modal-overlay" id="qrModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-title">📱 Código QR del Pase</div>
+      <button class="modal-close" onclick="cerrarQR()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="qr-container" id="qrDisplay">
+        <div class="qr-image" id="qrImage"></div>
+        <div class="qr-data" id="qrData"></div>
+      </div>
+      <div style="text-align:center;margin-top:12px">
+        <button class="btn btn-primary" onclick="descargarQR()">💾 Descargar QR</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DETALLE MODAL -->
+<div class="modal-overlay" id="detalleModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-title">🎫 Detalle del Pase</div>
+      <button class="modal-close" onclick="cerrarDetalle()">&times;</button>
+    </div>
+    <div class="modal-body" id="detalleContent"></div>
+  </div>
+</div>
+
+<!-- QR Code Library -->
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<!-- QR Scanner Library -->
+<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+
+<script>
+// ===== STATE =====
+let pases = [];
+let personal = [];
+let currentFiltroEstatus = 'todos';
+let selectedTrabajador = null;
+let currentPaseQR = null;
+let html5QrScanner = null;
+
+// ===== DEPARTAMENTOS (para servicio que autoriza) =====
+const DEPARTAMENTOS = [
+  'Dirección Delegacional',
+  'Subdirección Médica',
+  'Subdirección Administrativa',
+  'Jefatura de Servicios de Personal',
+  'Jefatura de Servicios de Prestaciones Económicas',
+  'Jefatura de Servicios de Prestaciones Sociales',
+  'Departamento de Enfermería',
+  'Departamento de Trabajo Social',
+  'Departamento de Nutrición',
+  'Departamento de Farmacia',
+  'Departamento de Patología',
+  'Departamento de Imaginología',
+  'Departamento de Laboratorio',
+  'Departamento de Archivo Clínico',
+  'Departamento de Admisión y Concertación',
+  'Departamento de Educación e Investigación en Salud',
+  'Departamento de Calidad',
+  'Departamento de Informática',
+  'Departamento de Mantenimiento',
+  'Departamento de Abastecimiento',
+  'Departamento de Contabilidad y Finanzas',
+  'Departamento de Afiliación y Cobranza',
+  'Coordinación de Control de la Prestación',
+  'Coordinación de Atención Integral',
+  'Coordinación de Comunicación y Relaciones Públicas'
+];
+
+const MOTIVOS_MAP = {
+  'CMP': 'Cita médica particular',
+  'COM': 'Comisión',
+  'DP': 'Diligencias personales',
+  'AP': 'Asunto particular',
+  'OTR': 'Otro'
+};
+
+const TIPOS_MAP = {
+  'HOR': 'Por su horario',
+  'ASU': 'Por el asunto'
+};
+
+const ESTATUS_MAP = {
+  'vigente': { label: 'Vigente', badge: 'badge-green', icon: '🟢' },
+  'utilizado': { label: 'Utilizado', badge: 'badge-blue', icon: '🔵' },
+  'vencido': { label: 'Vencido', badge: 'badge-red', icon: '🔴' }
+};
+
+// ===== INIT =====
+document.addEventListener('DOMContentLoaded', async () => {
+  // Set today
+  const now = new Date();
+  const today = now.toISOString().split('T')[0];
+  document.getElementById('fechaPase').value = today;
+  
+  // Set current time
+  const hours = String(now.getHours()).padStart(2, '0');
+  const mins = String(now.getMinutes()).padStart(2, '0');
+  document.getElementById('horaPase').value = `${hours}:${mins}`;
+
+  // Set current month for stats
+  document.getElementById('estMes').value = now.getMonth() + 1;
+  document.getElementById('estAnio').value = now.getFullYear();
+  
+  // Autocomplete events
+  document.getElementById('matricula').addEventListener('input', buscarPersonal);
+  document.getElementById('matricula').addEventListener('blur', () => {
+    setTimeout(() => document.getElementById('matriculaList').classList.remove('show'), 200);
+  });
+
+  // Motivo "Otro" toggle
+  document.getElementById('motivoPase').addEventListener('change', () => {
+    const show = document.getElementById('motivoPase').value === 'OTR';
+    document.getElementById('motivoOtroGroup').style.display = show ? 'block' : 'none';
+    if (!show) document.getElementById('motivoOtro').value = '';
+  });
+  
+  // Populate servicio que autoriza
+  const selServicio = document.getElementById('servicioAutoriza');
+  DEPARTAMENTOS.forEach(d => {
+    const opt = document.createElement('option');
+    opt.value = d;
+    opt.textContent = d;
+    selServicio.appendChild(opt);
+  });
+
+  // Populate filtro departamento en historial
+  const selFiltroDepto = document.getElementById('filtroDepto');
+  DEPARTAMENTOS.forEach(d => {
+    const opt = document.createElement('option');
+    opt.value = d;
+    opt.textContent = d;
+    selFiltroDepto.appendChild(opt);
+  });
+
+  // Load data
+  await Promise.all([cargarPersonal(), cargarPases()]);
+  cargarEstadisticas();
+});
+
+// ===== TAB SWITCHING =====
+function switchTab(tab) {
+  document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+  document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.getElementById(`tab-${tab}`).classList.add('active');
+  
+  if (tab === 'historial') renderHistorial();
+  if (tab === 'estadisticas') cargarEstadisticas();
+}
+
+// ===== DATA LOADING =====
+async function cargarPersonal() {
+  try {
+    const r = await fetch('data/correspondencia/personal.json');
+    const data = await r.json();
+    personal = data.empleados || [];
+  } catch (e) {
+    console.error('Error cargando personal:', e);
+    // Fallback: try relative path
+    try {
+      const r2 = await fetch('./data/correspondencia/personal.json');
+      const data2 = await r2.json();
+      personal = data2.empleados || [];
+    } catch (e2) {
+      console.error('Error cargando personal (fallback):', e2);
+    }
+  }
+}
+
+async function cargarPases() {
+  // Load from localStorage first
+  const stored = localStorage.getItem('imss_pases');
+  if (stored) {
+    try {
+      pases = JSON.parse(stored);
+    } catch (e) {
+      pases = [];
+    }
+  }
+  // Also try loading from server JSON for initial data
+  try {
+    const r = await fetch('data/pases/pases.json');
+    const data = await r.json();
+    if (data.pases && data.pases.length > 0 && pases.length === 0) {
+      // Merge server data if localStorage is empty
+      pases = data.pases;
+      guardarEnStorage();
+    }
+  } catch (e) {
+    // No server data, use localStorage
+  }
+  renderHistorial();
+}
+
+function guardarEnStorage() {
+  localStorage.setItem('imss_pases', JSON.stringify(pases));
+}
+
+// ===== AUTOCOMPLETE =====
+function buscarPersonal() {
+  const q = document.getElementById('matricula').value.toLowerCase().trim();
+  const list = document.getElementById('matriculaList');
+  
+  if (q.length < 2) { list.classList.remove('show'); return; }
+  
+  const results = personal.filter(e => 
+    e.matricula.toLowerCase().includes(q) || 
+    e.nombre.toLowerCase().includes(q) ||
+    e.puesto.toLowerCase().includes(q)
+  ).slice(0, 10);
+  
+  if (results.length === 0) { list.classList.remove('show'); return; }
+  
+  list.innerHTML = results.map(e => {
+    return `<div class="autocomplete-item" onclick="seleccionarTrabajador('${e.matricula}')">
+      <div class="name">${e.matricula} · ${e.nombre}</div>
+      <div class="detail">${e.categoria} - ${e.puesto}</div>
+    </div>`;
+  }).join('');
+  list.classList.add('show');
+}
+
+function seleccionarTrabajador(matricula) {
+  const emp = personal.find(e => e.matricula === matricula);
+  if (!emp) return;
+  
+  selectedTrabajador = emp;
+  document.getElementById('matricula').value = emp.matricula;
+  document.getElementById('matriculaList').classList.remove('show');
+  
+  // Show info
+  const info = document.getElementById('trabajadorInfo');
+  info.style.display = 'block';
+  document.getElementById('infoNombre').textContent = emp.nombre;
+  document.getElementById('infoCategoria').textContent = emp.categoria + ' - ' + emp.puesto;
+  document.getElementById('infoDepto').textContent = emp.puesto;
+  document.getElementById('infoHorario').textContent = 'Horario ' + emp.horario + ' · Descanso ' + emp.descanso;
+}
+
+// ===== GUARDAR PASE =====
+function guardarPase(e) {
+  e.preventDefault();
+  
+  if (!selectedTrabajador) {
+    showToast('Selecciona un trabajador válido', 'error');
+    return;
+  }
+
+  const motivoClave = document.getElementById('motivoPase').value;
+  let motivoDesc = MOTIVOS_MAP[motivoClave] || motivoClave;
+  if (motivoClave === 'OTR') {
+    const otro = document.getElementById('motivoOtro').value.trim();
+    if (otro) motivoDesc = otro;
+  }
+
+  const tipoClave = document.getElementById('tipoPase').value;
+  
+  // Generate folio
+  const folio = 'PSE-' + new Date().getFullYear() + '-' + String(pases.length + 1).padStart(5, '0');
+  
+  const nuevoPase = {
+    id: Date.now(),
+    folio: folio,
+    matricula: selectedTrabajador.matricula,
+    nombre: selectedTrabajador.nombre,
+    categoria: selectedTrabajador.categoria,
+    puesto: selectedTrabajador.puesto,
+    departamento: document.getElementById('servicioAutoriza').value,
+    fecha: document.getElementById('fechaPase').value,
+    hora: document.getElementById('horaPase').value,
+    tipoClave: tipoClave,
+    tipo: TIPOS_MAP[tipoClave] || tipoClave,
+    motivoClave: motivoClave,
+    motivo: motivoDesc,
+    servicioAutoriza: document.getElementById('servicioAutoriza').value,
+    observaciones: document.getElementById('observacionesPase').value.trim(),
+    estatus: 'vigente',
+    creadoEn: new Date().toISOString()
+  };
+  
+  pases.push(nuevoPase);
+  guardarEnStorage();
+  
+  showToast('✅ Pase generado: ' + folio, 'success');
+  limpiarFormulario();
+  renderHistorial();
+}
+
+function limpiarFormulario() {
+  document.getElementById('paseForm').reset();
+  document.getElementById('trabajadorInfo').style.display = 'none';
+  document.getElementById('motivoOtroGroup').style.display = 'none';
+  selectedTrabajador = null;
+  
+  const now = new Date();
+  document.getElementById('fechaPase').value = now.toISOString().split('T')[0];
+  const hours = String(now.getHours()).padStart(2, '0');
+  const mins = String(now.getMinutes()).padStart(2, '0');
+  document.getElementById('horaPase').value = `${hours}:${mins}`;
+}
+
+// ===== AUTO-CHECK ESTATUS =====
+function actualizarEstatus() {
+  const now = new Date();
+  let changed = false;
+  pases.forEach(p => {
+    if (p.estatus === 'vigente') {
+      // Si la fecha+hora del pase ya pasó, marcar como vencido
+      const paseDate = new Date(p.fecha + 'T' + (p.hora || '23:59'));
+      if (paseDate < now) {
+        p.estatus = 'vencido';
+        changed = true;
+      }
+    }
+  });
+  if (changed) guardarEnStorage();
+}
+
+// ===== RENDER HISTORIAL =====
+function renderHistorial() {
+  actualizarEstatus();
+  
+  const container = document.getElementById('historialList');
+  let filtered = [...pases];
+  
+  // Filter estatus
+  if (currentFiltroEstatus !== 'todos') {
+    filtered = filtered.filter(p => p.estatus === currentFiltroEstatus);
+  }
+  
+  // Filter departamento
+  const filtroDepto = document.getElementById('filtroDepto').value;
+  if (filtroDepto) {
+    filtered = filtered.filter(p => p.departamento === filtroDepto || p.servicioAutoriza === filtroDepto);
+  }
+  
+  // Filter dates
+  const desde = document.getElementById('filtroDesde').value;
+  const hasta = document.getElementById('filtroHasta').value;
+  if (desde) {
+    filtered = filtered.filter(p => p.fecha >= desde);
+  }
+  if (hasta) {
+    filtered = filtered.filter(p => p.fecha <= hasta);
+  }
+  
+  // Search
+  const search = document.getElementById('searchHistorial')?.value?.toLowerCase() || '';
+  if (search) {
+    filtered = filtered.filter(p => 
+      (p.nombre || '').toLowerCase().includes(search) ||
+      p.matricula.toLowerCase().includes(search) ||
+      (p.folio || '').toLowerCase().includes(search) ||
+      (p.motivo || '').toLowerCase().includes(search)
+    );
+  }
+  
+  // Sort by date desc
+  filtered.sort((a, b) => new Date(b.creadoEn) - new Date(a.creadoEn));
+  
+  if (filtered.length === 0) {
+    container.innerHTML = `<div class="empty-state">
+      <div class="empty-icon">🎫</div>
+      <div class="empty-text">Sin pases ${currentFiltroEstatus !== 'todos' ? 'con ese filtro' : 'emitidos'}</div>
+      <div class="empty-hint">${pases.length === 0 ? 'Genera un pase desde la pestaña Nuevo Pase' : 'Prueba con otro filtro'}</div>
+    </div>`;
+    return;
+  }
+  
+  container.innerHTML = filtered.map(p => {
+    const est = ESTATUS_MAP[p.estatus] || ESTATUS_MAP['vigente'];
+    const tipoIcon = p.tipoClave === 'HOR' ? '🕐' : '📌';
+    
+    return `<div class="pase-ticket" onclick="verDetalle(${p.id})">
+      <div class="pase-ticket-header">
+        <div class="pase-ticket-icon" style="background:rgba(37,211,102,.1)">🎫</div>
+        <div class="pase-ticket-info">
+          <div class="pase-ticket-title">${p.nombre || 'Sin nombre'}</div>
+          <div class="pase-ticket-desc">${p.matricula} · ${p.folio}</div>
+        </div>
+        <div class="pase-ticket-badges">
+          <span class="badge ${est.badge}">${est.icon} ${est.label}</span>
+        </div>
+      </div>
+      <hr class="pase-ticket-divider">
+      <div class="pase-ticket-footer">
+        <span>${tipoIcon} ${p.tipo}</span>
+        <span>${p.motivo}</span>
+        <span>📅 ${formatDate(p.fecha)} ${p.hora || ''}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function setFiltroEstatus(filtro) {
+  currentFiltroEstatus = filtro;
+  document.querySelectorAll('#filterChips .chip').forEach(c => c.classList.remove('active'));
+  document.querySelector(`[data-filter="${filtro}"]`)?.classList.add('active');
+  renderHistorial();
+}
+
+// ===== VER DETALLE =====
+function verDetalle(id) {
+  const p = pases.find(pase => pase.id === id);
+  if (!p) return;
+  
+  const est = ESTATUS_MAP[p.estatus] || ESTATUS_MAP['vigente'];
+  
+  const content = document.getElementById('detalleContent');
+  content.innerHTML = `
+    <div style="text-align:center;margin-bottom:16px">
+      <div style="font-size:36px">🎫</div>
+      <div style="font-size:16px;font-weight:600;margin-top:6px">${p.folio}</div>
+      <span class="badge ${est.badge}">${est.icon} ${est.label}</span>
+    </div>
+    <div class="form-info">
+      <div class="form-info-row"><span class="form-info-label">Matrícula:</span><span class="form-info-value">${p.matricula}</span></div>
+      <div class="form-info-row"><span class="form-info-label">Nombre:</span><span class="form-info-value">${p.nombre || '-'}</span></div>
+      <div class="form-info-row"><span class="form-info-label">Categoría:</span><span class="form-info-value">${p.categoria || '-'}</span></div>
+      <div class="form-info-row"><span class="form-info-label">Puesto:</span><span class="form-info-value">${p.puesto || '-'}</span></div>
+      <div class="form-info-row"><span class="form-info-label">Departamento:</span><span class="form-info-value">${p.departamento || p.servicioAutoriza || '-'}</span></div>
+    </div>
+    <div class="form-info">
+      <div class="form-info-row"><span class="form-info-label">Fecha:</span><span class="form-info-value">${formatDate(p.fecha)}</span></div>
+      <div class="form-info-row"><span class="form-info-label">Hora:</span><span class="form-info-value">${p.hora || '-'}</span></div>
+      <div class="form-info-row"><span class="form-info-label">Tipo:</span><span class="form-info-value">${p.tipo}</span></div>
+      <div class="form-info-row"><span class="form-info-label">Motivo:</span><span class="form-info-value">${p.motivo}</span></div>
+      <div class="form-info-row"><span class="form-info-label">Servicio Autoriza:</span><span class="form-info-value">${p.servicioAutoriza || '-'}</span></div>
+    </div>
+    ${p.observaciones ? `<div class="form-info"><div class="form-info-row"><span class="form-info-label">Observaciones:</span><span class="form-info-value">${p.observaciones}</span></div></div>` : ''}
+    <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
+      <button class="btn btn-primary" style="flex:1" onclick="generarQRPase(${p.id})">📱 Generar QR</button>
+      ${p.estatus === 'vigente' ? `<button class="btn btn-secondary" style="flex:1" onclick="cambiarEstatus(${p.id},'utilizado')">✅ Marcar Utilizado</button>` : ''}
+    </div>
+    <div style="display:flex;gap:8px;margin-top:8px">
+      ${p.estatus !== 'vencido' ? `<button class="btn btn-secondary" style="flex:1" onclick="cambiarEstatus(${p.id},'vencido')">⏰ Marcar Vencido</button>` : ''}
+      <button class="btn btn-danger" style="flex:1" onclick="eliminarPase(${p.id})">🗑️ Eliminar</button>
+    </div>
+  `;
+  
+  document.getElementById('detalleModal').classList.add('show');
+}
+
+function cerrarDetalle() {
+  document.getElementById('detalleModal').classList.remove('show');
+}
+
+function cambiarEstatus(id, nuevoEstatus) {
+  const p = pases.find(pase => pase.id === id);
+  if (!p) return;
+  p.estatus = nuevoEstatus;
+  guardarEnStorage();
+  showToast(`✅ Pase marcado como ${ESTATUS_MAP[nuevoEstatus]?.label || nuevoEstatus}`, 'success');
+  cerrarDetalle();
+  renderHistorial();
+  cargarEstadisticas();
+}
+
+function eliminarPase(id) {
+  if (!confirm('¿Eliminar este pase?')) return;
+  pases = pases.filter(p => p.id !== id);
+  guardarEnStorage();
+  showToast('🗑️ Pase eliminado', 'info');
+  cerrarDetalle();
+  renderHistorial();
+  cargarEstadisticas();
+}
+
+// ===== ESTADÍSTICAS =====
+function cargarEstadisticas() {
+  actualizarEstatus();
+  
+  const mes = parseInt(document.getElementById('estMes').value);
+  const anio = parseInt(document.getElementById('estAnio').value);
+  
+  const delMes = pases.filter(p => {
+    const d = new Date(p.fecha);
+    return d.getMonth() + 1 === mes && d.getFullYear() === anio;
+  });
+  
+  document.getElementById('estTotal').textContent = delMes.length;
+  document.getElementById('estVigentes').textContent = delMes.filter(p => p.estatus === 'vigente').length;
+  document.getElementById('estUtilizados').textContent = delMes.filter(p => p.estatus === 'utilizado').length;
+  document.getElementById('estVencidos').textContent = delMes.filter(p => p.estatus === 'vencido').length;
+  
+  // Counter by department
+  const deptCounts = {};
+  delMes.forEach(p => {
+    const dept = p.departamento || p.servicioAutoriza || 'Sin especificar';
+    deptCounts[dept] = (deptCounts[dept] || 0) + 1;
+  });
+  renderDeptCounter(deptCounts);
+  
+  // Counter by motivo
+  const motivoCounts = {};
+  delMes.forEach(p => {
+    const mot = p.motivo || 'Sin especificar';
+    motivoCounts[mot] = (motivoCounts[mot] || 0) + 1;
+  });
+  renderMotivoCounter(motivoCounts);
+}
+
+function renderDeptCounter(deptCounts) {
+  const container = document.getElementById('deptCounter');
+  const keys = Object.keys(deptCounts).sort((a, b) => deptCounts[b] - deptCounts[a]);
+  
+  if (keys.length === 0) {
+    container.innerHTML = '<div class="empty-state"><div class="empty-icon">📊</div><div class="empty-text">Sin datos para este periodo</div></div>';
+    return;
+  }
+  
+  const maxCount = Math.max(...keys.map(k => deptCounts[k]));
+  const colors = ['#25d366','#3b82f6','#f59e0b','#ef4444','#8b5cf6','#10b981','#ec4899','#06b6d4','#f97316','#6366f1'];
+  
+  container.innerHTML = keys.map((k, i) => {
+    const pct = maxCount > 0 ? (deptCounts[k] / maxCount * 100) : 0;
+    const color = colors[i % colors.length];
+    return `<div class="dept-card">
+      <div class="dept-header" onclick="this.nextElementSibling.classList.toggle('show')">
+        <div class="dept-dot" style="background:${color}"></div>
+        <div class="dept-info">
+          <div class="dept-title">${k}</div>
+          <div class="dept-subtitle">${deptCounts[k]} pases</div>
+        </div>
+        <div class="dept-count" style="color:${color}">${deptCounts[k]}</div>
+      </div>
+      <div class="dept-body">
+        <div class="dept-bar"><div class="dept-bar-fill" style="width:${pct}%;background:${color}"></div></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderMotivoCounter(motivoCounts) {
+  const container = document.getElementById('motivoCounter');
+  const keys = Object.keys(motivoCounts).sort((a, b) => motivoCounts[b] - motivoCounts[a]);
+  
+  if (keys.length === 0) {
+    container.innerHTML = '<div class="empty-state"><div class="empty-icon">📝</div><div class="empty-text">Sin datos</div></div>';
+    return;
+  }
+  
+  const maxCount = Math.max(...keys.map(k => motivoCounts[k]));
+  const colors = ['#25d366','#3b82f6','#f59e0b','#ef4444','#8b5cf6'];
+  
+  container.innerHTML = keys.map((k, i) => {
+    const pct = maxCount > 0 ? (motivoCounts[k] / maxCount * 100) : 0;
+    const color = colors[i % colors.length];
+    return `<div class="dept-card">
+      <div class="dept-header" onclick="this.nextElementSibling.classList.toggle('show')">
+        <div class="dept-dot" style="background:${color}"></div>
+        <div class="dept-info">
+          <div class="dept-title">${k}</div>
+          <div class="dept-subtitle">${motivoCounts[k]} pases</div>
+        </div>
+        <div class="dept-count" style="color:${color}">${motivoCounts[k]}</div>
+      </div>
+      <div class="dept-body">
+        <div class="dept-bar"><div class="dept-bar-fill" style="width:${pct}%;background:${color}"></div></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ===== QR GENERATION =====
+async function generarQRPase(id) {
+  const p = pases.find(pase => pase.id === id);
+  if (!p) return;
+  
+  currentPaseQR = p;
+  cerrarDetalle();
+  
+  const qrData = JSON.stringify({
+    id: p.id,
+    folio: p.folio,
+    matricula: p.matricula,
+    nombre: p.nombre,
+    tipo: p.tipo,
+    motivo: p.motivo,
+    fecha: p.fecha,
+    hora: p.hora,
+    servicioAutoriza: p.servicioAutoriza,
+    estatus: p.estatus
+  });
+  
+  try {
+    const canvas = await QRCode.toCanvas(document.createElement('canvas'), qrData, {
+      width: 256,
+      margin: 2,
+      color: { dark: '#111b21', light: '#ffffff' }
+    });
+    const qrDiv = document.getElementById('qrImage');
+    qrDiv.innerHTML = '';
+    canvas.style.width = '256px';
+    canvas.style.height = '256px';
+    qrDiv.appendChild(canvas);
+    
+    const est = ESTATUS_MAP[p.estatus] || ESTATUS_MAP['vigente'];
+    document.getElementById('qrData').innerHTML = `
+      <strong>🎫 ${p.folio}</strong><br>
+      ${p.matricula} · ${p.nombre || ''}<br>
+      ${p.tipo} · ${p.motivo}<br>
+      📅 ${formatDate(p.fecha)} ${p.hora || ''}<br>
+      🏢 ${p.servicioAutoriza || '-'}<br>
+      ${est.icon} ${est.label}
+    `;
+    
+    document.getElementById('qrModal').classList.add('show');
+  } catch (err) {
+    showToast('Error generando QR', 'error');
+    console.error(err);
+  }
+}
+
+function cerrarQR() {
+  document.getElementById('qrModal').classList.remove('show');
+}
+
+function descargarQR() {
+  const canvas = document.querySelector('#qrImage canvas');
+  if (!canvas) return;
+  const link = document.createElement('a');
+  link.download = `QR_pase_${currentPaseQR?.folio || 'imss'}.png`;
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+}
+
+// QR Search
+function buscarParaQR() {
+  const q = document.getElementById('qrSearch').value.toLowerCase().trim();
+  const container = document.getElementById('qrResults');
+  
+  if (q.length < 2) { container.innerHTML = ''; return; }
+  
+  const results = pases.filter(p => 
+    p.matricula.toLowerCase().includes(q) || 
+    (p.nombre || '').toLowerCase().includes(q) ||
+    (p.folio || '').toLowerCase().includes(q)
+  ).slice(0, 5);
+  
+  if (results.length === 0) {
+    container.innerHTML = '<div style="text-align:center;color:var(--text-secondary);padding:10px;font-size:13px">Sin resultados</div>';
+    return;
+  }
+  
+  container.innerHTML = results.map(p => {
+    const est = ESTATUS_MAP[p.estatus] || ESTATUS_MAP['vigente'];
+    return `<div class="card" style="cursor:pointer;margin-bottom:8px" onclick="generarQRPase(${p.id})">
+      <div class="card-header" style="padding:10px 12px">
+        <div class="card-icon" style="width:32px;height:32px;font-size:14px;background:rgba(37,211,102,.1)">🎫</div>
+        <div class="card-info">
+          <div class="card-title" style="font-size:13px">${p.folio}</div>
+          <div class="card-desc">${p.matricula} · ${p.nombre || ''} · ${p.motivo}</div>
+        </div>
+        <span class="badge ${est.badge}">${est.icon}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ===== QR SCANNER =====
+async function escanearQR() {
+  document.getElementById('scannerArea').style.display = 'block';
+  document.getElementById('scanBtn').style.display = 'none';
+  
+  try {
+    if (typeof Html5Qrcode !== 'undefined') {
+      html5QrScanner = new Html5Qrcode('qrVideoContainer');
+      await html5QrScanner.start(
+        { facingMode: "environment" },
+        { fps: 10, qrbox: { width: 250, height: 250 } },
+        (decodedText) => {
+          try {
+            const data = JSON.parse(decodedText);
+            document.getElementById('scanResult').style.display = 'block';
+            const est = ESTATUS_MAP[data.estatus] || ESTATUS_MAP['vigente'];
+            document.getElementById('scanResult').innerHTML = `
+              <div class="card">
+                <div class="card-body" style="text-align:center">
+                  <div style="font-size:24px">✅</div>
+                  <div style="font-weight:600;margin:6px 0">QR Escaneado</div>
+                  <div style="font-size:13px;color:var(--text-secondary)">
+                    <strong>${data.folio || 'Sin folio'}</strong><br>
+                    ${data.matricula} · ${data.nombre || ''}<br>
+                    ${data.tipo || ''} · ${data.motivo || ''}<br>
+                    📅 ${data.fecha || ''} ${data.hora || ''}<br>
+                    🏢 ${data.servicioAutoriza || ''}<br>
+                    ${est.icon} ${est.label}
+                  </div>
+                  <div style="display:flex;gap:8px;margin-top:10px">
+                    ${data.id ? `<button class="btn btn-primary btn-block" onclick="verDetalle(${data.id})">📋 Ver Detalle</button>` : ''}
+                    ${data.id && data.estatus === 'vigente' ? `<button class="btn btn-secondary btn-block" onclick="cambiarEstatus(${data.id},'utilizado');detenerEscaneo()">✅ Utilizar</button>` : ''}
+                  </div>
+                </div>
+              </div>`;
+            detenerEscaneo();
+          } catch (e) {
+            document.getElementById('scanResult').style.display = 'block';
+            document.getElementById('scanResult').innerHTML = `
+              <div class="card"><div class="card-body" style="text-align:center">
+                <div style="font-size:24px">📄</div>
+                <div style="font-size:13px;word-break:break-all;margin-top:8px">${decodedText}</div>
+              </div></div>`;
+          }
+        },
+        () => {} // silent error
+      );
+    } else {
+      document.getElementById('qrVideoContainer').innerHTML = `
+        <div style="padding:40px 20px;text-align:center;color:var(--text-secondary)">
+          <div style="font-size:48px">📷</div>
+          <div style="margin-top:10px">Escáner QR no disponible</div>
+          <div style="font-size:12px;margin-top:6px">Verifica que la librería html5-qrcode esté cargada</div>
+        </div>`;
+    }
+  } catch (err) {
+    console.error('Error escaneando QR:', err);
+    document.getElementById('qrVideoContainer').innerHTML = `
+      <div style="padding:40px 20px;text-align:center;color:var(--text-secondary)">
+        <div style="font-size:48px">⚠️</div>
+        <div style="margin-top:10px">${err.message || 'Error al acceder a la cámara'}</div>
+      </div>`;
+  }
+}
+
+function detenerEscaneo() {
+  if (html5QrScanner) {
+    try { html5QrScanner.stop(); } catch(e) {}
+    html5QrScanner = null;
+  }
+  document.getElementById('scannerArea').style.display = 'none';
+  document.getElementById('scanBtn').style.display = 'block';
+}
+
+// ===== EXPORT PDF =====
+function exportarPDF() {
+  actualizarEstatus();
+  const content = generatePrintHTML();
+  const win = window.open('', '_blank');
+  win.document.write(content);
+  win.document.close();
+  setTimeout(() => { win.print(); }, 500);
+}
+
+function generatePrintHTML() {
+  const now = new Date();
+  const monthNames = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  
+  let filtered = [...pases];
+  
+  // Apply same filters as historial
+  const filtroDepto = document.getElementById('filtroDepto').value;
+  const desde = document.getElementById('filtroDesde').value;
+  const hasta = document.getElementById('filtroHasta').value;
+  
+  if (currentFiltroEstatus !== 'todos') {
+    filtered = filtered.filter(p => p.estatus === currentFiltroEstatus);
+  }
+  if (filtroDepto) {
+    filtered = filtered.filter(p => p.departamento === filtroDepto || p.servicioAutoriza === filtroDepto);
+  }
+  if (desde) filtered = filtered.filter(p => p.fecha >= desde);
+  if (hasta) filtered = filtered.filter(p => p.fecha <= hasta);
+  
+  filtered.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+  
+  const rows = filtered.map(p => {
+    const est = ESTATUS_MAP[p.estatus] || ESTATUS_MAP['vigente'];
+    return `<tr>
+      <td>${p.folio || ''}</td>
+      <td>${p.matricula}</td>
+      <td>${p.nombre || '-'}</td>
+      <td>${p.categoria || '-'}</td>
+      <td>${p.departamento || p.servicioAutoriza || '-'}</td>
+      <td>${formatDate(p.fecha)}</td>
+      <td>${p.hora || '-'}</td>
+      <td>${p.tipo}</td>
+      <td>${p.motivo}</td>
+      <td>${p.servicioAutoriza || '-'}</td>
+      <td>${est.label}</td>
+    </tr>`;
+  }).join('');
+  
+  return `<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>Relación de Pases IMSS</title>
+<style>
+  body{font-family:Arial,sans-serif;margin:20px;font-size:10px}
+  h1{text-align:center;font-size:16px;margin-bottom:4px}
+  h2{text-align:center;font-size:12px;color:#666;margin-bottom:16px}
+  table{width:100%;border-collapse:collapse;margin-top:10px}
+  th{background:#005c4b;color:white;padding:6px 4px;text-align:left;font-size:9px}
+  td{padding:4px;border-bottom:1px solid #ddd;font-size:9px}
+  tr:nth-child(even){background:#f9f9f9}
+  .header-info{display:flex;justify-content:space-between;margin-bottom:10px;font-size:10px;color:#666}
+  .vigente{color:#10b981;font-weight:bold}
+  .utilizado{color:#3b82f6;font-weight:bold}
+  .vencido{color:#ef4444;font-weight:bold}
+</style></head><body>
+<h1>🎫 RELACIÓN DE PASES DE ENTRADA/SALIDA</h1>
+<h2>IMSS - Delegación Regional BCS - Departamento de Personal</h2>
+<div class="header-info"><span>Generado: ${now.toLocaleDateString('es-MX')}</span><span>Total: ${filtered.length} pases</span></div>
+<table><thead><tr><th>Folio</th><th>Matrícula</th><th>Nombre</th><th>Categoría</th><th>Depto.</th><th>Fecha</th><th>Hora</th><th>Tipo</th><th>Motivo</th><th>Serv. Autoriza</th><th>Estatus</th></tr></thead>
+<tbody>${rows}</tbody></table>
+<p style="text-align:center;margin-top:20px;font-size:10px;color:#666">Documento generado el ${now.toLocaleDateString('es-MX')} a las ${now.toLocaleTimeString('es-MX')}</p>
+</body></html>`;
+}
+
+function exportarEstadisticasPDF() {
+  const mes = document.getElementById('estMes');
+  const anio = document.getElementById('estAnio');
+  const monthNames = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  
+  const deptHTML = document.getElementById('deptCounter').innerHTML;
+  const motivoHTML = document.getElementById('motivoCounter').innerHTML;
+  
+  const content = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Estadísticas de Pases</title>
+<style>
+  body{font-family:Arial,sans-serif;margin:20px;font-size:11px}
+  h1{text-align:center;font-size:16px}
+  h2{text-align:center;font-size:12px;color:#666}
+  h3{margin-top:20px;font-size:13px;color:#005c4b}
+  .dept-card,.ind-card{margin:8px 0;padding:8px;border:1px solid #ddd;border-radius:6px}
+  .dept-header,.ind-header{display:flex;justify-content:space-between;align-items:center}
+  .dept-count,.ind-count{font-size:18px;font-weight:bold;color:#005c4b}
+  .dept-bar,.ind-bar{height:6px;background:#e0e0e0;border-radius:3px;margin-top:4px;overflow:hidden}
+  .dept-bar-fill,.ind-bar-fill{height:100%;background:#005c4b;border-radius:3px}
+  .header-info{text-align:center;font-size:10px;color:#666;margin-top:4px}
+</style></head><body>
+<h1>📊 ESTADÍSTICAS DE PASES</h1>
+<h2>IMSS Delegación Regional BCS</h2>
+<div class="header-info">${monthNames[mes.value-1]} ${anio.value}</div>
+<h3>🏢 Contador por Departamento</h3>
+${deptHTML}
+<h3>📝 Contador por Motivo</h3>
+${motivoHTML}
+<p style="text-align:center;margin-top:20px;font-size:10px;color:#666">Generado: ${new Date().toLocaleDateString('es-MX')}</p>
+</body></html>`;
+  
+  const win = window.open('', '_blank');
+  win.document.write(content);
+  win.document.close();
+  setTimeout(() => { win.print(); }, 500);
+}
+
+// ===== HELPERS =====
+function formatDate(dateStr) {
+  if (!dateStr) return '-';
+  const d = new Date(dateStr + 'T00:00:00');
+  return d.toLocaleDateString('es-MX', { day: '2-digit', month: 'short', year: 'numeric' });
+}
+
+function showToast(msg, type = 'info') {
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.textContent = msg;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 3000);
+}
+
+function goBack() {
+  window.location.href = 'index.html';
+}
+
+async function syncData() {
+  showToast('🔄 Sincronizando...', 'info');
+  await Promise.all([cargarPersonal(), cargarPases()]);
+  cargarEstadisticas();
+  renderHistorial();
+  showToast('✅ Datos actualizados', 'success');
+}
+
+// Close modals on overlay click
+document.getElementById('qrModal').addEventListener('click', function(e) { if (e.target === this) cerrarQR(); });
+document.getElementById('detalleModal').addEventListener('click', function(e) { if (e.target === this) cerrarDetalle(); });
+</script>
+</body>
+</html>

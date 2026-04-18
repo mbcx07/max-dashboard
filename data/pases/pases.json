@@ -1,0 +1,21 @@
+{
+  "descripcion": "Registro de pases de entrada/salida - IMSS Delegación Regional BCS",
+  "ultimoUpdate": "2026-04-18",
+  "pases": [],
+  "motivos": [
+    { "clave": "CMP", "descripcion": "Cita médica particular" },
+    { "clave": "COM", "descripcion": "Comisión" },
+    { "clave": "DP", "descripcion": "Diligencias personales" },
+    { "clave": "AP", "descripcion": "Asunto particular" },
+    { "clave": "OTR", "descripcion": "Otro" }
+  ],
+  "tiposPase": [
+    { "clave": "HOR", "descripcion": "Por su horario" },
+    { "clave": "ASU", "descripcion": "Por el asunto" }
+  ],
+  "estatus": [
+    { "clave": "vigente", "descripcion": "Vigente", "color": "#10b981" },
+    { "clave": "utilizado", "descripcion": "Utilizado", "color": "#3b82f6" },
+    { "clave": "vencido", "descripcion": "Vencido", "color": "#ef4444" }
+  ]
+}
