@@ -1,0 +1,18 @@
+{
+  "descripcion": "Solicitudes del programa de contratación - IMSS Delegación Regional BCS",
+  "ultimoUpdate": "2026-04-18",
+  "solicitudes": [],
+  "tiposSolicitud": [
+    { "clave": "TE", "descripcion": "Tiempo Extraordinario", "icono": "⏰" },
+    { "clave": "GS", "descripcion": "Guardia de Sustitución", "icono": "🔄" },
+    { "clave": "NIV", "descripcion": "Nivelación", "icono": "📈" }
+  ],
+  "documentosNivelacion": [
+    "Currículum vitae actualizado",
+    "Constancia de habilidades",
+    "Evaluación de desempeño",
+    "Constancia de cursos",
+    "Carta de recomendación del jefe inmediato",
+    "Historial de guardias"
+  ]
+}

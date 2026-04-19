@@ -1,4 +1,48 @@
 {
-  "registros": [],
-  "ultimoId": 0
+  "registros": [
+    {
+      "id": 1,
+      "fechaCaptura": "2026-04-18",
+      "matricula": "000001",
+      "nombre": "GARCÍA HERNÁNDEZ MARÍA ELENA",
+      "categoria": "C01",
+      "puesto": "ENFERMERA GENERAL",
+      "horario": "1",
+      "descanso": "1",
+      "tipoDocumento": "incapacidad_eg",
+      "fechaInicio": "2026-04-18",
+      "fechaTermino": "2026-04-22",
+      "dias": 5,
+      "folio": "INC-2026-001",
+      "observaciones": "ACTUALIZADO: Incapacidad EG verificada",
+      "quienRecibe": "DEPTO. DE PERSONAL",
+      "presencias": "",
+      "creadoPor": "Moisés",
+      "creadoEn": "2026-04-19T16:31:04.396Z",
+      "qrGenerado": true,
+      "modificadoEn": "2026-04-19T16:41:58.604Z"
+    },
+    {
+      "id": 2,
+      "fechaCaptura": "2026-04-18",
+      "matricula": "000004",
+      "nombre": "MARTÍNEZ FLORES JOSÉ LUIS",
+      "categoria": "C04",
+      "puesto": "MÉDICO GENERAL",
+      "horario": "1",
+      "descanso": "1",
+      "tipoDocumento": "comision_curso",
+      "fechaInicio": "2026-04-20",
+      "fechaTermino": "2026-04-25",
+      "dias": 6,
+      "folio": "COM-2026-042",
+      "observaciones": "Curso de actualización médica",
+      "quienRecibe": "JEFATURA DE SERVICIOS",
+      "presencias": "",
+      "creadoPor": "Moisés",
+      "creadoEn": "2026-04-19T16:31:19.310Z",
+      "qrGenerado": true
+    }
+  ],
+  "ultimoId": 2
 }

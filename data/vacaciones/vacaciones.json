@@ -1,0 +1,17 @@
+{
+  "descripcion": "Registro de vacaciones - IMSS Delegación Regional BCS",
+  "ultimoUpdate": "2026-04-18",
+  "registros": [],
+  "memos": [],
+  "configuracionVacacional": {
+    "aniosServicio": [
+      { "desde": 1, "hasta": 5, "dias": 12 },
+      { "desde": 6, "hasta": 10, "dias": 14 },
+      { "desde": 11, "hasta": 15, "dias": 16 },
+      { "desde": 16, "hasta": 20, "dias": 18 },
+      { "desde": 21, "hasta": 25, "dias": 20 },
+      { "desde": 26, "hasta": 100, "dias": 22 }
+    ],
+    "primaVacacional": 0.25
+  }
+}

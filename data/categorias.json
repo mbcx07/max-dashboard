@@ -1,0 +1,58 @@
+{
+  "descripcion": "Catálogo de categorías y horarios - IMSS Delegación Regional BCS",
+  "ultimoUpdate": "2026-04-18",
+  "horarios": [
+    { "clave": "1", "descripcion": "7:30 - 14:00", "horaEntrada": "07:30", "horaSalida": "14:00", "horasDia": 6.5 },
+    { "clave": "2", "descripcion": "5:00 - 12:30", "horaEntrada": "05:00", "horaSalida": "12:30", "horasDia": 7.5 },
+    { "clave": "3", "descripcion": "8:00 - 15:00", "horaEntrada": "08:00", "horaSalida": "15:00", "horasDia": 7.0 },
+    { "clave": "4", "descripcion": "8:00 - 14:00", "horaEntrada": "08:00", "horaSalida": "14:00", "horasDia": 6.0 },
+    { "clave": "5", "descripcion": "7:00 - 14:00", "horaEntrada": "07:00", "horaSalida": "14:00", "horasDia": 7.0 },
+    { "clave": "6", "descripcion": "8:30 - 15:30", "horaEntrada": "08:30", "horaSalida": "15:30", "horasDia": 7.0 },
+    { "clave": "7", "descripcion": "7:00 - 13:00", "horaEntrada": "07:00", "horaSalida": "13:00", "horasDia": 6.0 },
+    { "clave": "8", "descripcion": "9:00 - 15:00", "horaEntrada": "09:00", "horaSalida": "15:00", "horasDia": 6.0 }
+  ],
+  "descansos": [
+    { "clave": "1", "descripcion": "LUNES Y MARTES" },
+    { "clave": "2", "descripcion": "MARTES Y MIÉRCOLES" },
+    { "clave": "3", "descripcion": "MIÉRCOLES Y JUEVES" },
+    { "clave": "4", "descripcion": "JUEVES Y VIERNES" },
+    { "clave": "5", "descripcion": "SÁBADO Y DOMINGO" },
+    { "clave": "6", "descripcion": "DOMINGO Y LUNES" }
+  ],
+  "departamentos": [
+    { "clave": "DP", "descripcion": "DEPARTAMENTO DE PERSONAL" },
+    { "clave": "DRH", "descripcion": "DEPARTAMENTO DE RECURSOS HUMANOS" },
+    { "clave": "DN", "descripcion": "DEPARTAMENTO DE NÓMINA" },
+    { "clave": "DPV", "descripcion": "DEPARTAMENTO DE PREVENCIÓN" },
+    { "clave": "JS", "descripcion": "JEFATURA DE SERVICIOS" },
+    { "clave": "SM", "descripcion": "SUBDIRECCIÓN MÉDICA" },
+    { "clave": "DIR", "descripcion": "DIRECCIÓN" },
+    { "clave": "DA", "descripcion": "DEPARTAMENTO DE ARCHIVO" },
+    { "clave": "DC", "descripcion": "DEPARTAMENTO DE CÓMPUTO" },
+    { "clave": "DE", "descripcion": "DEPARTAMENTO DE ENFERMERÍA" },
+    { "clave": "DM", "descripcion": "DEPARTAMENTO MÉDICO" },
+    { "clave": "DT", "descripcion": "DEPARTAMENTO DE TRABAJO SOCIAL" },
+    { "clave": "DL", "descripcion": "DEPARTAMENTO DE LABORATORIO" },
+    { "clave": "DR", "descripcion": "DEPARTAMENTO DE RADIOLOGÍA" },
+    { "clave": "DNUT", "descripcion": "DEPARTAMENTO DE NUTRICIÓN" },
+    { "clave": "UCI", "descripcion": "UNIDAD DE CUIDADOS INTENSIVOS" },
+    { "clave": "URG", "descripcion": "URGENCIAS" },
+    { "clave": "CIR", "descripcion": "CIRUGÍA" },
+    { "clave": "MED", "descripcion": "MEDICINA INTERNA" },
+    { "clave": "PED", "descripcion": "PEDIATRÍA" }
+  ],
+  "delegaciones": [
+    { "clave": "BCS", "descripcion": "BAJA CALIFORNIA SUR" },
+    { "clave": "BCN", "descripcion": "BAJA CALIFORNIA" },
+    { "clave": "SIN", "descripcion": "SINALOA" },
+    { "clave": "SON", "descripcion": "SONORA" },
+    { "clave": "NAY", "descripcion": "NAYARIT" }
+  ],
+  "turnos": [
+    { "clave": "M", "descripcion": "MATUTINO" },
+    { "clave": "V", "descripcion": "VESPERTINO" },
+    { "clave": "N", "descripcion": "NOCTURNO" },
+    { "clave": "J", "descripcion": "JORNADA ACUMULADA" },
+    { "clave": "MI", "descripcion": "MIXTO" }
+  ]
+}
