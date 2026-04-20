@@ -2,10 +2,10 @@
 
 // Profile Management
 const PROFILES = {
-  moises: { name: 'Moisés', emoji: '📚', color: '#25d366' },
-  luisana: { name: 'Luisana', emoji: '👩‍🍳', color: '#f59e0b' },
-  valentina: { name: 'Valentina', emoji: '👩‍🎨', color: '#ec4899' },
-  amelia: { name: 'Amelia', emoji: '🎮', color: '#8b5cf6' }
+  moises: { name: 'Moisés', emoji: '📚', color: '#34d399' },
+  luisana: { name: 'Luisana', emoji: '👩‍🍳', color: '#fbbf24' },
+  valentina: { name: 'Valentina', emoji: '🦄', color: '#ff6bb5' },
+  amelia: { name: 'Amelia', emoji: '🎮', color: '#a855f7' }
 };
 
 let currentProfile = localStorage.getItem('maxProfile') || 'moises';
@@ -44,9 +44,7 @@ function loadProfile() {
 function handleProfileClick(profile, emoji) {
   currentProfile = profile;
   loadProfile();
-  if (chatHistory.length === 0) {
-    addMaxMessage(`¡Hola ${PROFILES[profile].name}! Soy Max, tu asistente personal. 📚\n\nEstoy aquí para ayudarte. ¿Qué necesitas?`);
-  }
+  // Welcome is handled by index.html overlay for personalized messages
 }
 
 function switchProfile() {
