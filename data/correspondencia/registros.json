@@ -42,7 +42,28 @@
       "creadoPor": "Moisés",
       "creadoEn": "2026-04-19T16:31:19.310Z",
       "qrGenerado": true
+    },
+    {
+      "id": 3,
+      "fechaCaptura": "2026-04-19",
+      "matricula": "000005",
+      "nombre": "SÁNCHEZ RAMÍREZ LAURA VERÓNICA",
+      "categoria": "C05",
+      "puesto": "TRABAJADORA SOCIAL",
+      "horario": "3",
+      "descanso": "4",
+      "tipoDocumento": "licencia_con_sueldo",
+      "fechaInicio": "2026-04-20",
+      "fechaTermino": "2026-04-22",
+      "dias": 3,
+      "folio": "LIC-2026-005",
+      "observaciones": "Licencia por maternidad",
+      "quienRecibe": "DEPTO. DE PERSONAL",
+      "presencias": "",
+      "creadoPor": "Moisés",
+      "creadoEn": "2026-04-19T16:48:16.176Z",
+      "qrGenerado": true
     }
   ],
-  "ultimoId": 2
+  "ultimoId": 3
 }

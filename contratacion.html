@@ -831,6 +831,15 @@ async function cargarSolicitudes() {
 
 function guardarSolicitudesStorage() {
   localStorage.setItem('imss_solicitudes', JSON.stringify(solicitudes));
+  // Sync to API
+  try {
+    const last = solicitudes[solicitudes.length - 1];
+    if (last && !last._synced) {
+      fetch('/api/contratacion/solicitudes', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(last) })
+        .then(() => { last._synced = true; localStorage.setItem('imss_solicitudes', JSON.stringify(solicitudes)); })
+        .catch(() => {});
+    }
+  } catch(e) {}
 }
 
 // ===== TAB SWITCHING =====

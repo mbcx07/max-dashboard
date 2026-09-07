@@ -688,6 +688,15 @@ async function cargarPases() {
 
 function guardarEnStorage() {
   localStorage.setItem('imss_pases', JSON.stringify(pases));
+  // Sync to API
+  try {
+    const last = pases[pases.length - 1];
+    if (last && !last._synced) {
+      fetch('/api/pases/pases', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(last) })
+        .then(() => { last._synced = true; localStorage.setItem('imss_pases', JSON.stringify(pases)); })
+        .catch(() => {});
+    }
+  } catch(e) {}
 }
 
 // ===== AUTOCOMPLETE =====
